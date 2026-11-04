@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>am-offer.net — Messages</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#111;background:#fff}
+header{border-bottom:1px solid #ccc;padding:12px 22px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:26px;font-weight:800;text-decoration:none}.brand span{color:#777;font-weight:500}
+nav a{margin-left:16px;color:#111;font-size:13px}
+.wrap{max-width:1080px;margin:auto;padding:18px 22px 40px}
+h1{font-size:24px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:18px;min-height:650px}
+.threadtools{display:flex;gap:6px;flex-wrap:wrap;padding:10px;border:1px solid #aaa;border-bottom:0;background:#fff}.threadtools button{border:1px solid #999;background:#fff;padding:7px 10px;cursor:pointer;font-size:12px}.threadtools button.active{background:#000;color:#fff;border-color:#000}.threadtools .spacer{flex:1}.threads{border:1px solid #aaa}.thread{padding:13px;border-bottom:1px solid #ccc;cursor:pointer;background:#fff}.threadrow{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.threadmeta{min-width:0}.threadact{border:1px solid #999;background:#fff;padding:4px 7px;cursor:pointer;font-size:11px;white-space:nowrap}.thread.active .threadact{background:#fff!important;color:#111!important}.emptythreads{padding:24px 14px;text-align:center;color:#666;font-size:13px}.chat.empty .messages,.chat.empty .composer{display:none}.chat.empty .chathead{min-height:120px;align-items:center}.chatmanage{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.chatmanage button{border:1px solid #999;background:#fff;padding:7px 10px;cursor:pointer;font-size:12px}
+.thread.active{background:#000;color:#fff}.thread small{display:block;margin-top:4px;opacity:.72}
+.chat{border:1px solid #aaa;display:flex;flex-direction:column}
+.chathead{padding:13px;border-bottom:1px solid #ccc;display:flex;justify-content:space-between;gap:10px}
+.listing{font-size:12px;color:#666}.messages{padding:18px;flex:1;background:#fafafa;overflow:auto}
+.bubble{max-width:72%;padding:10px 12px;margin-bottom:12px;border:1px solid #aaa;background:#fff;font-size:14px;line-height:1.4}
+.mine{margin-left:auto;background:#111;color:#fff;border-color:#111}
+.offer-card{border:2px solid #111;background:#fff;padding:14px;margin:12px 0;max-width:520px}
+.offer-card .amount{font-size:22px;font-weight:800;margin:4px 0}
+.status{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.status.sent{color:#555}
+.offer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.offer-actions button{border:1px solid #111;background:#fff;padding:8px 12px;cursor:pointer}
+.offer-actions .primary{background:#000;color:#fff}
+.buyer-actions{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #bbb}.buyer-actions.show{display:block}.buyer-actions .label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#666;margin-bottom:7px}.buyer-actions .buttons{display:flex;gap:8px;flex-wrap:wrap}.buyer-actions button{border:1px solid #111;background:#fff;padding:8px 12px;cursor:pointer}.buyer-actions .primary{background:#000;color:#fff}
+.composer{border-top:1px solid #ccc;padding:12px;display:flex;gap:8px}
+.composer input{flex:1;border:1px solid #999;padding:10px}.composer button{background:#000;color:#fff;border:0;padding:0 16px}
+.viewdeal{display:none;margin-top:10px}.viewdeal.show{display:block}
+.viewdeal a{display:inline-block;background:#000;color:#fff;padding:9px 13px;text-decoration:none;font-weight:700}
+.notice{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;display:none}
+.notice.show:not(:empty){display:block}.notice:empty{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.threads{display:block;max-height:220px;overflow:auto}.thread{padding:11px}.chat{min-height:520px}}
+</style>
+<style id="strict-grayscale-messages-v2">
+/* am-offer.net approved rule: black / white / gray only. */
+html, body, body * { color:#111 !important; border-color:#aaa !important; }
+body { background:#fff !important; }
+header, .chat, .threads, .thread, .offer-card, .bubble, .composer { background:#fff !important; }
+.thread.active, .mine, .primary, .viewdeal a, .composer button {
+  background:#000 !important;
+  color:#fff !important;
+  border-color:#000 !important;
+}
+.messages { background:#f7f7f7 !important; }
+.status, .listing, small { color:#555 !important; }
+button, input {
+  background:#fff !important;
+  color:#111 !important;
+  border-color:#999 !important;
+}
+.offer-actions .primary, .buyer-actions .primary { background:#000 !important; color:#fff !important; }
+.notice { background:#000 !important; color:#fff !important; }
+a { color:#111 !important; }
+</style>
+<style id="left-man-art-v3">
+.left-man-art{
+  padding:12px 18px 8px;
+  background:#fff!important;
+  border:0!important;
+  text-align:center;
+}
+.left-man-art img{
+  display:inline-block;
+  width:118px;
+  max-width:62%;
+  height:auto;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  filter:grayscale(100%);
+  opacity:.82;
+}
+</style>
+<!-- am-offer.net approved logo / Google / social -->
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+<link href="google-icon-192x192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="1200" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" name="twitter:image"/>
+<style id="amoffer-unified-background-v5">
+html, body { background-color: #DCDCDA !important; }
+</style>
+<style id="amoffer-full-page-background-v6">
+html, body,
+.page, .site, .site-wrap, .site-wrapper, .wrapper, .container,
+.main, main, .content, .content-wrap, .layout,
+header, .header, .topbar, .top-bar,
+.catalog, .category-grid, .categories, .section,
+.sidebar, aside, .card, .panel,
+footer, .footer {
+  background-color: #DCDCDA !important;
+}
+</style>
+<style id="amoffer-text-background-fix-v7">
+/* Remove the unwanted white boxes behind catalog/link text */
+.section ul li,
+.section ul li a,
+.category-grid a,
+.categories a,
+.catalog a,
+.category-column a,
+.category-list a,
+.card ul li,
+.card ul li a,
+.sidebar a,
+.quick-links a,
+.account-links a {
+  background: transparent !important;
+}
+
+/* Keep the approved hover behavior */
+.section ul li:hover,
+.section ul li:hover a,
+.category-grid a:hover,
+.categories a:hover,
+.catalog a:hover,
+.category-column a:hover,
+.category-list a:hover,
+.card ul li a:hover,
+.sidebar a:hover,
+.quick-links a:hover,
+.account-links a:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Keep headings clean on the unified background */
+.section .heading,
+.section .heading h2,
+.section .heading h2 a,
+.card h2,
+.card h3 {
+  background: transparent !important;
+}
+</style>
+<style id="image-integrity-v32">img{max-width:100%}.poster img,.post-head img{height:auto!important;object-fit:contain!important}.listing .photo img{object-fit:cover!important}</style>
+<style id="messages-contact-v57">
+.chatcontact{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}.chatcontact a,.chatcontact button{border:1px solid #777;background:#fff;color:#111;padding:6px 9px;text-decoration:none;cursor:pointer;font-size:12px;font-weight:700}.chatcontact a.primary{background:#111;color:#fff}.chatcontact:empty{display:none}
+</style>
+<meta content="noindex, nofollow, noarchive" name="robots"/></head>
+<body>
+<header><a class="brand" href="home.html">am-offer<span>.net</span></a>
+<nav><a href="am-offer-net-listing-detail-v12.html">listing</a><a href="am-offer-net-favorites-v1.html">favorites</a><a href="am-offer-net-my-account-v1.html">account</a></nav></header>
+<div class="wrap">
+<h1>Messages</h1>
+<div class="threadtools" id="threadTools">
+<button class="active" data-filter="active" type="button">Inbox <span id="countInbox">0</span></button>
+<button data-filter="offers" type="button">Offers <span id="countOffers">0</span></button>
+<button data-filter="archived" type="button">Archived <span id="countArchived">0</span></button>
+<span class="spacer"></span>
+</div>
+<div class="grid">
+<aside class="threads" id="threadList"></aside>
+<section class="chat">
+<div class="chathead">
+<div><b id="chatListingTitle">Listing</b><div class="listing" id="chatListingMeta"></div><div class="chatcontact" id="chatContactActions"></div></div>
+<div class="chatmanage"><span class="listing">Private conversation</span><button id="archiveConversationBtn" onclick="archiveCurrent()" type="button">Archive</button><button id="deleteConversationBtn" onclick="deleteCurrentConversation()" type="button">Delete</button></div>
+</div>
+<div class="messages" id="messages">
+<div class="offer-card" id="offerCard">
+<div class="status sent" id="offerStatus">PRIVATE OFFER SENT</div>
+<div class="amount" id="offerAmount">$65</div>
+<div id="offerNote">If you agree, contact me or I can call you to arrange pickup.</div>
+<div class="offer-direct-note" id="offerDirectNote" style="margin-top:10px;padding:10px 12px;border:1px solid #ddd;background:#fafafa;font-size:13px;line-height:1.45">This private offer was sent once. Continue directly with the other person by message or phone. The listing stays active until the seller removes it.</div>
+</div>
+<div id="systemMessages"></div>
+</div>
+<div class="composer">
+<input id="chatInput" placeholder="Write a message"/>
+<button onclick="sendChat()">Send</button>
+</div>
+</section>
+</div>
+</div>
+<div class="notice" id="notice"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script id="messages-supabase-v103">
+(function(){
+let client=null,user=null,all=[],active=null,filter='active';
+const params=new URLSearchParams(location.search);
+const wantedOffer=params.get('offer'), wantedListing=params.get('listing');
+const archivedKey='amOfferArchivedOfferIdsV103';
+const deletedKey='amOfferDeletedConversationsV141';
+
+function readArchived(){try{const a=JSON.parse(localStorage.getItem(archivedKey)||'[]');return Array.isArray(a)?a.map(String):[]}catch(_e){return[]}}
+function writeArchived(a){localStorage.setItem(archivedKey,JSON.stringify([...new Set(a.map(String))]))}
+function isArchived(id){return readArchived().includes(String(id))}
+function readDeleted(){try{const x=JSON.parse(localStorage.getItem(deletedKey)||'{}');return x&&typeof x==='object'?x:{}}catch(_e){return{}}}
+function writeDeleted(x){localStorage.setItem(deletedKey,JSON.stringify(x||{}))}
+function deletedAt(id){return readDeleted()[String(id)]||null}
+function clearDeleted(id){const x=readDeleted();delete x[String(id)];writeDeleted(x)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dial(v){return String(v||'').replace(/[^0-9+]/g,'')}
+function copyContactValue(value,message){const done=()=>flash(message);if(navigator.clipboard?.writeText)navigator.clipboard.writeText(String(value)).then(done).catch(()=>{});else{const t=document.createElement('textarea');t.value=String(value);document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();done();}}
+function flash(t){const n=document.getElementById('notice');n.textContent=t;n.classList.add('show');clearTimeout(window._nt);window._nt=setTimeout(()=>n.classList.remove('show'),2200)}
+window.flash=flash;
+
+function filtered(){
+  return all.filter(c=>!c.deleted).filter(c=>filter==='archived'?c.archived:(filter==='offers'?!c.archived:!c.archived))
+    .sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+}
+function setActiveAfterFilter(){
+  const rows=filtered();
+  // A deleted conversation opened explicitly from its listing is a clean draft.
+  // Keep that exact listing open, but do not put the old conversation back in Inbox.
+  if(active?.freshAfterDelete)return;
+  if(active&&!rows.some(c=>c.id===active.id))active=rows[0]||null;
+  if(!active&&rows.length)active=rows[0];
+}
+function renderCounts(){
+  const inbox=all.filter(c=>!c.deleted&&!c.archived).length, offers=all.filter(c=>!c.deleted&&!c.archived).length, archived=all.filter(c=>!c.deleted&&c.archived).length;
+  [['countInbox',inbox],['countOffers',offers],['countArchived',archived]].forEach(([id,n])=>{const e=document.getElementById(id);if(e)e.textContent=n});
+  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter));
+}
+
+function vehicleSummaryV124(c){
+  if(String(c?.category||'').toLowerCase()!=='cars & trucks')return '';
+  return [c.vehicleYear,c.vehicleMake,c.vehicleMileage!=null?Number(c.vehicleMileage).toLocaleString()+' mi':null,c.vehicleTitleType?String(c.vehicleTitleType).replace(/\b\w/g,x=>x.toUpperCase())+' title':null].filter(Boolean).join(' · ');
+}
+function renderThreads(){
+  const box=document.getElementById('threadList');if(!box)return;
+  const rows=filtered();
+  if(!rows.length){box.innerHTML='<div class="emptythreads">No conversations in this view.</div>';return}
+  box.innerHTML=rows.map(c=>{const unread=(c.messages||[]).filter(m=>m.sender_id!==user.id&&!m.read_at).length;return `<div class="thread ${active&&c.id===active.id?'active':''}" data-conv="${esc(c.id)}"><div class="threadrow"><div class="threadmeta"><b>${esc(c.listingTitle||'Listing')}${unread?` <span style="font-size:12px;border:1px solid #777;border-radius:999px;padding:1px 6px">${unread} new</span>`:''}</b><small>Private offer · $${esc(c.amount)}${vehicleSummaryV124(c)?' · '+esc(vehicleSummaryV124(c)):''}</small></div><button type="button" class="threadact" data-action="${c.archived?'restore':'archive'}" data-id="${esc(c.id)}">${c.archived?'Restore':'Archive'}</button></div></div>`}).join('');
+  box.querySelectorAll('.thread[data-conv]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('[data-action]'))return;active=all.find(x=>x.id===el.dataset.conv)||active;if(active)history.replaceState(null,'','?offer='+encodeURIComponent(active.id));renderAll();markActiveRead()}));
+  box.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();const c=all.find(x=>x.id===btn.dataset.id);if(!c)return;toggleArchive(c,btn.dataset.action==='archive')}));
+}
+function renderContactActions(){
+  const box=document.getElementById('chatContactActions');if(!box)return;box.innerHTML='';if(!active)return;
+  if(active.isSeller){box.innerHTML='<span class="muted">You are the seller for this listing.</span>';return}
+  const phone=(active.contact==='phone'||active.contact==='phone-email')?String(active.phone||'').trim():'',
+        email=(active.contact==='email'||active.contact==='phone-email')?String(active.email||'').trim():'';
+  if(phone){
+    const d=dial(phone);
+    if(active.callsOk)box.innerHTML+='<a class="primary" href="tel:'+d+'">Call seller</a>';
+    if(active.textsOk)box.innerHTML+='<a href="sms:'+d+'">Text seller</a>';
+    box.innerHTML+='<button type="button" id="copyChatPhone">Copy number</button>';
+  }
+  if(email)box.innerHTML+='<a href="mailto:'+encodeURIComponent(email)+'">Email seller</a><button type="button" id="copyChatEmail">Copy email</button>';
+  const p=document.getElementById('copyChatPhone');if(p)p.onclick=()=>copyContactValue(phone,'Phone number copied');
+  const e=document.getElementById('copyChatEmail');if(e)e.onclick=()=>copyContactValue(email,'Email copied');
+}
+function renderMessages(){
+  const msgs=document.getElementById('messages');if(!msgs||!active)return;
+  [...msgs.querySelectorAll('.bubble[data-dynamic="1"]')].forEach(n=>n.remove());
+  const offer=document.getElementById('offerCard');
+  (active.messages||[]).forEach(m=>{const d=document.createElement('div');d.className='bubble '+(m.sender_id===user.id?'mine':'');d.dataset.dynamic='1';d.textContent=m.body;msgs.insertBefore(d,offer)});
+  document.getElementById('systemMessages').innerHTML='';
+  setTimeout(()=>{msgs.scrollTop=msgs.scrollHeight},0);
+}
+function renderOffer(){
+  if(!active)return;
+  const card=document.getElementById('offerCard');
+  // After Delete, do not resurrect the old offer/conversation card.
+  // The one-time offer remains only as a backend rule.
+  if(active.freshAfterDelete||deletedAt(active.id)){card.style.display='none';return;}
+  card.style.display='block';
+  document.getElementById('offerAmount').textContent='$'+Number(active.amount).toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('offerNote').textContent='This private offer was sent once. Continue the conversation directly.';
+  const st=document.getElementById('offerStatus');st.textContent='PRIVATE OFFER SENT';st.className='status sent';
+}
+function renderEmpty(){
+  const chat=document.querySelector('.chat');if(!chat)return;const no=!active;
+  chat.classList.toggle('emptychat',no);
+  document.getElementById('chatListingTitle').textContent=no?((wantedListing||wantedOffer)?'No conversation for this listing yet':'No conversation selected'):(active.listingTitle||'Listing');
+  document.getElementById('chatListingMeta').textContent=no?'':([active.city,active.state,vehicleSummaryV124(active)].filter(Boolean).join(' · '));
+  document.getElementById('archiveConversationBtn').style.display=no?'none':'';
+  document.getElementById('deleteConversationBtn').style.display=(no||active?.freshAfterDelete)?'none':'';
+  document.getElementById('messages').style.display=no?'none':'';
+  document.querySelector('.composer').style.display=no?'none':'';
+  if(no){const cc=document.getElementById('chatContactActions');if(cc)cc.innerHTML=''}
+}
+function renderAll(){
+  setActiveAfterFilter();renderCounts();renderThreads();renderEmpty();
+  if(active){
+    document.getElementById('chatListingTitle').textContent=active.listingTitle||'Listing';
+    document.getElementById('chatListingMeta').textContent=[active.city,active.state,vehicleSummaryV124(active)].filter(Boolean).join(' · ');
+    document.getElementById('archiveConversationBtn').textContent=active.archived?'Restore':'Archive';
+    renderContactActions();renderMessages();renderOffer();
+  }
+}
+async function loadAll(){
+  const previousActiveId=active?.id||null;
+  const previousFilter=filter;
+  const ctx=await AmOfferAuth.requireActiveMember('am-offer-net-messages-offer-flow-v3.html');
+  if(!ctx)return;
+  client=ctx.client;user=ctx.user;
+
+  const {data:offers,error}=await client.from('offers')
+    .select('id,listing_id,buyer_id,amount,status,created_at,updated_at')
+    .order('updated_at',{ascending:false}).limit(250);
+  if(error)throw error;
+
+  const offerRows=offers||[];
+  const listingIds=[...new Set(offerRows.map(o=>o.listing_id).filter(Boolean))];
+  const offerIds=offerRows.map(o=>o.id);
+  let listings=[],messages=[];
+  if(listingIds.length){
+    const r=await client.from('listings')
+      .select('id,seller_id,title,category,city,state,vehicle_make,vehicle_year,vehicle_mileage,vehicle_title_type,contact_method,phone,email,calls_ok,texts_ok')
+      .in('id',listingIds);
+    if(r.error)throw r.error; listings=r.data||[];
+  }
+  if(offerIds.length){
+    const r=await client.from('messages')
+      .select('id,offer_id,sender_id,body,message_type,created_at,read_at')
+      .in('offer_id',offerIds).order('created_at',{ascending:true});
+    if(r.error)throw r.error; messages=r.data||[];
+  }
+  const lmap=Object.fromEntries(listings.map(x=>[x.id,x]));
+  const mmap={};messages.forEach(m=>(mmap[m.offer_id]||(mmap[m.offer_id]=[])).push(m));
+  all=offerRows.map(o=>{
+    const l=lmap[o.listing_id]||{};
+    return {
+      id:o.id,listingId:o.listing_id,listingTitle:l.title||'Listing',category:l.category||'',city:l.city||'',state:l.state||'',
+      vehicleMake:l.vehicle_make||'',vehicleYear:l.vehicle_year,vehicleMileage:l.vehicle_mileage,vehicleTitleType:l.vehicle_title_type||'',
+      sellerId:l.seller_id,buyerId:o.buyer_id,isSeller:l.seller_id===user.id,
+      contact:l.contact_method||'message',phone:l.phone||'',email:l.email||'',callsOk:!!l.calls_ok,textsOk:!!l.texts_ok,
+      amount:o.amount,status:o.status,createdAt:o.created_at,
+      updatedAt:(mmap[o.id]&&mmap[o.id].length?mmap[o.id][mmap[o.id].length-1].created_at:(o.updated_at||o.created_at)),
+      messages:(()=>{const cut=deletedAt(o.id);return (mmap[o.id]||[]).filter(m=>!cut||String(m.created_at)>String(cut))})(),archived:isArchived(o.id),
+      deleted:(()=>{const cut=deletedAt(o.id);return !!cut && !(mmap[o.id]||[]).some(m=>String(m.created_at)>String(cut))})()
+    };
+  });
+
+  const unreadConversation=all
+    .filter(c=>!c.archived && (c.messages||[]).some(m=>m.sender_id!==user.id&&!m.read_at))
+    .sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')))[0]||null;
+
+  // When Messages is opened from a specific listing/offer, never fall back to an unrelated old conversation.
+  // This keeps the selected listing context exact.
+  if(wantedOffer){
+    active=all.find(x=>String(x.id)===String(wantedOffer))||null;
+  }else if(wantedListing){
+    active=all.find(x=>String(x.listingId)===String(wantedListing))||null;
+  }else{
+    active=all.find(x=>String(x.id)===String(previousActiveId))
+      ||unreadConversation
+      ||all.find(x=>!x.archived)||all[0]||null;
+  }
+  // An explicit listing/offer link must open that exact conversation in Inbox.
+  // If it was archived locally, restore only that conversation instead of opening Archived.
+  if((wantedOffer||wantedListing) && active?.deleted){
+    // Open a clean composer for this exact listing without restoring the deleted thread.
+    active.freshAfterDelete=true;
+    active.messages=[];
+  }
+  if((wantedOffer||wantedListing) && active?.archived){
+    active.archived=false;
+    writeArchived(readArchived().filter(x=>x!==String(active.id)));
+  }
+  filter=previousActiveId?previousFilter:'active';
+  renderAll();
+
+  // Opening Messages means the conversation currently shown has actually been viewed.
+  // Mark only that conversation as read; other unread conversations keep the header alert active.
+  if(active&&!window.__amOfferInitialReadV140){
+    window.__amOfferInitialReadV140=true;
+    await markActiveRead();
+  }
+}
+
+async function markActiveRead(){
+  if(!active||!client||!user)return;
+  const unread=(active.messages||[]).filter(m=>m.sender_id!==user.id&&!m.read_at);
+  if(!unread.length){
+    if(window.AmOfferRefreshUnreadIndicator) window.AmOfferRefreshUnreadIndicator();
+    return;
+  }
+  const stamp=new Date().toISOString();
+  // Mark every unread message in the conversation the user is actually viewing.
+  // Filtering by offer_id + sender_id makes the update align exactly with the RLS read-receipt policy.
+  const {data:updated,error}=await client.from('messages')
+    .update({read_at:stamp})
+    .eq('offer_id',active.id)
+    .neq('sender_id',user.id)
+    .is('read_at',null)
+    .select('id,read_at');
+  if(error){console.warn('Could not mark conversation read',error);return;}
+  const updatedIds=new Set((updated||[]).map(x=>String(x.id)));
+  (active.messages||[]).forEach(m=>{if(updatedIds.has(String(m.id))|| (m.sender_id!==user.id&&!m.read_at)) m.read_at=stamp;});
+  renderThreads();
+  // Re-check the database so the header dots turn off immediately after the last unread conversation is read.
+  if(window.AmOfferRefreshUnreadIndicator){
+    await window.AmOfferRefreshUnreadIndicator();
+    setTimeout(()=>window.AmOfferRefreshUnreadIndicator(),350);
+  }
+}
+
+async function sendChat(){
+  if(!active||!client)return;
+  const input=document.getElementById('chatInput'),t=input.value.trim();if(!t)return;
+  input.disabled=true;
+  try{
+    const {data,error}=await client.from('messages')
+      .insert({offer_id:active.id,sender_id:user.id,body:t,message_type:'user'})
+      .select('id,offer_id,sender_id,body,message_type,created_at,read_at').single();
+    if(error)throw error;
+    active.messages.push(data);active.updatedAt=data.created_at;active.archived=false;active.deleted=false;active.freshAfterDelete=false;
+    writeArchived(readArchived().filter(x=>x!==String(active.id)));
+    input.value='';filter='active';renderAll();if(window.AmOfferRefreshUnreadIndicator)setTimeout(()=>window.AmOfferRefreshUnreadIndicator(),120);
+  }catch(err){flash('Message could not be sent. '+(err?.message||''))}
+  finally{input.disabled=false;input.focus()}
+}
+window.sendChat=sendChat;
+function toggleArchive(c,archive){
+  let a=readArchived();
+  a=archive?[...a,String(c.id)]:a.filter(x=>x!==String(c.id));
+  writeArchived(a);c.archived=archive;
+  if(archive){flash('Conversation archived');active=null}else{flash('Conversation restored');active=c;filter='active'}
+  renderAll();
+}
+window.archiveCurrent=function(){if(active)toggleArchive(active,!active.archived)};
+window.deleteCurrentConversation=function(){
+  if(!active)return;
+  if(!confirm('Delete this conversation from your Messages? Old messages will not return. Your one-time private offer record will remain.'))return;
+  const id=String(active.id), x=readDeleted();
+  x[id]=new Date().toISOString();writeDeleted(x);
+  writeArchived(readArchived().filter(v=>v!==id));
+  const c=all.find(v=>String(v.id)===id);if(c){c.deleted=true;c.archived=false;c.messages=[]}
+  active=null;filter='active';history.replaceState(null,'',location.pathname);flash('Conversation deleted');renderAll();
+};
+document.getElementById('chatInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;active=null;history.replaceState(null,'',location.pathname);renderAll()}));
+loadAll().catch(err=>{flash('Unable to load messages. '+(err?.message||''));document.getElementById('threadList').innerHTML='<div class="emptythreads">Messages could not be loaded.</div>'});
+let refreshBusy=false;
+setInterval(async()=>{
+  if(document.hidden||refreshBusy||!client||!user)return;
+  refreshBusy=true;
+  try{await loadAll()}catch(_e){}finally{refreshBusy=false}
+},12000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!refreshBusy){refreshBusy=true;loadAll().catch(()=>{}).finally(()=>refreshBusy=false)}});
+})();
+</script>
+<!-- Member gate removed: loadAll() already performs the required active-member check. -->
+<script id="global-auth-nav-v99">
+(function(){
+  async function run(){
+    let client;
+    try{ client=AmOfferAuth.client(); }catch(_e){ return; }
+
+    let session=null;
+    try{
+      const r=await client.auth.getSession();
+      session=r && r.data ? r.data.session : null;
+    }catch(_e){ return; }
+
+    const loginLinks=[...document.querySelectorAll('a[href*="am-offer-net-sign-in-v1.html"]')];
+    const createLinks=[...document.querySelectorAll('a[href*="am-offer-net-create-account-v1.html"]')];
+
+    if(!session) return;
+
+    loginLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='log in' || t==='login' || t==='sign in') a.style.display='none';
+    });
+    createLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='create account' || t==='sign up' || t==='signup') a.style.display='none';
+    });
+
+    const nav=document.querySelector('header .topnav, header .links, header nav, .topnav');
+    if(nav && !document.querySelector('.auth-nav-signout-v99')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout-v99';
+      out.textContent='Sign out';
+      out.style.cursor='pointer';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await client.auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+</body></html>

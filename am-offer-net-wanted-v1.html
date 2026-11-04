@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WANTED | am-Offer.net</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f1f1ef;color:#151515;font-family:Arial,sans-serif}
+.top{background:#fff;border-bottom:1px solid #ccc;padding:13px 4%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:26px;font-weight:900}.brand b{color:#08743d}.top a{color:#111;text-decoration:none;font-weight:700}
+.hero{background:linear-gradient(100deg,#3c0707,#7f1111,#4b0808);color:#fff;padding:24px 5%;border-bottom:4px solid #a91515}.hero h1{font-size:42px;margin:0}.hero p{margin:5px 0 0;font-size:17px}.wrap{max-width:1240px;margin:25px auto;padding:0 18px}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.post{background:#a91515;color:#fff;padding:12px 20px;border-radius:5px;text-decoration:none;font-weight:800;border:2px solid #8c0f0f}
+.grid{display:block;border-top:1px solid #c8c8c8}.card{background:transparent;cursor:pointer;border:0;border-bottom:1px solid #c8c8c8;border-radius:0;box-shadow:none;display:flex;align-items:flex-start;gap:14px;padding:10px 4px;min-height:92px}.pic{width:92px;height:72px;flex:0 0 92px;background:#ddd;display:flex;align-items:center;justify-content:center;color:#777;font-size:11px;font-weight:700;border-radius:3px;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover}.body{padding:0;min-width:0;flex:1}.tag{display:inline-block;background:#a91515;color:#fff;padding:3px 7px;font-size:10px;font-weight:900;border-radius:3px;margin-bottom:4px}.body h2{font-size:17px;margin:2px 0 5px;color:#071bd0;font-weight:700}.body p{font-size:13px;line-height:1.35;color:#444;margin:0;max-width:850px}.manage{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.manage button,.manage a{border:1px solid #999;background:#f5f5f5;color:#111;padding:5px 8px;border-radius:3px;font-weight:700;text-decoration:none;cursor:pointer}.manage .danger{background:#8f1111;color:#fff;border-color:#8f1111}.manage .hidebtn{background:#222;color:#fff;border-color:#222}.empty{text-align:center;padding:60px 15px;background:#fff;border:1px solid #ccc}
+@media(max-width:650px){.hero h1{font-size:32px}.actions{align-items:stretch;flex-direction:column}.post{text-align:center}.card{gap:9px;padding:9px 2px}.pic{width:72px;height:58px;flex-basis:72px}.body h2{font-size:15px}.body p{font-size:12px}}
+</style></head><body>
+<header class="top"><div class="brand"><b>am-</b>Offer.net</div><a href="home.html">Home</a></header>
+<section class="hero"><h1>⌕ WANTED</h1><p>People are looking for these. Can you help?</p></section>
+<main class="wrap"><div class="actions"><h2 style="margin:0">Latest WANTED Ads</h2><a class="post" href="am-offer-net-post-wanted-v1.html">Post a WANTED Ad</a></div>
+<div id="wantedGrid" class="grid"><div class="empty">Loading WANTED ads…</div></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://rryehtaskbjnfbodymjj.supabase.co';
+const SUPABASE_KEY='sb_publishable_10LgFmHximAplWyQXKNopw_2peqDb7r';
+let sb,currentUser=null,isAdmin=false;
+async function loadWanted(){
+ const grid=document.getElementById('wantedGrid');
+ if(!SUPABASE_KEY){grid.innerHTML='<div class="empty">WANTED is ready. Post the first request.</div>';return}
+ sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+ const {data:{user}}=await sb.auth.getUser(); currentUser=user||null;
+ if(currentUser){
+   const a=await sb.from('admin_users').select('user_id').eq('user_id',currentUser.id).maybeSingle();
+   isAdmin=!!a.data;
+ }
+ let q=sb.from('wanted_posts').select('*').order('created_at',{ascending:false});
+ if(!isAdmin) q=q.eq('status','published');
+ const {data,error}=await q;
+ if(error||!data?.length){grid.innerHTML='<div class="empty">No WANTED ads yet. Be the first to post what you are looking for.</div>';return}
+ grid.innerHTML=data.map(x=>{
+   const owner=currentUser&&currentUser.id===x.user_id;
+   let controls='';
+   if(owner||isAdmin) controls+=`<a href="am-offer-net-post-wanted-v1.html?edit=${x.id}">Edit</a>`;
+   if(isAdmin) controls+=`<button class="hidebtn" onclick="toggleWanted('${x.id}','${x.status==='hidden'?'published':'hidden'}')">${x.status==='hidden'?'Restore':'Hide'}</button>`;
+   if(owner||isAdmin) controls+=`<button class="danger" onclick="deleteWanted('${x.id}')">Delete</button>`;
+   return `<article class="card" onclick="location.href='am-offer-net-wanted-detail-v1.html?id=${x.id}'"><div class="pic">${x.image_urls?.[0]?`<img src="${x.image_urls[0]}" alt="">`:'WANTED'}</div><div class="body"><span class="tag">⌕ WANTED${x.status==='hidden'?' · HIDDEN':''}</span><h2>${esc(x.title)}</h2><p>${esc((x.description||'').slice(0,180))}</p>${controls?`<div class="manage" onclick="event.stopPropagation()">${controls}</div>`:''}</div></article>`;
+ }).join('');
+}
+async function deleteWanted(id){
+ if(!confirm('Delete this WANTED ad?'))return;
+ const r=await sb.from('wanted_posts').delete().eq('id',id);
+ if(r.error){alert(r.error.message);return} loadWanted();
+}
+async function toggleWanted(id,status){
+ const r=await sb.from('wanted_posts').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+ if(r.error){alert(r.error.message);return} loadWanted();
+}
+function esc(v){return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+loadWanted();
+</script></body></html>

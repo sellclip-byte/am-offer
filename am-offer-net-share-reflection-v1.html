@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Share a Reflection — am-offer.net</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#111;font-family:Arial,sans-serif}
+header{border-bottom:1px solid #aaa;padding:12px 22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:26px;font-weight:800;text-decoration:none;color:#111}.logo span{color:#777;font-weight:500}
+nav a{color:#111;font-size:13px;margin-left:16px}.wrap{max-width:700px;margin:auto;padding:30px 22px 55px}
+h1{font-size:26px;margin:0 0 6px}.intro{font-size:13px;color:#666;line-height:1.65;margin-bottom:24px}
+label{display:block;font-size:13px;font-weight:700;margin:17px 0 6px}
+select,textarea{width:100%;border:1px solid #999;background:#fff;color:#111;padding:10px;font:14px Arial,sans-serif}
+textarea{min-height:135px;resize:vertical;font-family:Georgia,serif;font-size:17px;line-height:1.55}
+.count{text-align:right;font-size:11px;color:#777;margin-top:5px}
+button{background:#000;color:#fff;border:0;padding:11px 16px;font-weight:700;margin-top:18px;cursor:pointer}
+.preview{display:none;border-top:1px solid #999;border-bottom:1px solid #999;margin-top:28px;padding:22px 4px}
+.preview blockquote{font-family:Georgia,serif;font-size:19px;font-style:italic;line-height:1.65;margin:0 0 9px}
+.meta{font-size:11px;color:#777}.rules{font-size:12px;color:#666;line-height:1.65;margin-top:25px}
+.rules b{color:#111}
+</style>
+<!-- am-offer.net approved logo / Google / social -->
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+<link href="google-icon-192x192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="1200" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" name="twitter:image"/>
+<style id="amoffer-unified-background-v5">
+html, body { background-color: #DCDCDA !important; }
+</style>
+<style id="amoffer-full-page-background-v6">
+html, body,
+.page, .site, .site-wrap, .site-wrapper, .wrapper, .container,
+.main, main, .content, .content-wrap, .layout,
+header, .header, .topbar, .top-bar,
+.catalog, .category-grid, .categories, .section,
+.sidebar, aside, .card, .panel,
+footer, .footer {
+  background-color: #DCDCDA !important;
+}
+</style>
+<style id="amoffer-text-background-fix-v7">
+/* Remove the unwanted white boxes behind catalog/link text */
+.section ul li,
+.section ul li a,
+.category-grid a,
+.categories a,
+.catalog a,
+.category-column a,
+.category-list a,
+.card ul li,
+.card ul li a,
+.sidebar a,
+.quick-links a,
+.account-links a {
+  background: transparent !important;
+}
+
+/* Keep the approved hover behavior */
+.section ul li:hover,
+.section ul li:hover a,
+.category-grid a:hover,
+.categories a:hover,
+.catalog a:hover,
+.category-column a:hover,
+.category-list a:hover,
+.card ul li a:hover,
+.sidebar a:hover,
+.quick-links a:hover,
+.account-links a:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Keep headings clean on the unified background */
+.section .heading,
+.section .heading h2,
+.section .heading h2 a,
+.card h2,
+.card h3 {
+  background: transparent !important;
+}
+</style>
+<style id="image-integrity-v32">img{max-width:100%}.poster img,.post-head img{height:auto!important;object-fit:contain!important}.listing .photo img{object-fit:cover!important}</style>
+<link href="https://am-offer.net/am-offer-net-share-reflection-v1.html" rel="canonical"/><meta content="noindex, nofollow, noarchive" name="robots"/></head>
+<body>
+<header>
+<a class="logo" href="home.html">am-offer<span>.net</span></a>
+<nav><a href="am-offer-net-voices-reflections-v2.html">Voices &amp; Reflections</a><a href="am-offer-net-my-account-v1.html">account</a><a href="am-offer-net-help-faq-v1.html">help</a></nav>
+</header>
+<main class="wrap">
+<h1>Share a reflection</h1>
+<p class="intro">A few thoughtful words can stay with someone for a long time. Share a short reflection about life, hope, family, gratitude, lessons learned, or a new beginning.</p>
+<form id="form">
+<label for="topic">Reflection</label>
+<select id="topic" required="">
+<option value="">Choose a theme</option>
+<option>life reflections</option><option>neighbor voices</option><option>words of hope</option><option>lessons learned</option><option>family &amp; future</option><option>gratitude</option><option>new beginnings</option><option>quiet thoughts</option>
+</select>
+<label for="text">Your words</label>
+<textarea id="text" maxlength="400" placeholder="Write one or two thoughtful sentences..." required=""></textarea>
+<div class="count"><span id="count">0</span> / 400</div>
+<button id="reflectionSubmitV148" type="submit">Preview reflection</button>
+</form>
+<section class="preview" id="preview">
+<blockquote id="ptext"></blockquote>
+<div class="meta" id="pmeta"></div>
+</section>
+<div class="rules"><b>A quiet space by design.</b> Reflections are short personal thoughts, not discussion threads. No replies, political campaigning, arguments, advertising, selling, harassment, or promotional links. Submissions may be reviewed before appearing publicly to preserve the calm purpose of this space.</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script>
+const t=document.getElementById('text'), c=document.getElementById('count');
+t.addEventListener('input',()=>c.textContent=t.value.length);
+document.getElementById('form').addEventListener('submit',async function(e){
+ e.preventDefault();
+ const text=t.value.trim(), topic=document.getElementById('topic').value;
+ document.getElementById('ptext').textContent='“'+text+'”';
+ document.getElementById('pmeta').textContent=topic+' • Neighbor voice';
+ document.getElementById('preview').style.display='block';
+ const btn=document.getElementById('reflectionSubmitV148');
+ if(btn.dataset.ready==='1'){
+   try{ const ctx=await AmOfferAuth.requireActiveMember('am-offer-net-share-reflection-v1.html'); if(!ctx)return; btn.disabled=true; btn.textContent='Publishing…';
+     const {error}=await ctx.client.from('reflections').insert({author_id:ctx.user.id,topic,body:text,status:'published'}); if(error)throw error;
+     location.href='am-offer-net-voices-reflections-v2.html?posted=1'; return;
+   }catch(err){btn.disabled=false;btn.textContent='Publish reflection'; console.error('Reflection publish error:',err); const msg=(err&&err.message)?err.message:String(err||'Unknown error'); const code=(err&&err.code)?('\nCode: '+err.code):''; const details=(err&&err.details)?('\nDetails: '+err.details):''; alert('Could not publish reflection.\n\n'+msg+code+details); return;}
+ }
+ btn.dataset.ready='1'; btn.textContent='Publish reflection';
+ document.getElementById('preview').scrollIntoView({behavior:'smooth'});
+});
+</script>
+<script id="global-auth-nav-v99">
+(function(){
+  async function run(){
+    let client;
+    try{ client=AmOfferAuth.client(); }catch(_e){ return; }
+
+    let session=null;
+    try{
+      const r=await client.auth.getSession();
+      session=r && r.data ? r.data.session : null;
+    }catch(_e){ return; }
+
+    const loginLinks=[...document.querySelectorAll('a[href*="am-offer-net-sign-in-v1.html"]')];
+    const createLinks=[...document.querySelectorAll('a[href*="am-offer-net-create-account-v1.html"]')];
+
+    if(!session) return;
+
+    loginLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='log in' || t==='login' || t==='sign in') a.style.display='none';
+    });
+    createLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='create account' || t==='sign up' || t==='signup') a.style.display='none';
+    });
+
+    const nav=document.querySelector('header .topnav, header .links, header nav, .topnav');
+    if(nav && !document.querySelector('.auth-nav-signout-v99')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout-v99';
+      out.textContent='Sign out';
+      out.style.cursor='pointer';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await client.auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+</body></html>

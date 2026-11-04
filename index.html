@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>am-offer.net | Buy, Sell &amp; Make Private Offers Locally</title>
+<style>
+:root{--ink:#080808;--mid:#666;--line:#c7ccd1;--paper:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+.shell{width:min(1536px,100%);margin:0 auto;background:#fff}
+header{height:86px;display:grid;grid-template-columns:370px 470px 1fr;align-items:center;padding:0 47px;border-bottom:1px solid var(--line)}
+.logo{display:block;font-size:45px;line-height:.93;font-weight:800;letter-spacing:-2px}
+.logo .dotnet{color:#666}
+.tagline{font-size:20px;line-height:1;font-weight:700;margin-top:8px;padding-left:42px}
+.loc{display:flex;align-items:center;gap:10px;justify-content:center}
+.pin{font-size:27px;line-height:1}
+.loc select{height:39px;border:1px solid #b9bec4;background:#fff;color:#111;border-radius:4px;font-size:17px;padding:0 38px 0 12px;min-width:194px}
+.topnav{display:flex;justify-content:flex-end;align-items:center;font-size:18px;white-space:nowrap}
+.topnav a{padding:0 16px;border-right:1px solid #aeb3b8}
+.topnav a:last-child{border-right:0;padding-right:0}
+.main{display:grid;grid-template-columns:307px 278px 300px 253px 1fr;min-height:870px;margin:16px 26px 0;border-left:1px solid var(--line)}
+.poster{border-right:1px solid var(--line);overflow:hidden;background:#f3f3f3}
+.poster img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+.column{border-right:1px solid var(--line);display:grid;grid-template-rows:1fr 1fr;min-width:0}
+.section{padding:15px 28px 15px 28px;overflow:hidden}
+.section.bottom{border-top:1px solid var(--line)}
+.heading{display:grid;grid-template-columns:38px 1fr;align-items:center;gap:10px;margin-bottom:8px}
+.icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+.icon svg{width:30px;height:30px;fill:#000}
+.heading h2{margin:0;font-size:22px;line-height:1.05;font-weight:800;border-bottom:1px solid #333;padding-bottom:8px}
+.section ul{list-style:none;padding:0;margin:0;font-size:16px;line-height:1.42}
+.sidebar{padding:0 0 0 16px;min-width:0}
+.cta{height:66px;border:1px solid #222;background:linear-gradient(#fafafa,#e7e7e7);border-radius:4px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:19px;font-weight:800;margin:0 0 17px 0}
+.cta .pencil{font-size:27px}
+.card{border:1px solid var(--line);border-radius:4px;padding:17px 24px 18px;margin-bottom:20px}
+.card h3{margin:0 0 11px;font-size:22px;font-weight:800;padding-bottom:8px;border-bottom:1px solid #aeb3b8}
+.card ul{list-style:none;padding:0;margin:0;font-size:18px;line-height:2.08}
+footer{height:74px;margin:0 26px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;align-items:center;font-size:14px}
+.footer-links{display:flex;align-items:center}
+.footer-links a{padding:0 16px;border-right:1px solid #aaa}
+.footer-links a:first-child{padding-left:12px}.footer-links a:last-child{border-right:0}
+.footer-right{display:flex;align-items:center;gap:16px;padding-right:4px}
+.social{display:flex;gap:8px}
+.social span{width:30px;height:30px;border:1px solid #bcc1c6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.slogan{font-family:Georgia,serif;font-weight:700;font-style:italic;font-size:16px;line-height:1.05;transform:rotate(-5deg);text-align:center;min-width:126px}
+.slogan:after{content:"";display:block;width:100px;border-bottom:3px solid #000;margin:5px auto 0}
+@media(max-width:760px){
+  header{display:block;height:auto;padding:12px 14px}
+  .logo{font-size:36px}.tagline{font-size:16px;padding-left:0}
+  .loc{margin-top:12px;display:grid;grid-template-columns:auto 1fr 1fr}
+  .loc select{min-width:0;width:100%}.topnav{margin-top:12px;justify-content:flex-start;overflow:auto}
+  .main{display:block;margin:10px 0 0;border-left:0}.poster{border-right:0;border-bottom:1px solid var(--line)}
+  .poster img{height:auto}.column{display:block;border-right:0}.section{border-bottom:1px solid var(--line)}.section.bottom{border-top:0}
+  .sidebar{display:block;padding:14px}.sidebar .cta,.sidebar .card{margin-bottom:14px}
+  footer{height:auto;margin:0;padding:14px;display:block}.footer-right{margin-top:14px;justify-content:flex-start;flex-wrap:wrap}
+}
+</style>
+<!-- am-offer.net approved logo / Google / social -->
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+<link href="google-icon-192x192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="1200" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" name="twitter:image"/>
+<style id="catalog-hover-fix-v8">
+/* REAL catalog hover fix: the catalog entries are LI elements */
+.section ul li{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  padding:2px 6px;
+  margin:0 0 1px 0;
+  cursor:pointer;
+  color:#000;
+  background:#fff;
+  transition:none;
+}
+.section ul li,
+.section ul li a{
+  color:#000 !important;
+  text-decoration:none !important;
+}
+.section ul li:hover{
+  background:#000 !important;
+  color:#fff !important;
+}
+.section ul li:hover a{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+
+/* Category heading itself also inverts on hover */
+.section .heading h2{
+  width:max-content;
+  max-width:100%;
+  padding:3px 7px 8px 7px;
+}
+.section .heading h2:hover{
+  background:#000 !important;
+  color:#fff !important;
+}
+.section .heading h2:hover a{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+</style>
+<style id="working-links-v9">
+.section ul li > a{display:block;width:100%;height:100%}
+.card ul li > a{display:block;width:100%;color:#000;text-decoration:none}
+.card ul li > a:hover{background:#000;color:#fff;text-decoration:none}
+.heading h2 > a{display:block}
+</style>
+<style id="amoffer-unified-background-v5">
+html, body { background-color: #DCDCDA !important; }
+</style>
+<style id="amoffer-full-page-background-v6">
+html, body,
+.page, .site, .site-wrap, .site-wrapper, .wrapper, .container,
+.main, main, .content, .content-wrap, .layout,
+header, .header, .topbar, .top-bar,
+.catalog, .category-grid, .categories, .section,
+.sidebar, aside, .card, .panel,
+footer, .footer {
+  background-color: #DCDCDA !important;
+}
+</style>
+<style id="amoffer-text-background-fix-v7">
+/* Remove the unwanted white boxes behind catalog/link text */
+.section ul li,
+.section ul li a,
+.category-grid a,
+.categories a,
+.catalog a,
+.category-column a,
+.category-list a,
+.card ul li,
+.card ul li a,
+.sidebar a,
+.quick-links a,
+.account-links a {
+  background: transparent !important;
+}
+
+/* Keep the approved hover behavior */
+.section ul li:hover,
+.section ul li:hover a,
+.category-grid a:hover,
+.categories a:hover,
+.catalog a:hover,
+.category-column a:hover,
+.category-list a:hover,
+.card ul li a:hover,
+.sidebar a:hover,
+.quick-links a:hover,
+.account-links a:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Keep headings clean on the unified background */
+.section .heading,
+.section .heading h2,
+.section .heading h2 a,
+.card h2,
+.card h3 {
+  background: transparent !important;
+}
+</style>
+<style id="poster-full-image-fix-v8">
+/* Show the approved My Last Chance poster completely — no crop on the right */
+.poster {
+  overflow: visible !important;
+  background: #DCDCDA !important;
+}
+.poster img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  object-position: top center !important;
+  display: block !important;
+}
+</style>
+<style id="voices-real-width-fix-v12">
+/* Built directly from approved v8.
+   The 4th main grid track contains For Sale / Voices & Reflections. */
+.main{
+  grid-template-columns:307px 268px 290px 350px minmax(250px,1fr) !important;
+}
+.main > .column:nth-of-type(3) .section{
+  padding-left:24px !important;
+  padding-right:18px !important;
+  overflow:visible !important;
+}
+.main > .column:nth-of-type(3) .heading{
+  grid-template-columns:34px max-content !important;
+  gap:8px !important;
+  overflow:visible !important;
+}
+.main > .column:nth-of-type(3) .heading h2,
+.main > .column:nth-of-type(3) .heading h2 a{
+  width:max-content !important;
+  max-width:none !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+}
+</style>
+<style id="tagline-under-logo-v15">
+.logo-area{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:2px !important;
+}
+.logo-area .tagline,
+.logo-area .taglines,
+.tagline{
+  display:block !important;
+  width:max-content !important;
+  max-width:none !important;
+  white-space:nowrap !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1.2 !important;
+}
+</style>
+<style id="policy-information-area-v16">
+.policy-card{
+  margin-top:18px !important;
+}
+.policy-card h3{
+  text-transform:none !important;
+}
+.policy-card .policy-copy{
+  margin-top:18px;
+  padding-top:12px;
+  border-top:1px solid #aaa;
+  font-size:13px;
+  line-height:1.45;
+  color:#333;
+}
+</style>
+<style id="hope-quote-v31">
+/* Keep poster + quote together as one left-column grid item */
+.poster-stack{
+  grid-column:1;
+  grid-row:1 / span 2;
+  min-width:0;
+}
+.poster-stack .poster{
+  width:100%!important;
+  margin:0!important;
+}
+.poster-stack .poster img{
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  display:block!important;
+  object-fit:contain!important;
+}
+.poster-stack .hope-quote{
+  position:relative!important;
+  width:100%!important;
+  height:245px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:#DCDCDA!important;
+}
+.poster-stack .hope-quote-inner{
+  position:absolute!important;
+  left:22px!important;
+  top:145px!important;
+  width:250px!important;
+  transform:rotate(-45deg)!important;
+  transform-origin:left center!important;
+  color:#111!important;
+  font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive!important;
+  font-size:27px!important;
+  font-style:italic!important;
+  font-weight:500!important;
+  line-height:.95!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.poster-stack .hope-quote-inner span{display:block!important}
+@media(max-width:800px){
+  .poster-stack{grid-column:auto;grid-row:auto}
+  .poster-stack .hope-quote{height:210px!important}
+  .poster-stack .hope-quote-inner{left:18px!important;top:125px!important;font-size:24px!important}
+}
+</style>
+<style id="image-integrity-v32">img{max-width:100%}.poster img,.post-head img{height:auto!important;object-fit:contain!important}.listing .photo img{object-fit:cover!important}</style>
+<style id="share-suite-v37">
+.social{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.social .share-social-btn{width:32px;height:32px;border:1px solid #bcc1c6;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:#fff;color:#111;text-decoration:none;cursor:pointer;padding:0}
+.social .share-social-btn:hover,.social .share-social-btn:focus{background:#111;color:#fff;outline:none}
+.share-sheet-v37{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center;z-index:99999;padding:16px}
+.share-sheet-v37.show{display:flex}
+.share-card-v37{width:min(560px,100%);background:#fff;border:1px solid #999;border-radius:12px;padding:16px;box-shadow:0 14px 42px rgba(0,0,0,.28)}
+.share-card-v37 h3{margin:0 0 12px;font-size:18px}
+.share-grid-v37{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.share-option-v37{border:1px solid #bbb;background:#fff;color:#111;border-radius:9px;padding:11px 8px;font:700 12px Arial,sans-serif;cursor:pointer;min-height:48px}
+.share-option-v37:hover,.share-option-v37:focus{background:#f1f1f1}
+.share-close-v37{margin-top:12px;width:100%;padding:10px;border:1px solid #999;background:#eee;border-radius:8px;font-weight:700;cursor:pointer}
+.share-toast-v37{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#111;color:#fff;padding:9px 12px;border-radius:7px;font:700 12px Arial,sans-serif;display:none;z-index:100000}.share-toast-v37.show{display:block}
+@media(max-width:560px){.share-grid-v37{grid-template-columns:repeat(3,minmax(0,1fr))}.share-card-v37{border-radius:12px 12px 0 0}.share-sheet-v37{padding:0}}
+</style>
+<style id="fresh-listings-v141">
+.fresh-v51{max-width:1180px;margin:22px auto 24px;padding:0 18px}.fresh-v51-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:10px}.fresh-v51 h2{margin:0;font-size:23px;color:#111}.fresh-v51 .fresh-sub{color:#666;font-size:13px;margin-top:3px}.fresh-v51 .fresh-all{font-weight:800;color:#174ea6;text-decoration:none;white-space:nowrap}.fresh-v51-grid{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 10px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;cursor:grab;user-select:none;scrollbar-width:thin}.fresh-v51-grid:active{cursor:grabbing}.fresh-v51-card{flex:0 0 168px;border:1px solid #d8d8d8;border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.05);scroll-snap-align:start}.fresh-v51-card>a{color:inherit;text-decoration:none;display:block}.fresh-v51-photo{width:100%;height:96px;object-fit:cover;background:#eee;display:block;filter:none!important;-webkit-filter:none!important}.fresh-v51-body{padding:7px 8px 8px}.fresh-v51-title{font-weight:800;font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}.fresh-v51-price{font-weight:900;font-size:14px;line-height:1.15}.fresh-v51-meta{display:none}.fresh-v51-empty{padding:14px;border:1px dashed #bbb;border-radius:8px;color:#666;background:#fafafa;min-width:260px}.fresh-v51-badge{display:none}@media(max-width:520px){.fresh-v51{padding:0 10px}.fresh-v51-card{flex-basis:145px}.fresh-v51-photo{height:84px}.fresh-v51 h2{font-size:20px}.fresh-v51-head{align-items:flex-start}}
+</style>
+<style id="auth-nav-buttons-v77">
+.topnav .auth-nav-login,.topnav .auth-nav-create{border:1px solid #111!important;border-radius:5px;padding:9px 14px!important;margin-left:8px;font-weight:700;text-decoration:none!important;line-height:1;}
+.topnav .auth-nav-login{background:#fff;color:#000;}
+.topnav .auth-nav-create{background:#000;color:#fff;}
+.topnav .auth-nav-login:hover{background:#eee;color:#000;}
+.topnav .auth-nav-create:hover{background:#222;color:#fff;}
+@media(max-width:760px){.topnav .auth-nav-login,.topnav .auth-nav-create{flex:0 0 auto;margin-left:0;margin-right:8px;padding:9px 12px!important}}
+</style>
+<link href="https://am-offer.net/" rel="canonical"/><meta content="Buy and sell locally on am-offer.net. Browse listings, make one private offer, message sellers directly, and post your own items." name="description"/><meta content="am-offer.net | Buy, Sell &amp; Make Private Offers Locally" property="og:title"/><meta content="Buy and sell locally on am-offer.net. Browse listings, make one private offer, message sellers directly, and post your own items." property="og:description"/><meta content="website" property="og:type"/><meta content="am-offer.net" property="og:site_name"/><script id="website-schema-v118" type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://am-offer.net/#website","url":"https://am-offer.net/","name":"am-offer.net","description":"A local marketplace for buying, selling, and making private offers.","potentialAction":{"@type":"SearchAction","target":"https://am-offer.net/am-offer-net-search-results-v4.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script id="organization-schema-v118" type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://am-offer.net/#organization","name":"am-offer.net","url":"https://am-offer.net/","logo":"https://am-offer.net/google-icon-512x512.png"}</script><link href="/site.webmanifest" rel="manifest"/><meta content="#111111" name="theme-color"/>
+<style id="listing-photo-color-v134">
+/* Product/listing photos must keep their original colors across the marketplace. */
+.listing img,.listing .photo img,.photo img,.card img,.item img,.result img,.listing-card img,.thumb img,.thumbs img,.mainphoto img{filter:none!important;-webkit-filter:none!important;}
+</style>
+
+<style id="catalog-readability-v16">
+/* v16: improve readability of homepage category/catalog links only. */
+.section ul > li,
+.section ul > li > a {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  color: #171717 !important;
+}
+.section ul > li {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+.section ul > li:hover,
+.section ul > li:hover > a {
+  color: #fff !important;
+}
+</style>
+<style id="catalog-align-v213">
+.wanted-slot-v213{display:block;width:100%;padding:24px 0 0;clear:both;position:static!important}
+.wanted-catalog-row-v213{display:flex;justify-content:center;align-items:center;position:static!important;left:auto!important;right:auto!important;top:auto!important;transform:none!important;margin:0!important;width:100%}
+.jobs-align-v209{transform:none!important;margin:0!important}
+</style>
+<style id="mobile-app-nav-v2129">
+@media (max-width:760px){
+ body{padding-bottom:84px!important}
+ .topnav{display:none!important}
+ .mobile-app-nav-v2129{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fff;border-top:1px solid #d7d7d7;box-shadow:0 -3px 16px rgba(0,0,0,.10);display:grid;grid-template-columns:repeat(5,1fr);padding:7px max(6px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));}
+ .mobile-app-nav-v2129 a{min-width:0;color:#111;text-decoration:none!important;text-align:center;font:700 11px/1.15 Arial,sans-serif;padding:3px 1px;border:0!important}
+ .mobile-app-nav-v2129 .mi{display:flex;align-items:center;justify-content:center;width:30px;height:30px;margin:0 auto 3px;border-radius:9px;font-size:19px;font-weight:700}
+ .mobile-app-nav-v2129 .post .mi{background:#111;color:#fff;width:38px;height:38px;border-radius:50%;font-size:26px;margin-top:-12px}
+ .mobile-app-nav-v2129 .signup{color:#fff;background:#111;border-radius:10px!important;padding:6px 2px!important}
+ .mobile-app-nav-v2129 .signup .mi{color:#fff}
+ .mobile-quick-auth-v2129{display:flex!important;gap:8px;margin:10px 0 2px;width:100%}
+ .mobile-quick-auth-v2129 a{flex:1;text-align:center;text-decoration:none;padding:11px 8px;border:1px solid #111;border-radius:9px;font-weight:800;font-size:15px}
+ .mobile-quick-auth-v2129 .login{background:#fff;color:#111}.mobile-quick-auth-v2129 .create{background:#111;color:#fff}
+}
+@media (min-width:761px){.mobile-app-nav-v2129,.mobile-quick-auth-v2129{display:none!important}}
+</style>
+
+<style id="mobile-marketplace-home-v2130">
+@media(max-width:760px){
+  /* Mobile opens as a marketplace, not the informational/poster layout. */
+  .poster-stack{display:none!important}
+  header{position:sticky;top:0;z-index:1200;background:#fff;padding:10px 12px!important;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+  header .tagline{font-size:13px!important;margin-top:3px!important}
+  header .loc{margin-top:8px!important}
+  .mobile-quick-auth-v2129{margin-top:8px!important}
+  .fresh-v51{margin:12px 0 8px!important;padding:0 10px!important}
+  .fresh-v51-head{align-items:center!important}
+  .fresh-v51 h2{font-size:22px!important}
+  .fresh-v51-grid{padding-bottom:6px!important}
+  .mobile-market-actions-v2130{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 10px 12px;background:#fff;border-bottom:1px solid #ddd}
+  .mobile-market-actions-v2130 a{display:flex;min-height:66px;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid #d4d4d4;border-radius:12px;background:#fff;color:#111;text-decoration:none!important;font:800 12px/1.15 Arial,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .mobile-market-actions-v2130 b{font-size:22px;line-height:1}
+  .mobile-market-actions-v2130 .primary{background:#111;color:#fff;border-color:#111}
+  .main{margin-top:0!important}
+}
+@media(min-width:761px){.mobile-market-actions-v2130{display:none!important}}
+</style>
+<script id="mobile-marketplace-home-script-v2130">
+document.addEventListener('DOMContentLoaded',function(){
+  if(!window.matchMedia('(max-width:760px)').matches)return;
+  var shell=document.querySelector('.shell'), header=shell&&shell.querySelector('header'), fresh=document.querySelector('.fresh-v51'), main=document.querySelector('main.main');
+  if(!shell||!header||!main)return;
+  var actions=document.createElement('nav');
+  actions.className='mobile-market-actions-v2130';
+  actions.setAttribute('aria-label','Marketplace shortcuts');
+  actions.innerHTML='<a href="am-offer-net-search-results-v4.html"><b>⌕</b>Browse</a><a class="primary" href="am-offer-net-post-my-chance-ad-v4.html?new=1"><b>＋</b>Post Item</a><a href="am-offer-net-wanted-v1.html"><b>◎</b>Wanted</a><a href="am-offer-net-community-v2.html"><b>♧</b>Community</a>';
+  header.insertAdjacentElement('afterend',actions);
+  if(fresh) actions.insertAdjacentElement('afterend',fresh);
+});
+</script>
+
+<style id="mobile-real-home-v2131">
+.mobile-home-v2131{display:none}
+@media(max-width:760px){
+ body{background:#f5f5f5!important;padding-bottom:76px!important}
+ .shell>header,.shell>main.main,.poster-stack,.mobile-market-actions-v2130{display:none!important}
+ .mobile-home-v2131{display:block!important;background:#f5f5f5;min-height:100vh;padding:0 12px 18px}
+ .mh-brand{background:#fff;margin:0 -12px;padding:14px 14px 11px;border-bottom:1px solid #ddd;display:flex;align-items:end;justify-content:space-between}
+ .mh-brand a{font:900 28px/1 Arial,sans-serif;color:#111;text-decoration:none}.mh-brand a span{font-weight:700}.mh-brand small{font:700 11px Arial;color:#666}
+ .mh-auth{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}
+ .mh-auth a{background:#fff;border:2px solid #111;border-radius:10px;padding:12px 6px;text-align:center;color:#111;text-decoration:none;font:800 15px Arial}.mh-auth a.dark{background:#111;color:#fff}
+ .mh-search{display:flex;background:#fff;border:1px solid #c9c9c9;border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 5px rgba(0,0,0,.05)}
+ .mh-search input{min-width:0;flex:1;border:0!important;outline:0;padding:13px 12px;font-size:16px;background:#fff}.mh-search button{border:0;background:#111;color:#fff;padding:0 15px;font-weight:800}
+ .mh-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+ .mh-actions a{min-width:0;background:#fff;border:1px solid #d6d6d6;border-radius:12px;padding:10px 2px 8px;text-align:center;color:#111;text-decoration:none;font:800 11px Arial}.mh-actions a b{display:block;font-size:23px;line-height:26px}.mh-actions a.post{background:#111;color:#fff;border-color:#111}
+ #mobileFreshMountV2131 .fresh-v51{display:block!important;margin:0!important;padding:12px 0 4px!important;background:transparent!important}
+ #mobileFreshMountV2131 .fresh-v51-head{padding:0 2px 9px!important}#mobileFreshMountV2131 .fresh-v51-head h2{font-size:21px!important;margin:0!important}
+ #mobileFreshMountV2131 .fresh-sub{font-size:12px!important}#mobileFreshMountV2131 .fresh-v51-grid{padding-bottom:8px!important}
+ footer{display:none!important}
+}
+</style>
+<script id="mobile-real-home-script-v2131">
+document.addEventListener('DOMContentLoaded',function(){if(!matchMedia('(max-width:760px)').matches)return;var mount=document.getElementById('mobileFreshMountV2131'),fresh=document.querySelector('section.fresh-v51');if(mount&&fresh)mount.appendChild(fresh);});
+</script>
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="am-Offer"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
+</head>
+<body>
+<div class="shell">
+<header>
+<div class="brand">
+<a class="logo" href="home.html">am-offer<span class="dotnet">.net</span></a>
+<div class="tagline">Post My Chance • Buy • Trade • Local</div>
+</div>
+<div class="loc">
+<span class="pin">●</span>
+<select id="stateSelect">
+<option value="">United States</option>
+<option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
+</select>
+<select id="citySelect"><option value="">Select City</option></select>
+</div>
+<nav class="topnav"><a class="auth-nav-login" href="am-offer-net-sign-in-v1.html">log in</a><a class="auth-nav-create" href="am-offer-net-create-account-v1.html">create account</a><a href="am-offer-net-my-account-v1.html">account</a><a href="am-offer-net-favorites-v1.html">favorites</a><a href="am-offer-net-messages-offer-flow-v3.html">messages</a><a href="am-offer-net-help-faq-v1.html">help</a></nav><div class="mobile-quick-auth-v2129"><a class="login" href="am-offer-net-sign-in-v1.html">Log in</a><a class="create" href="am-offer-net-create-account-v1.html">Create account</a></div>
+</header>
+<section class="mobile-home-v2131" aria-label="am-Offer mobile home">
+  <div class="mh-brand"><a href="home.html">am-offer<span>.net</span></a><small>Local Marketplace</small></div>
+  <div class="mh-auth"><a href="am-offer-net-sign-in-v1.html">Log in</a><a class="dark" href="am-offer-net-create-account-v1.html">Create account</a></div>
+  <form class="mh-search" action="am-offer-net-search-results-v4.html" method="get"><input name="q" type="search" placeholder="Search cars, furniture, phones..." aria-label="Search marketplace"><button type="submit">Search</button></form>
+  <div class="mh-actions">
+   <a class="post" href="am-offer-net-post-my-chance-ad-v4.html?new=1"><b>＋</b><span>Post Item</span></a>
+   <a href="am-offer-net-search-results-v4.html"><b>⌕</b><span>Browse</span></a>
+   <a href="am-offer-net-wanted-v1.html"><b>◎</b><span>Wanted</span></a>
+   <a href="am-offer-net-community-v2.html"><b>♧</b><span>Community</span></a>
+  </div>
+  <div id="mobileFreshMountV2131"></div>
+</section>
+<main class="main">
+<div class="poster-stack">
+<aside class="poster"><img alt="My Last Chance poster" src="am-offer-net-approved-poster.png"/></aside>
+<div class="hope-quote">
+<div class="hope-quote-inner">
+<span>You’re giving me</span>
+<span>one more reason</span>
+<span>to hope.</span>
+</div>
+</div>
+</div>
+<div class="column">
+<section class="section">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><circle cx="22" cy="19" r="9"></circle><circle cx="42" cy="19" r="9"></circle><circle cx="32" cy="14" r="10"></circle><path d="M7 47c0-10 7-16 15-16s15 6 15 16v7H7z"></path><path d="M27 47c0-11 8-18 17-18s17 7 17 18v7H27z"></path></svg></span><h2><a href="am-offer-net-community-v2.html">community</a></h2></div>
+<ul><li><a href="am-offer-net-community-v2.html?section=lost">lost</a></li><li><a href="am-offer-net-community-v2.html?section=found">found</a></li><li><a href="am-offer-net-community-v2.html?section=alerts">alerts</a></li><li><a href="am-offer-net-community-v2.html?section=general">general</a></li><li><a href="am-offer-net-community-v2.html?section=local%20news">local news</a></li><li><a href="am-offer-net-community-v2.html?section=help%20from%20neighbors">help from neighbors</a></li></ul>
+<div class="wanted-slot-v213"><div class="wanted-catalog-row-v213"><style id="wanted-home-v200-style">
+@keyframes wantedPulseV200{
+  0%,100%{background:#a91515;color:#fff;box-shadow:0 0 0 2px #fff,0 0 7px rgba(169,21,21,.28)}
+  50%{background:#fff;color:#8f1111;box-shadow:0 0 0 2px #a91515,0 0 11px rgba(169,21,21,.22)}
+}
+.wanted-home-v200{display:flex;align-items:center;justify-content:center;gap:10px;width:190px;max-width:92%;margin:0 auto;padding:12px 18px;border:2px solid #a91515;border-radius:7px;font:800 22px/1 Arial,sans-serif;text-decoration:none!important;animation:wantedPulseV200 3.5s ease-in-out infinite}
+.wanted-home-v200 small{font-size:10px;font-weight:700;display:block;margin-top:4px;letter-spacing:.2px}
+@media(prefers-reduced-motion:reduce){.wanted-home-v200{animation:none;background:#a91515;color:#fff}}
+</style>
+<a class="wanted-home-v200" href="am-offer-net-wanted-v1.html" aria-label="Open WANTED">
+  <span style="font-size:27px">⌕</span><span>WANTED<small>Find It. Post It. Get It.</small></span>
+</a>
+</div></div></section><section class="section bottom jobs-align-v209">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><rect height="30" rx="3" width="48" x="8" y="20"></rect><rect height="10" rx="3" width="24" x="20" y="12"></rect><rect fill="#fff" height="5" width="48" x="8" y="29"></rect></svg></span><h2>
+<a href="am-offer-net-search-results-v4.html?category=jobs">jobs</a></h2></div>
+<ul><li><a href="am-offer-net-search-results-v4.html?q=accounting%20/%20finance">accounting / finance</a></li><li><a href="am-offer-net-search-results-v4.html?q=admin%20/%20office">admin / office</a></li><li><a href="am-offer-net-search-results-v4.html?q=customer%20service">customer service</a></li><li><a href="am-offer-net-search-results-v4.html?q=education">education</a></li><li><a href="am-offer-net-search-results-v4.html?q=healthcare">healthcare</a></li><li><a href="am-offer-net-search-results-v4.html?q=hospitality">hospitality</a></li><li><a href="am-offer-net-search-results-v4.html?q=manufacturing">manufacturing</a></li><li><a href="am-offer-net-search-results-v4.html?q=marketing%20/%20pr">marketing / pr</a></li><li><a href="am-offer-net-search-results-v4.html?q=nonprofit">nonprofit</a></li><li><a href="am-offer-net-search-results-v4.html?q=retail">retail</a></li><li><a href="am-offer-net-search-results-v4.html?q=sales">sales</a></li><li><a href="am-offer-net-search-results-v4.html?q=skilled%20trade">skilled trade</a></li><li><a href="am-offer-net-search-results-v4.html?q=tech%20/%20it">tech / it</a></li><li><a href="am-offer-net-search-results-v4.html?q=transportation">transportation</a></li><li><a href="am-offer-net-search-results-v4.html?q=general%20labor">general labor</a></li><li><a href="am-offer-net-voices-reflections-v2.html">more ...</a></li></ul>
+</section>
+</div>
+<div class="column">
+<section class="section">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><path d="M6 31 32 8l26 23-7 8-5-5v22H18V34l-5 5z"></path><rect fill="#fff" height="18" width="10" x="27" y="38"></rect></svg></span><h2><a href="am-offer-net-search-results-v4.html?category=housing">housing</a></h2></div>
+<ul><li><a href="am-offer-net-search-results-v4.html?q=apartments%20/%20housing">apartments / housing</a></li><li><a href="am-offer-net-search-results-v4.html?q=rooms%20/%20shared">rooms / shared</a></li><li><a href="am-offer-net-search-results-v4.html?q=sublets%20/%20temporary">sublets / temporary</a></li><li><a href="am-offer-net-search-results-v4.html?q=housing%20wanted">housing wanted</a></li><li><a href="am-offer-net-search-results-v4.html?q=office%20/%20commercial">office / commercial</a></li><li><a href="am-offer-net-search-results-v4.html?q=parking%20/%20storage">parking / storage</a></li><li><a href="am-offer-net-search-results-v4.html?q=real%20estate%20for%20sale">real estate for sale</a></li><li><a href="am-offer-net-search-results-v4.html?q=real%20estate%20wanted">real estate wanted</a></li><li><a href="am-offer-net-search-results-v4.html?q=vacation%20rentals">vacation rentals</a></li></ul>
+</section>
+<section class="section bottom">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><path d="M28 4h8l2 8 7 3 7-4 6 6-4 7 3 7 8 2v8l-8 2-3 7 4 7-6 6-7-4-7 3-2 8h-8l-2-8-7-3-7 4-6-6 4-7-3-7-8-2v-8l8-2 3-7-4-7 6-6 7 4 7-3z"></path><circle cx="32" cy="36" fill="#fff" r="9"></circle></svg></span><h2><a href="am-offer-net-search-results-v4.html?category=services">services</a></h2></div>
+<ul><li><a href="am-offer-net-search-results-v4.html?q=automotive">automotive</a></li><li><a href="am-offer-net-search-results-v4.html?q=beauty">beauty</a></li><li><a href="am-offer-net-search-results-v4.html?q=computer">computer</a></li><li><a href="am-offer-net-search-results-v4.html?q=creative">creative</a></li><li><a href="am-offer-net-search-results-v4.html?q=event">event</a></li><li><a href="am-offer-net-search-results-v4.html?q=financial">financial</a></li><li><a href="am-offer-net-search-results-v4.html?q=health">health</a></li><li><a href="am-offer-net-search-results-v4.html?q=home%20improvement">home improvement</a></li><li><a href="am-offer-net-search-results-v4.html?q=legal">legal</a></li><li><a href="am-offer-net-search-results-v4.html?q=lessons">lessons</a></li><li><a href="am-offer-net-search-results-v4.html?q=moving%20/%20storage">moving / storage</a></li><li><a href="am-offer-net-search-results-v4.html?q=real%20estate">real estate</a></li><li><a href="am-offer-net-search-results-v4.html?q=skilled%20trade">skilled trade</a></li><li><a href="am-offer-net-search-results-v4.html?q=small%20business">small business</a></li><li><a href="am-offer-net-search-results-v4.html?q=travel">travel</a></li><li><a href="am-offer-net-search-results-v4.html?q=writing%20/%20editing">writing / editing</a></li><li><a href="am-offer-net-search-results-v4.html?q=more%20...">more ...</a></li></ul>
+</section>
+</div>
+<div class="column">
+<section class="section">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><path d="M7 18 30 6h20l7 7v20L34 56 8 30z"></path><circle cx="45" cy="18" fill="#fff" r="5"></circle></svg></span><h2><a href="am-offer-net-search-results-v4.html?category=for%20sale">for sale</a></h2></div>
+<ul><li><a href="am-offer-net-search-results-v4.html?q=antiques">antiques</a></li><li><a href="am-offer-net-search-results-v4.html?q=appliances">appliances</a></li><li><a href="am-offer-net-search-results-v4.html?q=arts%20%26%20crafts">arts &amp; crafts</a></li><li><a href="am-offer-net-search-results-v4.html?q=atv%20/%20utv%20/%20snow">atv / utv / snow</a></li><li><a href="am-offer-net-search-results-v4.html?q=auto%20parts">auto parts</a></li><li><a href="am-offer-net-search-results-v4.html?q=baby%20%26%20kids">baby &amp; kids</a></li><li><a href="am-offer-net-search-results-v4.html?q=bicycles">bicycles</a></li><li><a href="am-offer-net-search-results-v4.html?q=boats">boats</a></li><li><a href="am-offer-net-search-results-v4.html?q=books%20%26%20media">books &amp; media</a></li><li><a href="am-offer-net-search-results-v4.html?q=cars%20%26%20trucks">cars &amp; trucks</a></li><li><a href="am-offer-net-search-results-v4.html?q=electronics">electronics</a></li><li><a href="am-offer-net-search-results-v4.html?q=farm%20%26%20garden">farm &amp; garden</a></li><li><a href="am-offer-net-search-results-v4.html?q=furniture">furniture</a></li><li><a href="am-offer-net-search-results-v4.html?q=household">household</a></li><li><a href="am-offer-net-search-results-v4.html?q=jewelry">jewelry</a></li><li><a href="am-offer-net-search-results-v4.html?q=tools">tools</a></li><li><a href="am-offer-net-search-results-v4.html?q=toys%20%26%20games">toys &amp; games</a></li><li><a href="am-offer-net-search-results-v4.html?q=free">free</a></li></ul>
+</section>
+<section class="section bottom">
+<div class="heading"><span class="icon"><svg viewbox="0 0 64 64"><path d="M16 42c7-1 12-4 15-9 3 5 8 8 17 9"></path><path d="M19 25c3-6 7-9 12-9s9 3 12 9"></path><circle cx="31" cy="28" r="2"></circle></svg></span><h2><a href="am-offer-net-voices-reflections-v2.html">Voices &amp; Reflections</a></h2></div>
+<ul>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=life%20reflections">life reflections</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=neighbor%20voices">neighbor voices</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=words%20of%20hope">words of hope</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=lessons%20learned">lessons learned</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html">family &amp; future</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=gratitude">gratitude</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=new%20beginnings">new beginnings</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html?theme=quiet%20thoughts">quiet thoughts</a></li>
+<li><a href="am-offer-net-voices-reflections-v2.html">more ...</a></li>
+</ul>
+</section>
+</div>
+<aside class="sidebar">
+<a class="cta" href="am-offer-net-post-my-chance-ad-v4.html?new=1" id="postChanceCta"><span class="pencil">✎</span><span>Post my chance ad</span></a>
+<section class="card"><h3>my account</h3><ul><li><a href="am-offer-net-my-listings-v1.html">my listings</a></li><li><a href="am-offer-net-favorites-v1.html">my favorites</a></li><li><a href="am-offer-net-saved-searches-v1.html">saved searches</a></li><li><a href="am-offer-net-search-alerts-v1.html">search alerts</a></li></ul></section>
+<section class="card"><h3>quick links</h3><ul><li><a href="am-offer-net-safety-tips-v1.html">safety tips</a></li><li><a href="am-offer-net-community-guidelines-v1.html">community guidelines</a></li><li><a href="am-offer-net-report-abuse-v1.html">report abuse</a></li><li><a href="am-offer-net-help-faq-v1.html">help / faq</a></li><li><a href="am-offer-net-contact-us-v1.html">contact us</a></li></ul></section>
+<section class="card policy-card">
+<h3>site information</h3>
+<ul>
+<li><a href="am-offer-net-about-v2.html?view=about">about am-offer.net</a></li>
+<li><a href="terms.html">terms of use</a></li>
+<li><a href="privacy.html">privacy policy</a></li>
+<li><a href="am-offer-net-community-guidelines-v1.html">community guidelines</a></li>
+<li><a href="am-offer-net-prohibited-items-v1.html">prohibited items</a></li>
+<li><a href="am-offer-net-safety-tips-v1.html">safety tips</a></li>
+<li><a href="am-offer-net-report-abuse-v1.html">report abuse</a></li>
+<li><a href="am-offer-net-help-faq-v1.html">help / faq</a></li>
+<li><a href="am-offer-net-contact-us-v1.html">contact us</a></li>
+</ul>
+<div class="policy-copy">© 2026 am-offer.net<br/>All rights reserved.</div>
+</section>
+</aside>
+</main>
+<section aria-labelledby="freshListingsTitle" class="fresh-v51">
+<div class="fresh-v51-head"><div><h2 id="freshListingsTitle">Fresh listings</h2><div class="fresh-sub">Recently posted items from the marketplace.</div></div><a class="fresh-all" href="am-offer-net-search-results-v4.html">View all listings →</a></div>
+<div class="fresh-v51-grid" id="freshListingsV51"></div>
+</section>
+<script id="fresh-listings-script-v105">
+(async function(){
+ const root=document.getElementById('freshListingsV51');if(!root)return;
+ const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const price=x=>x.asking_price===null?'Make Offer':'$'+Number(x.asking_price).toLocaleString(undefined,{maximumFractionDigits:2});
+ try{
+   const authDeadline=Date.now()+6000;
+   while(!window.AmOfferAuth && Date.now()<authDeadline) await new Promise(r=>setTimeout(r,60));
+   if(!window.AmOfferAuth) throw new Error('Authentication client is not ready');
+   const client=AmOfferAuth.client();
+   const {data,error}=await client.from('listings')
+     .select('id,title,category,asking_price,city,state,vehicle_make,vehicle_year,vehicle_mileage,vehicle_title_type,created_at,listing_media(storage_path,sort_order,media_type)')
+     .eq('status','active').eq('moderation_status','normal').is('archived_at',null)
+     .order('created_at',{ascending:false}).limit(80);
+   if(error)throw error;
+   const rows=data||[];
+   if(!rows.length){root.innerHTML='<div class="fresh-v51-empty">No listings yet. Be the first to post an item.</div>';return;}
+   root.innerHTML=rows.map(x=>{
+     const media=(x.listing_media||[]).filter(m=>m.media_type==='image').sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+     const pic=media[0]?client.storage.from('listing-media').getPublicUrl(media[0].storage_path).data.publicUrl:'social-share-1200x1200.png';
+     const u='am-offer-net-listing-detail-v12.html?id='+encodeURIComponent(x.id)+'&return='+encodeURIComponent(location.pathname.split('/').pop()||'home.html');
+     const carMeta=String(x.category||'').toLowerCase()==='cars & trucks'?
+       [x.vehicle_year,x.vehicle_make,x.vehicle_mileage!=null?Number(x.vehicle_mileage).toLocaleString()+' mi':null,x.vehicle_title_type?String(x.vehicle_title_type).replace(/\b\w/g,c=>c.toUpperCase())+' title':null].filter(Boolean).join(' · '):'';
+     return `<article class="fresh-v51-card"><a href="${u}"><img class="fresh-v51-photo" src="${esc(pic)}" alt="${esc(x.title)}"><div class="fresh-v51-body"><div class="fresh-v51-title" title="${esc(x.title)}">${esc(x.title)}</div><div class="fresh-v51-price">${esc(price(x))}</div></div></a></article>`;
+   }).join('');
+ }catch(err){
+   root.innerHTML='<div class="fresh-v51-empty">Fresh listings are temporarily unavailable.</div>';
+ }
+})();
+// Compact horizontal marketplace strip: mouse-drag on desktop, swipe on touch devices.
+(function(){
+ const strip=document.getElementById('freshListingsV51'); if(!strip)return;
+ let down=false,startX=0,startLeft=0,moved=false;
+ strip.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;down=true;moved=false;startX=e.clientX;startLeft=strip.scrollLeft;strip.setPointerCapture?.(e.pointerId);});
+ strip.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-startX;if(Math.abs(dx)>5)moved=true;strip.scrollLeft=startLeft-dx;});
+ const stop=()=>{down=false;}; strip.addEventListener('pointerup',stop);strip.addEventListener('pointercancel',stop);strip.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')stop();});
+ strip.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
+ strip.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){strip.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
+})();
+</script>
+<section class="tc-partner" aria-label="Partner site TexContractor" style="max-width:980px;margin:26px auto 20px;padding:0 14px;box-sizing:border-box"><p style="margin:0 0 8px;font:700 13px/1.35 Arial,Helvetica,sans-serif;color:#4b5563;text-align:center">Our partner site <a href="https://texcontractor.com/?utm_source=amoffer&amp;utm_medium=banner" target="_blank" rel="noopener" style="color:#b7791f">TexContractor.com</a> · free for pros in 63 trades</p><iframe src="https://texcontractor.com/ad/banner.html?theme=gold&amp;src=amoffer" title="TexContractor: enter your phone to get customers" loading="lazy" style="display:block;width:100%;height:250px;border:0;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.15)"></iframe></section>
+<footer>
+<div class="footer-links"><a href="am-offer-net-about-v2.html?view=about">about</a><a href="am-offer-net-safety-tips-v1.html">safety</a><a href="privacy.html">privacy</a><a href="terms.html">terms</a><a href="am-offer-net-contact-us-v1.html">contact</a></div>
+<div class="footer-right"><span>© 2026 am-offer.net. All rights reserved.</span><div aria-label="Share am-offer.net" class="social">
+<button class="share-social-btn" data-open-share-v37="" title="Share on Facebook or other apps" type="button">f</button>
+<button class="share-social-btn" data-open-share-v37="" title="Share on X or other apps" type="button">𝕏</button>
+<button class="share-social-btn" data-open-share-v37="" title="Share to WhatsApp, Messages, Messenger and more" type="button">↗</button>
+<button class="share-social-btn" data-open-share-v37="" title="More sharing options" type="button">•••</button>
+</div><div class="slogan">Local People.<br/>Brighter Tomorrows.</div></div>
+</footer>
+</div>
+<script id="home-location-v32">
+const cityMap={"Alabama":["Birmingham","Montgomery","Mobile","Huntsville","Tuscaloosa","Hoover","Auburn","Dothan"],"Alaska":["Anchorage","Fairbanks","Juneau","Sitka","Ketchikan","Wasilla","Kenai"],"Arizona":["Phoenix","Tucson","Mesa","Chandler","Scottsdale","Glendale","Tempe","Gilbert","Peoria","Surprise"],"Arkansas":["Little Rock","Fort Smith","Fayetteville","Springdale","Jonesboro","Rogers","Conway","Bentonville"],"California":["Los Angeles","San Diego","San Jose","San Francisco","Fresno","Sacramento","Long Beach","Oakland","Bakersfield","Anaheim","Santa Ana","Riverside","Stockton","Irvine","Chula Vista"],"Colorado":["Denver","Colorado Springs","Aurora","Fort Collins","Lakewood","Thornton","Arvada","Westminster","Pueblo","Boulder"],"Connecticut":["Bridgeport","New Haven","Stamford","Hartford","Waterbury","Norwalk","Danbury","New Britain","Bristol","Meriden"],"Delaware":["Wilmington","Dover","Newark","Middletown","Smyrna","Milford","Seaford"],"Florida":["Jacksonville","Miami","Tampa","Orlando","St. Petersburg","Hialeah","Tallahassee","Port St. Lucie","Cape Coral","Fort Lauderdale","Pembroke Pines","Hollywood","Gainesville","Clearwater"],"Georgia":["Atlanta","Augusta","Columbus","Macon","Savannah","Athens","South Fulton","Sandy Springs","Roswell","Warner Robins"],"Hawaii":["Honolulu","Hilo","Kailua","Pearl City","Waipahu","Kaneohe","Mililani Town"],"Idaho":["Boise","Meridian","Nampa","Idaho Falls","Caldwell","Pocatello","Coeur d'Alene","Twin Falls"],"Illinois":["Chicago","Aurora","Joliet","Naperville","Rockford","Elgin","Springfield","Peoria","Champaign","Waukegan"],"Indiana":["Indianapolis","Fort Wayne","Evansville","South Bend","Carmel","Fishers","Bloomington","Hammond","Lafayette","Noblesville"],"Iowa":["Des Moines","Cedar Rapids","Davenport","Sioux City","Iowa City","West Des Moines","Ankeny","Waterloo","Ames"],"Kansas":["Wichita","Overland Park","Kansas City","Olathe","Topeka","Lawrence","Shawnee","Lenexa","Manhattan"],"Kentucky":["Louisville","Lexington","Bowling Green","Owensboro","Covington","Georgetown","Richmond","Florence"],"Louisiana":["New Orleans","Baton Rouge","Shreveport","Lafayette","Lake Charles","Kenner","Bossier City","Monroe"],"Maine":["Portland","Lewiston","Bangor","South Portland","Auburn","Biddeford","Sanford","Augusta"],"Maryland":["Baltimore","Frederick","Gaithersburg","Rockville","Bowie","Hagerstown","Annapolis","College Park"],"Massachusetts":["Boston","Worcester","Springfield","Cambridge","Lowell","Brockton","Quincy","Lynn","New Bedford","Fall River"],"Michigan":["Detroit","Grand Rapids","Warren","Sterling Heights","Ann Arbor","Lansing","Dearborn","Livonia","Troy","Flint"],"Minnesota":["Minneapolis","St. Paul","Rochester","Duluth","Bloomington","Brooklyn Park","Plymouth","Woodbury","Maple Grove"],"Mississippi":["Jackson","Gulfport","Southaven","Hattiesburg","Biloxi","Meridian","Tupelo","Olive Branch"],"Missouri":["Kansas City","St. Louis","Springfield","Columbia","Independence","Lee's Summit","O'Fallon","St. Joseph","St. Charles"],"Montana":["Billings","Missoula","Great Falls","Bozeman","Butte","Helena","Kalispell","Belgrade"],"Nebraska":["Omaha","Lincoln","Bellevue","Grand Island","Kearney","Fremont","Hastings","Norfolk"],"Nevada":["Las Vegas","Henderson","Reno","North Las Vegas","Sparks","Carson City","Mesquite","Elko"],"New Hampshire":["Manchester","Nashua","Concord","Derry","Dover","Rochester","Salem","Merrimack"],"New Jersey":["Newark","Jersey City","Paterson","Elizabeth","Edison","Woodbridge","Lakewood","Toms River","Hamilton","Trenton"],"New Mexico":["Albuquerque","Las Cruces","Rio Rancho","Santa Fe","Roswell","Farmington","Clovis","Hobbs"],"New York":["New York City","Buffalo","Yonkers","Rochester","Syracuse","Albany","New Rochelle","Mount Vernon","Schenectady","Utica"],"North Carolina":["Charlotte","Raleigh","Greensboro","Durham","Winston-Salem","Fayetteville","Cary","Wilmington","High Point","Concord"],"North Dakota":["Fargo","Bismarck","Grand Forks","Minot","West Fargo","Williston","Dickinson","Mandan"],"Ohio":["Columbus","Cleveland","Cincinnati","Toledo","Akron","Dayton","Parma","Canton","Lorain","Hamilton"],"Oklahoma":["Oklahoma City","Tulsa","Norman","Broken Arrow","Edmond","Lawton","Moore","Midwest City","Enid"],"Oregon":["Portland","Salem","Eugene","Gresham","Hillsboro","Bend","Beaverton","Medford","Springfield","Corvallis"],"Pennsylvania":["Philadelphia","Pittsburgh","Allentown","Reading","Erie","Scranton","Bethlehem","Lancaster","Harrisburg","York"],"Rhode Island":["Providence","Warwick","Cranston","Pawtucket","East Providence","Woonsocket","Cumberland","Coventry"],"South Carolina":["Charleston","Columbia","North Charleston","Mount Pleasant","Rock Hill","Greenville","Summerville","Goose Creek","Sumter"],"South Dakota":["Sioux Falls","Rapid City","Aberdeen","Brookings","Watertown","Mitchell","Yankton","Pierre"],"Tennessee":["Nashville","Memphis","Knoxville","Chattanooga","Clarksville","Murfreesboro","Franklin","Johnson City","Jackson","Bartlett"],"Texas":["Houston","San Antonio","Dallas","Austin","Fort Worth","El Paso","Arlington","Corpus Christi","Plano","Lubbock","Laredo","Irving","Garland","Frisco","McKinney","Amarillo","Grand Prairie","Brownsville","Killeen","Denton"],"Utah":["Salt Lake City","West Valley City","West Jordan","Provo","Orem","Sandy","St. George","Ogden","Layton","South Jordan"],"Vermont":["Burlington","South Burlington","Rutland","Essex Junction","Barre","Montpelier","St. Albans","Winooski"],"Virginia":["Virginia Beach","Chesapeake","Norfolk","Richmond","Newport News","Alexandria","Hampton","Roanoke","Portsmouth","Suffolk"],"Washington":["Seattle","Spokane","Tacoma","Vancouver","Bellevue","Kent","Everett","Renton","Spokane Valley","Federal Way"],"West Virginia":["Charleston","Huntington","Morgantown","Parkersburg","Wheeling","Martinsburg","Weirton","Fairmont"],"Wisconsin":["Milwaukee","Madison","Green Bay","Kenosha","Racine","Appleton","Waukesha","Eau Claire","Oshkosh","Janesville"],"Wyoming":["Cheyenne","Casper","Laramie","Gillette","Rock Springs","Sheridan","Green River","Evanston"],"District of Columbia":["Washington"]};
+const stateSelect=document.getElementById("stateSelect"), citySelect=document.getElementById("citySelect");
+function fillCities(){
+  const keep=citySelect.value; citySelect.innerHTML='<option value="">Select City</option>';
+  (cityMap[stateSelect.value]||[]).forEach(city=>{const o=document.createElement('option');o.value=city;o.textContent=city;citySelect.appendChild(o)});
+  if([...citySelect.options].some(o=>o.value===keep)) citySelect.value=keep;
+}
+stateSelect.addEventListener('change',fillCities); fillCities();
+function addLocation(href){
+  const u=new URL(href,location.href);
+  if(stateSelect.value) u.searchParams.set('state',stateSelect.value);
+  if(citySelect.value) u.searchParams.set('city',citySelect.value);
+  return u.pathname.split('/').pop()+u.search;
+}
+document.querySelectorAll('a[href^="am-offer-net-search-results-v4.html"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.href=addLocation(a.getAttribute('href'))}));
+</script>
+<div aria-hidden="true" class="share-sheet-v37" id="siteShareSheet">
+<div aria-labelledby="siteShareTitle" aria-modal="true" class="share-card-v37" role="dialog">
+<h3 id="siteShareTitle">Share am-offer.net</h3>
+<div class="share-grid-v37">
+<button class="share-option-v37" data-share="whatsapp">WhatsApp</button>
+<button class="share-option-v37" data-share="sms">Messages / SMS</button>
+<button class="share-option-v37" data-share="messenger">Messenger</button>
+<button class="share-option-v37" data-share="facebook">Facebook</button>
+<button class="share-option-v37" data-share="x">X</button>
+<button class="share-option-v37" data-share="telegram">Telegram</button>
+<button class="share-option-v37" data-share="linkedin">LinkedIn</button>
+<button class="share-option-v37" data-share="email">Email</button>
+<button class="share-option-v37" data-share="copy">Copy Link</button>
+<button class="share-option-v37" data-share="more">More Apps</button>
+</div>
+<button class="share-close-v37" type="button">Close</button>
+</div>
+</div>
+<div class="share-toast-v37" id="shareToastV37" role="status"></div>
+<script id="share-suite-script-v37">
+(function(){
+  const sheet=document.getElementById('siteShareSheet');
+  if(!sheet)return;
+  const toast=document.getElementById('shareToastV37');
+  const shareUrl=()=>location.href;
+  const shareText=()=>`am-offer.net — ${document.title || 'Local marketplace'}`;
+  function note(msg){if(!toast)return;toast.textContent=msg;toast.classList.add('show');clearTimeout(window.__shareToast);window.__shareToast=setTimeout(()=>toast.classList.remove('show'),2200)}
+  function openSheet(){sheet.classList.add('show');sheet.setAttribute('aria-hidden','false')}
+  function closeSheet(){sheet.classList.remove('show');sheet.setAttribute('aria-hidden','true')}
+  function showCopyFallback(url){
+    let box=document.getElementById('amOfferCopyFallback');
+    if(!box){
+      box=document.createElement('div'); box.id='amOfferCopyFallback';
+      box.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px';
+      box.innerHTML='<div style="background:#fff;border-radius:16px;max-width:560px;width:100%;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><strong>Copy link</strong><button type="button" data-close aria-label="Close" style="border:0;background:transparent;font-size:24px;cursor:pointer">×</button></div><p style="margin:12px 0;color:#555">Your browser could not copy automatically. Select and copy this link:</p><input data-url readonly style="width:100%;box-sizing:border-box;padding:12px;border:1px solid #bbb;border-radius:10px"><div style="margin-top:14px;text-align:right"><button type="button" data-select style="padding:10px 16px;border-radius:10px;border:1px solid #111;background:#111;color:#fff;cursor:pointer">Select link</button></div></div>';
+      document.body.appendChild(box);
+      const close=()=>{box.style.display='none'};
+      box.querySelector('[data-close]').onclick=close; box.onclick=e=>{if(e.target===box)close()};
+      box.querySelector('[data-select]').onclick=()=>{const i=box.querySelector('[data-url]');i.focus();i.select()};
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.style.display!=='none')close()});
+    }
+    box.querySelector('[data-url]').value=url; box.style.display='flex';
+    setTimeout(()=>{const i=box.querySelector('[data-url]');i.focus();i.select()},0);
+  }
+  async function copyLink(){try{await navigator.clipboard.writeText(shareUrl());note('Link copied.');return true}catch(e){try{const t=document.createElement('textarea');t.value=shareUrl();document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();note('Link copied.');return true}catch(x){showCopyFallback(shareUrl());return false}}}
+  async function nativeShare(){if(navigator.share){try{await navigator.share({title:document.title,text:shareText(),url:shareUrl()});return true}catch(e){if(e && e.name==='AbortError')return false}} note('Share menu is not available in this browser.');return false}
+  async function doShare(type){
+    const u=encodeURIComponent(shareUrl()), t=encodeURIComponent(shareText()+' '+shareUrl());
+    if(type==='whatsapp'){window.open('https://wa.me/?text='+t,'_blank','noopener');return}
+    if(type==='sms'){location.href=(/iPhone|iPad|iPod/i.test(navigator.userAgent)?'sms:&body=':'sms:?body=')+t;return}
+    if(type==='facebook'){window.open('https://www.facebook.com/sharer/sharer.php?u='+u,'_blank','noopener,width=720,height=640');return}
+    if(type==='x'){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText())+'&url='+u,'_blank','noopener,width=720,height=520');return}
+    if(type==='telegram'){window.open('https://t.me/share/url?url='+u+'&text='+encodeURIComponent(shareText()),'_blank','noopener');return}
+    if(type==='linkedin'){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+u,'_blank','noopener,width=720,height=640');return}
+    if(type==='email'){location.href='mailto:?subject='+encodeURIComponent(document.title)+'&body='+t;return}
+    if(type==='copy'){await copyLink();return}
+    if(type==='more'){await nativeShare();return}
+    if(type==='messenger'){
+      if(await nativeShare()) return;
+      await copyLink();
+      window.open('https://www.messenger.com/','_blank','noopener');
+      note('Link copied — paste it in Messenger.');
+    }
+  }
+  document.querySelectorAll('[data-open-share-v37]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openSheet()}));
+  sheet.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>doShare(b.dataset.share)));
+  sheet.querySelector('.share-close-v37')?.addEventListener('click',closeSheet);
+  sheet.addEventListener('click',e=>{if(e.target===sheet)closeSheet()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+})();
+</script>
+
+<style id="catalog-horizontal-after-14-v96">
+/* Catalog rule: when a catalog reaches 14 items, stop growing as one long vertical column. */
+.section ul.catalog-wide-v96{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:18px !important;
+  row-gap:0 !important;
+  align-items:start !important;
+}
+.section ul.catalog-wide-v96 > li{
+  min-width:0 !important;
+  margin:0 !important;
+}
+.section ul.catalog-wide-v96 > li > a{
+  display:block !important;
+  width:100% !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+}
+@media(max-width:760px){
+  .section ul.catalog-wide-v96{
+    grid-template-columns:1fr !important;
+  }
+}
+</style>
+<script id="catalog-horizontal-after-14-script-v96">
+(function(){
+  document.querySelectorAll('.section ul').forEach(function(list){
+    const items=Array.from(list.children).filter(function(el){return el.tagName==='LI';});
+    if(items.length>=14) list.classList.add('catalog-wide-v96');
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script id="home-member-link-router-v98">
+(function(){
+  const protectedPages=new Set([
+    'am-offer-net-my-account-v1.html',
+    'am-offer-net-account-settings-v1.html',
+    'am-offer-net-my-listings-v1.html',
+    'am-offer-net-favorites-v1.html',
+    'am-offer-net-saved-searches-v1.html',
+    'am-offer-net-search-alerts-v1.html',
+    'am-offer-net-messages-offer-flow-v3.html',
+    'am-offer-net-post-my-chance-ad-v4.html',
+    'am-offer-net-edit-listing-v1.html'
+  ]);
+
+  async function activeContext(){
+    try{
+      const client=AmOfferAuth.client();
+      const {data:{session}}=await client.auth.getSession();
+      if(!session) return null;
+
+      const {data:admin}=await client.from('admin_users')
+        .select('role').eq('user_id',session.user.id).maybeSingle();
+      if(admin) return {client,session,isAdmin:true};
+
+      const {data:profile,error}=await client.from('profiles')
+        .select('membership_status').eq('id',session.user.id).maybeSingle();
+
+      if(error || !profile || profile.membership_status!=='active') return null;
+      return {client,session,isAdmin:false};
+    }catch(_e){
+      return null;
+    }
+  }
+
+  async function updateAuthNav(){
+    const ctx=await activeContext();
+    const login=document.querySelector('.auth-nav-login');
+    const create=document.querySelector('.auth-nav-create');
+    if(!ctx) return;
+
+    if(login) login.style.display='none';
+    if(create) create.style.display='none';
+
+    const nav=document.querySelector('.topnav');
+    if(nav && !nav.querySelector('.auth-nav-signout')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout';
+      out.textContent='sign out';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await AmOfferAuth.client().auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+
+  document.addEventListener('click',async function(e){
+    const a=e.target.closest('a[href]');
+    if(!a) return;
+    if(a.id==='postChanceCta') return;
+    const raw=(a.getAttribute('href')||'').split('?')[0].split('#')[0];
+    if(!protectedPages.has(raw)) return;
+
+    e.preventDefault();
+    const signIn='am-offer-net-sign-in-v1.html?return='+encodeURIComponent(raw);
+
+    try{
+      const client=AmOfferAuth.client();
+      const {data:{session}}=await client.auth.getSession();
+
+      if(!session){
+        location.href=signIn;
+        return;
+      }
+
+      const {data:admin}=await client.from('admin_users')
+        .select('role').eq('user_id',session.user.id).maybeSingle();
+      if(admin){
+        location.href=raw;
+        return;
+      }
+
+      const {data:profile,error}=await client.from('profiles')
+        .select('membership_status').eq('id',session.user.id).maybeSingle();
+
+      if(error || !profile || profile.membership_status!=='active'){
+        try{await client.auth.signOut();}catch(_e){}
+        const reason=!profile?'profile':
+          profile.membership_status==='pending'?'pending':
+          profile.membership_status==='rejected'?'rejected':'inactive';
+        location.href='am-offer-net-sign-in-v1.html?reason='+encodeURIComponent(reason)+'&return='+encodeURIComponent(raw);
+        return;
+      }
+
+      location.href=raw;
+    }catch(_err){
+      location.href=signIn;
+    }
+  },true);
+
+  updateAuthNav();
+})();
+</script>
+<script id="global-auth-nav-v99">
+(function(){
+  async function run(){
+    let client;
+    try{ client=AmOfferAuth.client(); }catch(_e){ return; }
+
+    let session=null;
+    try{
+      const r=await client.auth.getSession();
+      session=r && r.data ? r.data.session : null;
+    }catch(_e){ return; }
+
+    const loginLinks=[...document.querySelectorAll('a[href*="am-offer-net-sign-in-v1.html"]')];
+    const createLinks=[...document.querySelectorAll('a[href*="am-offer-net-create-account-v1.html"]')];
+
+    if(!session) return;
+
+    loginLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='log in' || t==='login' || t==='sign in') a.style.display='none';
+    });
+    createLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='create account' || t==='sign up' || t==='signup') a.style.display='none';
+    });
+
+    const nav=document.querySelector('header .topnav, header .links, header nav, .topnav');
+    if(nav && !document.querySelector('.auth-nav-signout-v99')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout-v99';
+      out.textContent='Sign out';
+      out.style.cursor='pointer';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await client.auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+
+<script id="production-demo-cache-cleanup-v133">
+(function(){
+  try{
+    // Remove only legacy demo/cache inventory; real listings live in Supabase and are not affected.
+    ['amOfferDemoListings','amOfferDemoCatalog','amOfferDemoItems'].forEach(function(k){localStorage.removeItem(k)});
+  }catch(_e){}
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+
+<script id="sponsored-home-ads-v182">
+(async function(){
+  try{
+    if(!window.AmOfferAuth)return;
+    const client=AmOfferAuth.client(), now=new Date().toISOString();
+    const {data,error}=await client.from('sponsored_ads').select('id,advertiser_name,headline,description,image_url,cta_text,cta_url').eq('is_active',true).eq('placement','homepage').or('starts_at.is.null,starts_at.lte.'+now).or('ends_at.is.null,ends_at.gte.'+now).order('sort_order',{ascending:true}).limit(1);
+    if(error||!data?.length)return;
+    const a=data[0], esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const host=document.querySelector('.sidebar')||document.querySelector('main')||document.body;
+    const box=document.createElement('section');box.className='sponsored-ad-v182';
+    box.innerHTML=`<a class="sponsored-card-link-v184" href="${esc(a.cta_url)}" target="_blank" rel="noopener sponsored"><div class="sponsored-label-v182">Sponsored</div>${a.image_url?`<img src="${esc(a.image_url)}" alt="${esc(a.advertiser_name||a.headline)}">`:''}<div class="sponsored-body-v182"><strong>${esc(a.headline)}</strong>${a.description?`<p>${esc(a.description)}</p>`:''}<span class="sponsored-cta-v184">${esc(a.cta_text||'Learn More')}</span></div></a>`;
+    host.prepend(box);
+  }catch(_e){}
+})();
+</script>
+<style id="sponsored-home-ads-style-v182">
+.sponsored-card-link-v184{display:block;color:inherit!important;text-decoration:none!important;cursor:pointer}.sponsored-ad-v182{background:#fff;border:1px solid #aaa;margin:0 0 14px;overflow:hidden}.sponsored-ad-v182 img{display:block;width:100%;max-height:220px;object-fit:cover}.sponsored-label-v182{font-size:11px;color:#666;padding:6px 9px 0}.sponsored-body-v182{padding:9px}.sponsored-body-v182 strong{display:block;font-size:17px;line-height:1.2}.sponsored-body-v182 p{margin:7px 0;line-height:1.35;color:#444}.sponsored-cta-v184{display:inline-block;background:#111;color:#fff!important;text-decoration:none;padding:8px 12px;font-weight:700}
+</style>
+
+
+<div class="mobile-app-nav-v2129" aria-label="Mobile navigation">
+ <a href="index.html"><span class="mi">⌂</span>Home</a>
+ <a href="am-offer-net-search-results-v4.html"><span class="mi">⌕</span>Browse</a>
+ <a class="post" href="am-offer-net-post-my-chance-ad-v4.html?new=1"><span class="mi">+</span>Post</a>
+ <a href="am-offer-net-sign-in-v1.html"><span class="mi">♙</span>Log in</a>
+ <a class="signup" href="am-offer-net-create-account-v1.html"><span class="mi">＋</span>Sign up</a>
+</div>
+<script id="mobile-post-auth-router-v2134">
+(function(){
+ const POST_PAGE='am-offer-net-post-my-chance-ad-v4.html?new=1';
+ const SIGN_IN='am-offer-net-sign-in-v1.html?return='+encodeURIComponent(POST_PAGE);
+ async function route(e){
+   const a=e.target.closest('a'); if(!a)return;
+   const href=a.getAttribute('href')||'';
+   const isPost=a.matches('.mobile-app-nav-v2129 .post,.mh-actions .post') || (href.includes('am-offer-net-post-my-chance-ad-v4.html') && (a.textContent||'').toLowerCase().includes('post'));
+   if(!isPost)return;
+   e.preventDefault(); e.stopImmediatePropagation();
+   try{
+     if(!window.AmOfferAuth){location.href=SIGN_IN;return;}
+     const r=await AmOfferAuth.client().auth.getSession();
+     location.href=(r&&r.data&&r.data.session)?POST_PAGE:SIGN_IN;
+   }catch(_e){location.href=SIGN_IN;}
+ }
+ document.addEventListener('click',route,true);
+})();
+</script>
+
+<!-- am-Offer mobile install prompt v21.36 -->
+<style id="amoffer-install-v2136-style">
+#amofferInstallV2136{display:none}
+@media(max-width:760px){
+ #amofferInstallV2136{position:fixed;left:12px;right:12px;bottom:82px;z-index:99999;background:#fff;border:3px solid #16a34a;border-radius:15px;padding:11px 12px;box-shadow:0 8px 28px rgba(0,0,0,.24);align-items:center;gap:10px;font-family:Arial,sans-serif}
+ #amofferInstallV2136.show{display:flex;animation:amOfferInstallGlow 1.35s ease-in-out infinite}
+ #amofferInstallV2136 .appicon{width:44px;height:44px;border-radius:11px;object-fit:cover;flex:0 0 44px}
+ #amofferInstallV2136 .copy{min-width:0;flex:1;color:#111}.install-title{font-size:15px;font-weight:900;line-height:1.15}.install-sub{font-size:11px;margin-top:3px;color:#555;line-height:1.2}
+ #amofferInstallV2136 button.install{border:0;border-radius:10px;background:#16a34a;color:#fff;font-weight:900;padding:10px 12px;font-size:13px;white-space:nowrap}
+ #amofferInstallV2136 button.close{position:absolute;right:-7px;top:-9px;width:24px;height:24px;border-radius:50%;border:1px solid #777;background:#fff;color:#111;font-size:16px;line-height:20px;padding:0}
+ @keyframes amOfferInstallGlow{0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.18),0 0 0 0 rgba(22,163,74,.85);transform:scale(1)}50%{box-shadow:0 8px 30px rgba(0,0,0,.25),0 0 0 9px rgba(22,163,74,.28);transform:scale(1.022)}}
+ @media(prefers-reduced-motion:reduce){#amofferInstallV2136.show{animation:none}}
+}
+#amofferIosHelpV2136{display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.55);padding:18px;align-items:flex-end;justify-content:center;font-family:Arial,sans-serif}
+#amofferIosHelpV2136.show{display:flex}#amofferIosHelpV2136 .sheet{width:min(440px,100%);background:#fff;border-radius:18px;padding:18px;color:#111;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#amofferIosHelpV2136 h3{margin:0 0 9px;font-size:20px}#amofferIosHelpV2136 p{margin:7px 0;font-size:15px;line-height:1.4}#amofferIosHelpV2136 .done{width:100%;margin-top:12px;border:0;border-radius:10px;background:#111;color:#fff;padding:12px;font-weight:900;font-size:15px}
+</style>
+<div id="amofferInstallV2136" role="button" aria-label="Install am-Offer on your phone">
+ <img class="appicon" src="google-icon-192x192.png" alt="am-Offer">
+ <div class="copy"><div class="install-title">Keep am-Offer on your phone</div><div class="install-sub">Add it to your Home Screen — open it like an app.</div></div>
+ <button class="install" type="button">Install</button><button class="close" type="button" aria-label="Close">×</button>
+</div>
+<div id="amofferIosHelpV2136"><div class="sheet"><h3>Add am-Offer to Home Screen</h3><p><b>On iPhone this Install button cannot place the icon automatically.</b></p><p>1. Open am-Offer in <b>Safari</b>.</p><p>2. Tap the <b>Share</b> button (square with the ↑ arrow).</p><p>3. Choose <b>Add to Home Screen</b>.</p><p>4. Tap <b>Add</b>. Then look for the am-Offer icon on your Home Screen or in App Library.</p><button class="done" type="button">Got it</button></div></div>
+<script id="amoffer-install-v2136-script">
+(function(){
+ const standalone=matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;
+ if(standalone)return;
+ const mobile=matchMedia('(max-width:760px)').matches; if(!mobile)return;
+ const bar=document.getElementById('amofferInstallV2136'), install=bar.querySelector('.install'), close=bar.querySelector('.close'), help=document.getElementById('amofferIosHelpV2136');
+ const ios=/iPhone|iPad|iPod/i.test(navigator.userAgent); let deferred=null;
+ function show(){bar.classList.add('show')}
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;show()});
+ if(ios) setTimeout(show,1200); else setTimeout(show,1800);
+ install.addEventListener('click',async e=>{e.stopPropagation();bar.classList.remove('show');
+   if(deferred){deferred.prompt();try{await deferred.userChoice}catch(_e){}deferred=null;return}
+   if(ios){help.classList.add('show');return}
+   alert('Open your browser menu and choose “Install app” or “Add to Home screen”.');
+ });
+ close.addEventListener('click',e=>{e.stopPropagation();bar.classList.remove('show')});
+ help.querySelector('.done').addEventListener('click',()=>help.classList.remove('show'));
+ help.addEventListener('click',e=>{if(e.target===help)help.classList.remove('show')});
+ window.addEventListener('appinstalled',()=>bar.classList.remove('show'));
+ if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+})();
+</script>
+
+</body>
+</html>

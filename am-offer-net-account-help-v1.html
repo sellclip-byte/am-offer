@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Account help | am-offer.net</title><link href="favicon.ico" rel="icon"/><style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#d9d9d6}body:before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(220,220,218,.62),rgba(220,220,218,.78)),url("am-offer-net-seated-man-feathered.png") left bottom/auto 88vh no-repeat}.top{height:76px;background:#fff;border-bottom:1px solid #c9c9c6;display:flex;align-items:center;justify-content:space-between;padding:10px 30px}.top img{width:165px;height:auto}.top a{color:#111}.wrap{min-height:calc(100vh - 76px);padding:40px 18px 60px;display:flex;justify-content:center}.card{width:min(720px,100%);background:rgba(248,248,246,.96);border:1px solid #9d9d99;box-shadow:0 14px 40px rgba(0,0,0,.12)}.head{padding:18px 22px;border-bottom:1px solid #aaa}.head h1{font-size:24px;margin:0}.content{padding:22px}.content h2{font-size:16px;margin:22px 0 7px}.content h2:first-child{margin-top:0}.content p,.content li{font-size:14px;line-height:1.65;color:#3f3f3c}.content ul{padding-left:22px}.note{background:#eee;border-left:4px solid #111;padding:12px 14px;margin:18px 0;font-size:13px;line-height:1.55}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-block;border:1px solid #111;padding:10px 14px;text-decoration:none;color:#111;background:#fff}.btn.primary{background:#111;color:#fff;font-weight:700}@media(max-width:760px){body:before{background:linear-gradient(rgba(220,220,218,.82),rgba(220,220,218,.9)),url("am-offer-net-seated-man-feathered.png") center bottom/auto 72vh no-repeat}.top{padding:10px 16px}.top img{width:145px}.wrap{padding-top:22px}}
+</style><meta content="noindex, nofollow, noarchive" name="robots"/></head><body><header class="top"><a href="home.html"><img alt="am-offer.net" src="am-offer-net-logo-master.png"/></a><a href="am-offer-net-sign-in-v1.html">Log in</a></header><main class="wrap"><article class="card"><div class="head"><h1>Account help</h1></div><div class="content">
+<h2>Creating an account</h2><p>Enter your display name, email, and a password you choose. You can complete the rest of your profile information after you log in to your account.</p>
+<h2>Member approval</h2><p>am-offer.net can operate in either <b>Manual Approval</b> or <b>Automatic Approval</b> mode. In Manual Approval, a new account remains pending until an administrator activates it. In Automatic Approval, the account becomes active immediately after registration.</p>
+<h2>Your password</h2><ul><li>Use at least 8 characters and choose a password that is difficult to guess.</li><li>Your existing password is never shown to an administrator.</li><li>Do not send your password to another member or to am-offer.net support.</li></ul>
+<h2>Forgot your password?</h2><p>Use <b>Forgot password?</b> on the login page. A secure reset link is sent to your email. The administrator does not retrieve or manually read your existing password.</p>
+<h2>Pending or inactive account</h2><p>If your account is waiting for approval, the login page will tell you that the request is pending. If you believe an account was rejected or disabled by mistake, contact am-offer.net support.</p>
+<div class="note"><b>Security:</b> am-offer.net administrators can activate, suspend, or disable an account, but they cannot see your current password.</div>
+<div class="actions"><a class="btn primary" href="am-offer-net-sign-in-v1.html">Back to log in</a><a class="btn" href="am-offer-net-forgot-password-v1.html">Reset password</a><a class="btn" href="am-offer-net-contact-us-v1.html">Contact support</a></div>
+</div></article></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script id="global-auth-nav-v99">
+(function(){
+  async function run(){
+    let client;
+    try{ client=AmOfferAuth.client(); }catch(_e){ return; }
+
+    let session=null;
+    try{
+      const r=await client.auth.getSession();
+      session=r && r.data ? r.data.session : null;
+    }catch(_e){ return; }
+
+    const loginLinks=[...document.querySelectorAll('a[href*="am-offer-net-sign-in-v1.html"]')];
+    const createLinks=[...document.querySelectorAll('a[href*="am-offer-net-create-account-v1.html"]')];
+
+    if(!session) return;
+
+    loginLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='log in' || t==='login' || t==='sign in') a.style.display='none';
+    });
+    createLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='create account' || t==='sign up' || t==='signup') a.style.display='none';
+    });
+
+    const nav=document.querySelector('header .topnav, header .links, header nav, .topnav');
+    if(nav && !document.querySelector('.auth-nav-signout-v99')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout-v99';
+      out.textContent='Sign out';
+      out.style.cursor='pointer';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await client.auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+</body></html>

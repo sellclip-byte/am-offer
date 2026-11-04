@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Admin Dashboard | am-offer.net</title>
+<link href="favicon-32x32.png" rel="icon"/>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#efefed;color:#111}
+.top{height:72px;background:#fff;border-bottom:1px solid #bbb;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;position:sticky;top:0;z-index:10}
+.top img{width:155px;display:block}.top-right{display:flex;gap:8px;align-items:center}
+.top a,.top button{border:1px solid #777;background:#fff;color:#111;padding:8px 12px;text-decoration:none;cursor:pointer;font:inherit}
+.shell{max-width:1280px;margin:0 auto;padding:24px 18px 60px}
+.headline{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:18px}
+h1{font-size:28px;margin:0}.sub{color:#666;font-size:13px;margin-top:5px}
+.notice{display:none;background:#111;color:#fff;padding:11px 13px;margin-bottom:16px}.notice.show{display:block}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.stat{background:#fff;border:1px solid #bbb;padding:14px}.stat b{display:block;font-size:25px;margin-top:5px}.stat span{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:.04em}
+.tabs{display:flex;gap:6px;overflow:auto;border-bottom:1px solid #aaa;margin-bottom:16px}
+.tab{border:1px solid #aaa;border-bottom:0;background:#ddd;padding:10px 14px;cursor:pointer;white-space:nowrap;font-weight:700}
+.tab.active{background:#fff}
+.panel{display:none;background:#fff;border:1px solid #b8b8b4;margin-bottom:20px}.panel.active{display:block}
+.panel h2{font-size:18px;margin:0;padding:15px 18px;border-bottom:1px solid #ccc}
+.body{padding:18px}.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mode{border:1px solid #bbb;padding:14px;cursor:pointer}.mode.active{border:2px solid #111}.mode strong{display:block;margin-bottom:5px}.mode p{margin:0;color:#555;font-size:13px;line-height:1.45}
+.actions{margin-top:14px}.primary,.small{border:1px solid #111;background:#111;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}.small{padding:6px 9px;font-size:12px}
+.secondary{border:1px solid #777;background:#fff;color:#111;padding:6px 9px;cursor:pointer;font-size:12px}.danger{border-color:#7a1717;color:#7a1717}.warn{border-color:#8a5a00;color:#6d4700}
+.status{font-size:13px;color:#555;margin-left:10px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:10px;border-bottom:1px solid #ddd;font-size:13px;vertical-align:top}th{background:#f6f6f4;position:sticky;top:0}.pill{display:inline-block;padding:3px 8px;border:1px solid #aaa;border-radius:99px;text-transform:capitalize}.pill.hidden,.pill.suspended,.pill.rejected,.pill.blocked{border-color:#7a1717;color:#7a1717}.pill.active,.pill.normal,.pill.resolved{border-color:#2d6337;color:#24522e}.empty{padding:18px;color:#666}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid #ddd;background:#fafafa}.toolbar input,.toolbar select{padding:8px;border:1px solid #999;background:#fff;min-width:180px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px}.card{border:1px solid #ccc;padding:13px}.card h3{margin:0 0 6px;font-size:15px}.muted{color:#666;font-size:12px}.row-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.ad-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ad-form label{font-size:12px;font-weight:700}.ad-form input,.ad-form textarea,.ad-form select{width:100%;margin-top:4px;padding:8px;border:1px solid #999;background:#fff}.ad-form .wide{grid-column:1/-1}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
+@media(max-width:700px){.mode-grid,.ad-form{grid-template-columns:1fr}.ad-form .wide{grid-column:auto}.top{padding:8px 10px;height:auto}.top img{width:118px}.top-right{gap:5px}.top a,.top button{padding:7px 8px;font-size:12px}.shell{padding:14px 10px 50px}.stats{grid-template-columns:1fr 1fr}.headline{align-items:start;flex-direction:column}
+#panel-invitations .body{padding:14px 12px}#panel-invitations .actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}#panel-invitations .status{display:block;width:100%;margin:3px 0 0;line-height:1.45}#panel-invitations .table-wrap{overflow:visible;padding:0 10px 12px}#panel-invitations table,#panel-invitations tbody,#panel-invitations tr,#panel-invitations td{display:block;width:100%;min-width:0}#panel-invitations thead{display:none}#panel-invitations tr{border:1px solid #c8c8c4;margin:10px 0;background:#fff;padding:12px}#panel-invitations td{border:0;padding:3px 0;font-size:14px}#panel-invitations td.inv-phone{font-size:17px;margin-bottom:3px}#panel-invitations td.inv-sent{color:#666;font-size:12px}#panel-invitations td.inv-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}#panel-invitations .small-btn{border:1px solid #777;background:#fff;color:#111;padding:9px 10px;font-weight:700;font-size:13px;cursor:pointer}#panel-invitations .sms-btn{background:#111;color:#fff;border-color:#111;flex:1 1 110px}#panel-invitations .sent-btn{border-color:#2d6337;color:#24522e}#panel-invitations tr.inv-row-sent{border:2px solid #2d6337;background:#f0fff3}#panel-invitations tr.inv-row-sent td.inv-phone strong{color:#176b2c}#panel-invitations .sent-check{display:inline-block;margin-left:7px;color:#176b2c;font-weight:900}#panel-invitations .confirm-sent-btn{background:#176b2c!important;color:#fff!important;border-color:#176b2c!important;flex:1 1 120px}#panel-invitations .dnc-btn{border-color:#7a1717;color:#7a1717}#invitationMessage{font-size:14px;line-height:1.35}}
+
+/* v21.24 — Customer Invitations mobile controls: keep every action visible on iPhone */
+@media(max-width:700px){
+  #panel-invitations .body>.actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;width:100%!important;align-items:stretch!important;overflow:visible!important}
+  #panel-invitations .body>.actions>button{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;width:100%!important;min-width:0!important;min-height:46px!important;margin:0!important;padding:11px 8px!important;font-size:13px!important;line-height:1.2!important;white-space:normal!important;overflow:visible!important}
+  #panel-invitations #invitationStats{grid-column:1/-1!important;display:block!important;width:100%!important}
+  #panel-invitations .table-wrap{display:block!important;visibility:visible!important;overflow:visible!important}
+  #panel-invitations #invitationRows{display:block!important;visibility:visible!important}
+  #panel-invitations td.inv-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;overflow:visible!important}
+  #panel-invitations td.inv-actions .small-btn{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;width:100%!important;min-width:0!important;min-height:44px!important;margin:0!important;white-space:normal!important}
+  #panel-invitations td.inv-actions .sms-btn,#panel-invitations td.inv-actions .confirm-sent-btn{grid-column:1/-1!important}
+}
+@media(max-width:390px){
+  #panel-invitations .body>.actions,#panel-invitations td.inv-actions{grid-template-columns:1fr!important}
+  #panel-invitations #invitationStats,#panel-invitations td.inv-actions .sms-btn,#panel-invitations td.inv-actions .confirm-sent-btn{grid-column:1!important}
+}
+</style>
+<meta content="noindex, nofollow, noarchive" name="robots"/></head>
+<body>
+<header class="top">
+<a href="home.html" style="border:0;padding:0"><img alt="am-offer.net" src="am-offer-net-logo-master.png"/></a>
+<div class="top-right"><a href="home.html">View site</a><button id="logoutBtn">Log out</button></div>
+</header>
+<main class="shell">
+<div class="notice" id="notice"></div>
+<div class="headline">
+<div><h1>Admin Dashboard</h1><div class="sub">Members, listings, reports, advertising and membership approval in one place.</div></div>
+<button class="secondary" id="refreshAll">Refresh dashboard</button>
+</div>
+<section class="stats">
+<div class="stat"><span>Members</span><b id="statMembers">—</b></div>
+<div class="stat"><span>Active listings</span><b id="statListings">—</b></div>
+<div class="stat"><span>Pending members</span><b id="statPending">—</b></div>
+<div class="stat"><span>Open reports</span><b id="statReports">—</b></div>
+<div class="stat"><span>Active ads</span><b id="statAds">—</b></div>
+</section>
+<div class="tabs">
+<button class="tab active" data-tab="membership">Membership</button>
+<button class="tab" data-tab="members">Members</button>
+<button class="tab" data-tab="listings">Listings</button>
+<button class="tab" data-tab="community">Community Posts</button>
+<button class="tab" data-tab="reflections">Voices &amp; Reflections</button>
+<button class="tab" data-tab="reports">Reports</button>
+<button class="tab" data-tab="ads">Sponsored Ads</button><button class="tab" data-tab="wanted">WANTED</button>
+<button class="tab" data-tab="invitations">Customer Invitations</button>
+<button class="tab" data-tab="backups">Backup &amp; Restore</button>
+</div>
+<section class="panel active" id="panel-membership">
+<h2>Membership approval</h2>
+<div class="body">
+<div class="mode-grid">
+<div class="mode" data-mode="manual"><strong>Manual Approval</strong><p>New accounts remain Pending until an administrator activates them.</p></div>
+<div class="mode" data-mode="automatic"><strong>Automatic Approval</strong><p>New accounts become Active immediately after registration.</p></div>
+</div>
+<div class="actions"><button class="primary" id="saveMode">Save approval mode</button><span class="status" id="modeStatus"></span></div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead><tbody id="membershipRows"></tbody></table><div class="empty" hidden="" id="membershipEmpty">No membership requests found.</div></div>
+</section>
+<section class="panel" id="panel-members">
+<h2>Members</h2>
+<div class="toolbar"><input id="memberSearch" placeholder="Search name, city or ID"/><select id="memberStatus"><option value="">All statuses</option><option>active</option><option>pending</option><option>suspended</option><option>rejected</option><option>blocked</option></select><button class="secondary" id="loadMembersBtn">Apply</button></div>
+<div class="table-wrap"><table><thead><tr><th>Member</th><th>Location</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead><tbody id="memberRows"></tbody></table><div class="empty" hidden="" id="membersEmpty">No members found.</div></div>
+</section>
+<section class="panel" id="panel-listings">
+<h2>Listings</h2>
+<div class="toolbar"><input id="listingSearch" placeholder="Search title or city"/><select id="listingStatus"><option value="">All statuses</option><option>active</option><option>sold</option><option>archived</option><option>removed</option></select><select id="listingModeration"><option value="">All moderation</option><option>normal</option><option>hidden</option></select><button class="secondary" id="loadListingsBtn">Apply</button></div>
+<div class="table-wrap"><table><thead><tr><th>Listing</th><th>Seller</th><th>Status</th><th>Moderation</th><th>Created</th><th>Actions</th></tr></thead><tbody id="listingRows"></tbody></table><div class="empty" hidden="" id="listingsEmpty">No listings found.</div></div>
+</section>
+<section class="panel" id="panel-community">
+<h2>Community Posts</h2>
+<div class="toolbar"><input id="communitySearch" placeholder="Search title, city or section"/><button class="secondary" id="loadCommunityBtn">Apply</button></div>
+<div class="table-wrap"><table><thead><tr><th>Post</th><th>Author</th><th>Section</th><th>Created</th><th>Actions</th></tr></thead><tbody id="communityRows"></tbody></table><div class="empty" hidden id="communityEmpty">No community posts found.</div></div>
+</section>
+<section class="panel" id="panel-reflections">
+<h2>Voices &amp; Reflections</h2>
+<div class="toolbar"><input id="reflectionSearch" placeholder="Search topic or text"/><select id="reflectionStatus"><option value="">All statuses</option><option value="published">published</option><option value="hidden">hidden</option></select><button class="secondary" id="loadReflectionsBtn">Apply</button></div>
+<div class="table-wrap"><table><thead><tr><th>Reflection</th><th>Author</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="reflectionRows"></tbody></table><div class="empty" hidden id="reflectionsEmpty">No reflections found.</div></div>
+</section>
+<section class="panel" id="panel-reports">
+<h2>Reports</h2>
+<div class="toolbar"><select id="reportStatus"><option value="">All statuses</option><option>open</option><option>reviewing</option><option>resolved</option><option>dismissed</option></select><button class="secondary" id="loadReportsBtn">Apply</button></div>
+<div class="cards" id="reportCards"></div><div class="empty" hidden="" id="reportsEmpty">No reports found.</div>
+</section>
+<section class="panel" id="panel-ads">
+<h2>Sponsored Ads</h2>
+<div class="body">
+<form class="ad-form" id="adForm">
+<label>Advertiser<input id="adAdvertiser" required=""/></label>
+<label>Headline<input id="adHeadline" required=""/></label>
+<label>CTA text<input id="adCtaText" required="" value="Learn More"/></label>
+<label>CTA URL<input id="adCtaUrl" placeholder="https://..." required="" type="url"/></label>
+<label>Placement<select id="adPlacement"><option value="homepage">homepage</option><option value="search">search</option><option value="category">category</option></select></label>
+<label>Category<input id="adCategory" value="all"/></label>
+<label class="wide">Ad image<input id="adImage" type="file" accept="image/jpeg,image/png,image/webp,image/gif"/></label>
+<div class="wide" id="adImagePreviewWrap" hidden><img id="adImagePreview" alt="Ad image preview" style="max-width:360px;max-height:180px;object-fit:cover;border:1px solid #aaa"/></div>
+<label class="wide">Description<textarea id="adDescription" rows="2"></textarea></label>
+<div class="wide"><button class="primary" type="submit">Create sponsored ad</button></div>
+</form>
+</div>
+<div class="table-wrap"><table><thead><tr><th>Advertiser</th><th>Headline</th><th>Placement</th><th>Clicks</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adRows"></tbody></table><div class="empty" hidden="" id="adsEmpty">No sponsored ads found.</div></div>
+</section>
+
+<section class="panel" id="panel-wanted">
+  <h2>WANTED Ads</h2>
+  <div class="body">
+    <div class="toolbar">
+      <input id="wantedSearch" placeholder="Search title"/>
+      <select id="wantedStatus"><option value="">All statuses</option><option value="published">Published</option><option value="hidden">Hidden</option></select>
+      <button class="secondary" id="loadWantedBtn">Apply</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table><thead><tr><th>WANTED Ad</th><th>Owner</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody id="wantedRows"></tbody></table>
+    <div class="empty" hidden id="wantedEmpty">No WANTED ads found.</div>
+  </div>
+</section>
+<section class="panel" id="panel-invitations" dir="rtl">
+<h2>دعوات العملاء</h2>
+<div class="body">
+<p style="margin-top:0;line-height:1.55">قائمة خاصة بعملائنا الحاليين لدعوتهم إلى am-Offer. يمنع بيع الأرقام أو مشاركتها أو استخدامها لإعلانات طرف ثالث.</p>
+<div style="border:1px solid #aaa;padding:12px;margin:10px 0;background:#fafafa"><strong>دعوة العميل</strong><p style="margin:8px 0 0;line-height:1.5">أرسل بطاقة الدعوة المعتمدة. حالة كل رقم تبقى محفوظة حتى لا نرسل لنفس العميل مرتين.</p></div>
+<div class="actions" style="justify-content:flex-start"><button class="primary" id="loadTodayInvitationsBtn" type="button">قائمة الإرسال الحالية</button><button class="secondary" id="loadAllInvitationsBtn" type="button">عرض الكل</button><button class="secondary" id="showNotSentBtn" type="button">لم يُرسل</button><button class="secondary" id="showSentBtn" type="button">✓ تم الإرسال</button><button class="secondary" id="showDncBtn" type="button">عدم التواصل</button><span class="status" id="invitationStats"></span></div>
+<div style="border:2px solid #222;padding:14px;margin:14px 0;background:#fff"><strong style="font-size:17px">+ إضافة عملاء جدد</strong><p class="muted" style="margin:6px 0 10px">يتم فحص رقم الهاتف نفسه ومنع التكرار تلقائيًا، حتى لو كُتب الرقم بصيغة مختلفة.</p><div class="actions" style="justify-content:flex-start"><button class="primary" id="importContactsBtn" type="button">من جهات الاتصال</button><button class="secondary" id="importFileBtn" type="button">استيراد ملف</button><button class="secondary" id="pasteNumbersBtn" type="button">لصق أرقام</button><button class="secondary" id="sendToContactBtn" type="button">مراسلة جهة اتصال</button><button class="primary" id="shareInvitationBtn" type="button">مشاركة الدعوة</button></div><input id="customerFileInput" type="file" accept=".txt,.csv,.vcf,text/plain,text/csv,text/vcard" hidden><div id="customerImportBox" hidden style="margin-top:12px"><textarea id="customerNumbersInput" rows="7" style="width:100%;padding:10px;border:1px solid #777" placeholder="الصق الأرقام هنا — رقم في كل سطر أو قائمة منسوخة"></textarea><div class="actions" style="justify-content:flex-start;margin-top:8px"><button class="primary" id="saveCustomerNumbersBtn" type="button">فحص وإضافة الأرقام</button><button class="secondary" id="cancelCustomerImportBtn" type="button">إلغاء</button></div></div><div id="customerImportResult" style="margin-top:10px;font-weight:700"></div></div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>رقم الهاتف</th><th>الحالة</th><th>تاريخ الإرسال</th><th>الأوامر</th></tr></thead><tbody id="invitationRows"></tbody></table><div class="empty" hidden id="invitationsEmpty">لا توجد أرقام في هذه القائمة.</div></div>
+</section>
+<section class="panel" id="panel-backups"><h2>Backup &amp; Restore</h2><div class="body"><p style="margin-top:0;line-height:1.55"><strong>Application backup</strong> saves the am-Offer application tables and uploaded files from <code>listing-media</code>. Backups are stored privately and are available only to an administrator.</p><p class="muted">This application-level backup does not recreate Supabase Auth passwords if the entire Auth system is lost.</p><div class="actions"><button class="primary" id="createBackupBtn" type="button">Create Backup</button><button class="secondary" id="refreshBackupsBtn" type="button">Refresh History</button><span class="status" id="backupStatus"></span></div></div><div class="table-wrap"><table><thead><tr><th>Created</th><th>Status</th><th>Tables / Rows</th><th>Media</th><th>Size</th><th>Note</th><th>Actions</th></tr></thead><tbody id="backupRows"></tbody></table><div class="empty" hidden id="backupsEmpty">No application backups yet.</div></div></section>
+</main>
+<div aria-hidden="true" class="admin-modal-v104" id="adminModalV104">
+<div aria-labelledby="adminModalTitleV104" aria-modal="true" class="admin-modal-card-v104" role="dialog">
+<h3 id="adminModalTitleV104">Confirm action</h3>
+<p id="adminModalTextV104"></p>
+<textarea id="adminModalInputV104" placeholder="Optional note" rows="3"></textarea>
+<div class="admin-modal-actions-v104">
+<button class="secondary" id="adminModalCancelV104" type="button">Cancel</button>
+<button class="primary" id="adminModalOkV104" type="button">Continue</button>
+</div>
+</div>
+</div>
+<style id="admin-modal-style-v104">
+.admin-modal-v104{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:18px}
+.admin-modal-v104.show{display:flex}.admin-modal-card-v104{width:min(460px,100%);background:#fff;border:1px solid #555;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.3)}
+.admin-modal-card-v104 h3{margin:0 0 8px}.admin-modal-card-v104 p{color:#555;line-height:1.45}.admin-modal-card-v104 textarea{width:100%;border:1px solid #999;padding:9px;display:none}
+.admin-modal-actions-v104{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script id="admin-dashboard-v102">
+(function(){
+let client=null,session=null,selectedMode='manual';
+const $=id=>document.getElementById(id), notice=$('notice');
+function say(t){notice.textContent=t;notice.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>notice.classList.remove('show'),4200)}
+function adminDialogV104(title,text,{input=false,inputPlaceholder='Optional note',okText='Continue'}={}){
+  return new Promise(resolve=>{
+    const modal=$('adminModalV104'),field=$('adminModalInputV104'),ok=$('adminModalOkV104'),cancel=$('adminModalCancelV104');
+    $('adminModalTitleV104').textContent=title;$('adminModalTextV104').textContent=text;
+    field.style.display=input?'block':'none';field.value='';field.placeholder=inputPlaceholder;ok.textContent=okText;
+    modal.classList.add('show');modal.setAttribute('aria-hidden','false');
+    const done=v=>{modal.classList.remove('show');modal.setAttribute('aria-hidden','true');ok.onclick=null;cancel.onclick=null;resolve(v)};
+    ok.onclick=()=>done(input?field.value:true);cancel.onclick=()=>done(null);
+    modal.onclick=e=>{if(e.target===modal)done(null)};
+    if(input)setTimeout(()=>field.focus(),20);
+  });
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fmtDate(v){return v?new Date(v).toLocaleString():'—'}
+function pill(v){return `<span class="pill ${esc(v)}">${esc(v)}</span>`}
+function paintMode(){document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===selectedMode))}
+document.querySelectorAll('.mode').forEach(x=>x.onclick=()=>{selectedMode=x.dataset.mode;paintMode()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='wanted')loadWanted();if(b.dataset.tab==='invitations')loadInvitations(true)});
+
+async function requireAdmin(){
+  client=AmOfferAuth.client();
+  const r=await client.auth.getSession();session=r.data.session;
+  if(!session){location.href='am-offer-net-sign-in-v1.html?return='+encodeURIComponent('am-offer-net-admin-membership-v1.html');return false}
+  const {data:a}=await client.from('admin_users').select('role').eq('user_id',session.user.id).maybeSingle();
+  if(!a){document.querySelector('.shell').innerHTML='<h1>Administrator access required</h1><p>This page is available only to am-offer.net administrators.</p><p><a href="home.html">Return home</a></p>';return false}
+  return true;
+}
+async function loadStats(){
+  const [m,l,p,r,a]=await Promise.all([
+    client.from('profiles').select('*',{count:'exact',head:true}).is('account_deleted_at',null),
+    client.from('listings').select('*',{count:'exact',head:true}).eq('status','active').eq('moderation_status','normal').is('archived_at',null),
+    client.from('membership_requests').select('*',{count:'exact',head:true}).eq('status','pending'),
+    client.from('reports').select('*',{count:'exact',head:true}).in('status',['open','reviewing']),
+    client.from('sponsored_ads').select('*',{count:'exact',head:true}).eq('is_active',true)
+  ]);
+  $('statMembers').textContent=m.count??'—';$('statListings').textContent=l.count??'—';$('statPending').textContent=p.count??'—';$('statReports').textContent=r.count??'—';$('statAds').textContent=a.count??'—';
+}
+async function loadMembership(){
+  const m=await client.rpc('get_membership_approval_mode');
+  if(!m.error&&m.data){selectedMode=m.data;paintMode();$('modeStatus').textContent='Current: '+(m.data==='manual'?'Manual Approval':'Automatic Approval')}
+  const r=await client.rpc('admin_list_membership_requests');
+  if(r.error){say(r.error.message);return}
+  const list=r.data||[];$('membershipEmpty').hidden=!!list.length;
+  $('membershipRows').innerHTML=list.map(x=>`<tr><td>${esc(x.display_name)}</td><td>${esc(x.email)}</td><td>${pill(x.status)}</td><td>${fmtDate(x.created_at)}</td><td>${x.status==='pending'?`<button class="small" data-mid="${x.id}" data-mstatus="active">Activate</button> <button class="secondary danger" data-mid="${x.id}" data-mstatus="rejected">Reject</button>`:`<button class="secondary" data-mid="${x.id}" data-mstatus="pending">Set Pending</button>`}</td></tr>`).join('');
+  document.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>setMembership(b.dataset.mid,b.dataset.mstatus));
+}
+async function setMembership(id,status){
+  const r=await client.rpc('admin_set_membership_request_status',{p_request_id:id,p_status:status});
+  if(r.error){say(r.error.message);return} say('Membership status updated.'); await Promise.all([loadMembership(),loadMembers(),loadStats()]);
+}
+async function loadMembers(){
+  let q=client.from('profiles').select('id,display_name,nickname,city,state,membership_status,suspended_at,created_at').is('account_deleted_at',null).order('created_at',{ascending:false}).limit(150);
+  const status=$('memberStatus').value;if(status)q=q.eq('membership_status',status);
+  const {data,error}=await q;if(error){say(error.message);return}
+  const term=$('memberSearch').value.trim().toLowerCase();
+  const list=(data||[]).filter(x=>!term||[x.display_name,x.nickname,x.city,x.state,x.id].some(v=>String(v||'').toLowerCase().includes(term)));
+  $('membersEmpty').hidden=!!list.length;
+  $('memberRows').innerHTML=list.map(x=>`<tr><td><strong>${esc(x.nickname||x.display_name)}</strong><div class="muted">${esc(x.id)}</div></td><td>${esc([x.city,x.state].filter(Boolean).join(', ')||'—')}</td><td>${pill(x.membership_status)}</td><td>${fmtDate(x.created_at)}</td><td><div class="row-actions">${x.membership_status==='active'?`<button class="secondary warn" data-user="${x.id}" data-useraction="suspend">Suspend</button>`:`<button class="secondary" data-user="${x.id}" data-useraction="activate">Activate</button>`}<button class="secondary danger" data-user="${x.id}" data-useraction="block">Block</button></div></td></tr>`).join('');
+  document.querySelectorAll('[data-user]').forEach(b=>b.onclick=()=>memberAction(b.dataset.user,b.dataset.useraction));
+}
+async function memberAction(id,action){
+  let patch={},notes='';
+  if(action==='suspend'){
+    const answer=await adminDialogV104('Suspend member','The member will not be able to use protected marketplace features until reactivated.',{input:true,inputPlaceholder:'Suspension reason (optional)',okText:'Suspend'});
+    if(answer===null)return;notes=String(answer||'').trim()||'Suspended by administrator';
+    patch={membership_status:'suspended',suspended_at:new Date().toISOString(),suspension_reason:notes};
+  }
+  if(action==='activate')patch={membership_status:'active',suspended_at:null,suspension_reason:null};
+  if(action==='block'){
+    const answer=await adminDialogV104('Block member','Block this member account?',{input:true,inputPlaceholder:'Reason (optional)',okText:'Block member'});
+    if(answer===null)return;notes=String(answer||'').trim()||'Blocked by administrator';
+    patch={membership_status:'blocked',suspended_at:new Date().toISOString(),suspension_reason:notes};
+  }
+  const {error}=await client.from('profiles').update(patch).eq('id',id);if(error){say(error.message);return}
+  await client.from('moderation_actions').insert({admin_id:session.user.id,action_type:'member_'+action,target_user_id:id,notes:notes||null});
+  say('Member updated.');await Promise.all([loadMembers(),loadStats()]);
+}
+async function loadListings(){
+  let q=client.from('listings').select('id,title,seller_id,city,state,status,moderation_status,created_at').order('created_at',{ascending:false}).limit(200);
+  if($('listingStatus').value)q=q.eq('status',$('listingStatus').value);
+  if($('listingModeration').value)q=q.eq('moderation_status',$('listingModeration').value);
+  const {data,error}=await q;if(error){say(error.message);return}
+  const term=$('listingSearch').value.trim().toLowerCase();
+  const list=(data||[]).filter(x=>!term||[x.title,x.city,x.state].some(v=>String(v||'').toLowerCase().includes(term)));
+  $('listingsEmpty').hidden=!!list.length;
+  $('listingRows').innerHTML=list.map(x=>`<tr><td><strong>${esc(x.title)}</strong><div class="muted">${esc([x.city,x.state].filter(Boolean).join(', '))}</div></td><td><span class="muted">${esc(x.seller_id)}</span></td><td>${pill(x.status)}</td><td>${pill(x.moderation_status)}</td><td>${fmtDate(x.created_at)}</td><td><div class="row-actions"><a class="secondary" href="am-offer-net-listing-detail-v12.html?id=${encodeURIComponent(x.id)}">View</a>${x.moderation_status==='normal'?`<button class="secondary warn" data-listing="${x.id}" data-laction="hide">Hide</button>`:`<button class="secondary" data-listing="${x.id}" data-laction="show">Restore</button>`}<button class="secondary danger" data-listing="${x.id}" data-laction="remove">Delete</button></div></td></tr>`).join('');
+  document.querySelectorAll('[data-listing]').forEach(b=>b.onclick=()=>listingAction(b.dataset.listing,b.dataset.laction));
+}
+async function listingAction(id,action){
+  let patch={},type=action;
+  if(action==='hide')patch={moderation_status:'hidden'};
+  if(action==='show')patch={moderation_status:'normal'};
+  if(action==='remove'){
+    const answer=await adminDialogV104('Delete listing','Permanently delete this listing from am-offer? This cannot be undone.',{okText:'Delete listing'});
+    if(!answer)return;
+    const {error}=await client.from('listings').delete().eq('id',id);
+    if(error){say('Could not delete listing: '+error.message);return}
+    say('Listing deleted.');await Promise.all([loadListings(),loadStats()]);return;
+  }
+  const {error}=await client.from('listings').update(patch).eq('id',id);if(error){say(error.message);return}
+  await client.from('moderation_actions').insert({admin_id:session.user.id,action_type:'listing_'+type,listing_id:id});
+  say('Listing updated.');await Promise.all([loadListings(),loadStats()]);
+}
+async function loadCommunity(){
+  let q=client.from('community_posts').select('id,title,user_id,section,city,state,created_at,image_paths').order('created_at',{ascending:false}).limit(200);
+  const {data,error}=await q;if(error){say('Could not load Community Posts: '+error.message);return}
+  const term=$('communitySearch').value.trim().toLowerCase();
+  const list=(data||[]).filter(x=>!term||[x.title,x.city,x.state,x.section].some(v=>String(v||'').toLowerCase().includes(term)));
+  $('communityEmpty').hidden=!!list.length;
+  $('communityRows').innerHTML=list.map(x=>`<tr><td><strong>${esc(x.title)}</strong><div class="muted">${esc([x.city,x.state].filter(Boolean).join(', '))}</div></td><td><span class="muted">${esc(x.user_id)}</span></td><td>${esc(x.section)}</td><td>${fmtDate(x.created_at)}</td><td><div class="row-actions"><a class="secondary" href="am-offer-net-community-post-detail-v1.html?id=${encodeURIComponent(x.id)}">View</a><button class="secondary danger" data-community="${x.id}" data-caction="delete">Delete</button></div></td></tr>`).join('');
+  document.querySelectorAll('[data-community]').forEach(b=>b.onclick=()=>communityAction(b.dataset.community,b.dataset.caction));
+}
+async function communityAction(id,action){
+  if(action!=='delete')return;
+  const answer=await adminDialogV104('Delete community post','Permanently delete this community post?',{okText:'Delete post'});if(!answer)return;
+  const {data:post}=await client.from('community_posts').select('image_paths').eq('id',id).maybeSingle();
+  const {error}=await client.from('community_posts').delete().eq('id',id);if(error){say('Could not delete post: '+error.message);return}
+  let paths=post?.image_paths;if(typeof paths==='string'){try{paths=JSON.parse(paths)}catch(_){paths=[]}}if(Array.isArray(paths)&&paths.length){try{await client.storage.from('listing-media').remove(paths)}catch(_){}}
+  say('Community post deleted.');await loadCommunity();
+}
+async function loadReflections(){
+  let q=client.from('reflections').select('id,author_id,topic,body,status,created_at').order('created_at',{ascending:false}).limit(200);
+  const wantedStatus=$('reflectionStatus').value;if(wantedStatus)q=q.eq('status',wantedStatus);
+  const {data,error}=await q;if(error){say('Could not load Voices & Reflections: '+error.message);return}
+  const term=$('reflectionSearch').value.trim().toLowerCase();
+  const list=(data||[]).filter(x=>!term||[x.topic,x.body].some(v=>String(v||'').toLowerCase().includes(term)));
+  $('reflectionsEmpty').hidden=!!list.length;
+  $('reflectionRows').innerHTML=list.map(x=>`<tr><td><strong>${esc(x.topic)}</strong><div class="muted">${esc((x.body||'').slice(0,120))}${(x.body||'').length>120?'…':''}</div></td><td><span class="muted">${esc(x.author_id)}</span></td><td>${pill(x.status)}</td><td>${fmtDate(x.created_at)}</td><td><div class="row-actions"><a class="secondary" href="am-offer-net-reflection-detail-v1.html?id=${encodeURIComponent(x.id)}">View</a><button class="secondary" data-reflection="${x.id}" data-refaction="${x.status==='hidden'?'restore':'hide'}">${x.status==='hidden'?'Restore':'Hide'}</button><button class="secondary danger" data-reflection="${x.id}" data-refaction="delete">Delete</button></div></td></tr>`).join('');
+  document.querySelectorAll('[data-reflection]').forEach(b=>b.onclick=()=>reflectionAction(b.dataset.reflection,b.dataset.refaction));
+}
+async function reflectionAction(id,action){
+  if(action==='delete'){
+    const answer=await adminDialogV104('Delete reflection','Permanently delete this reflection? The author will no longer be able to recover it.',{okText:'Delete reflection'});if(!answer)return;
+    const {error}=await client.from('reflections').delete().eq('id',id);if(error){say('Could not delete reflection: '+error.message);return}
+    say('Reflection deleted.');await loadReflections();return;
+  }
+  const next=action==='restore'?'published':'hidden';
+  const title=next==='hidden'?'Hide reflection':'Restore reflection';
+  const text=next==='hidden'?'Hide this reflection from public view?':'Restore this reflection to public view?';
+  const answer=await adminDialogV104(title,text,{okText:next==='hidden'?'Hide':'Restore'});if(!answer)return;
+  const {error}=await client.from('reflections').update({status:next}).eq('id',id);if(error){say('Could not update reflection: '+error.message);return}
+  say(next==='hidden'?'Reflection hidden.':'Reflection restored.');await loadReflections();
+}
+function backupSize(n){n=Number(n||0);if(!n)return '—';const u=['B','KB','MB','GB'];let i=0;while(n>=1024&&i<u.length-1){n/=1024;i++}return (i?n.toFixed(1):Math.round(n))+' '+u[i]}
+async function backupInvoke(body){const {data,error}=await client.functions.invoke('admin-backup',{body});if(error)throw new Error(error.message||'Backup service error');if(data?.error)throw new Error(data.error);return data}
+async function loadBackups(){try{$('backupStatus').textContent='Loading…';const data=await backupInvoke({action:'list'}),list=data.backups||[];$('backupsEmpty').hidden=!!list.length;$('backupRows').innerHTML=list.map(x=>`<tr><td>${fmtDate(x.created_at)}</td><td>${pill(x.status)}</td><td>${esc(x.table_count||0)} / ${esc(x.row_count||0)}</td><td>${esc(x.file_count||0)} files</td><td>${esc(backupSize(x.size_bytes))}</td><td>${esc(x.note||'—')}</td><td><div class="row-actions">${x.status==='ready'?`<button class="secondary" data-bdownload="${x.id}">Download</button><button class="secondary danger" data-brestore="${x.id}">Restore</button>`:''}</div>${x.error_message?`<div class="muted">${esc(x.error_message)}</div>`:''}</td></tr>`).join('');document.querySelectorAll('[data-bdownload]').forEach(b=>b.onclick=()=>downloadBackup(b.dataset.bdownload));document.querySelectorAll('[data-brestore]').forEach(b=>b.onclick=()=>restoreBackup(b.dataset.brestore));$('backupStatus').textContent=list.length?list.length+' backup'+(list.length===1?'':'s'):'No backups'}catch(e){$('backupStatus').textContent='';say('Could not load backups: '+e.message)}}
+async function createBackup(){const b=$('createBackupBtn');b.disabled=true;$('backupStatus').textContent='Creating backup…';try{await backupInvoke({action:'create'});say('Backup created successfully.');await loadBackups()}catch(e){say('Backup failed: '+e.message);$('backupStatus').textContent='Backup failed'}finally{b.disabled=false}}
+async function downloadBackup(id){try{const d=await backupInvoke({action:'download',id});if(!d.url)throw new Error('Download link was not created');location.href=d.url}catch(e){say('Could not download backup: '+e.message)}}
+async function restoreBackup(id){const first=await adminDialogV104('Restore backup','Restoring replaces current application data with this backup. A new safety backup will be created automatically before restore. Continue?',{okText:'Continue'});if(!first)return;const typed=await adminDialogV104('Final restore confirmation','Type RESTORE exactly to begin. Do not close the page while the restore is running.',{input:true,inputPlaceholder:'Type RESTORE',okText:'Restore backup'});if(typed!=='RESTORE'){if(typed!==null)say('Restore cancelled: confirmation text did not match.');return}$('backupStatus').textContent='Restoring…';try{await backupInvoke({action:'restore',id,confirm:'RESTORE'});say('Restore completed. A pre-restore safety backup was created.');await Promise.all([loadBackups(),loadStats()])}catch(e){say('Restore failed: '+e.message);$('backupStatus').textContent='Restore failed'}}
+async function loadReports(){
+  let q=client.from('reports').select('id,reporter_id,listing_id,reported_user_id,reason,details,status,created_at,resolved_at').order('created_at',{ascending:false}).limit(150);
+  if($('reportStatus').value)q=q.eq('status',$('reportStatus').value);
+  const {data,error}=await q;if(error){say(error.message);return}
+  const list=data||[];$('reportsEmpty').hidden=!!list.length;
+  $('reportCards').innerHTML=list.map(x=>`<article class="card"><h3>${esc(x.reason.replaceAll('_',' '))} ${pill(x.status)}</h3><div class="muted">Reported ${fmtDate(x.created_at)}</div><p>${esc(x.details||'No additional details.')}</p><div class="muted">Listing: ${esc(x.listing_id||'—')}<br>User: ${esc(x.reported_user_id||'—')}</div><div class="row-actions">${x.status!=='reviewing'?`<button class="secondary" data-report="${x.id}" data-rstatus="reviewing">Reviewing</button>`:''}${x.status!=='resolved'?`<button class="small" data-report="${x.id}" data-rstatus="resolved">Resolve</button>`:''}${x.status!=='dismissed'?`<button class="secondary" data-report="${x.id}" data-rstatus="dismissed">Dismiss</button>`:''}${x.listing_id?`<a class="secondary" href="am-offer-net-listing-detail-v12.html?id=${encodeURIComponent(x.listing_id)}">Open listing</a>`:''}</div></article>`).join('');
+  document.querySelectorAll('[data-report]').forEach(b=>b.onclick=()=>reportAction(b.dataset.report,b.dataset.rstatus));
+}
+async function reportAction(id,status){
+  const patch={status,resolved_at:['resolved','dismissed'].includes(status)?new Date().toISOString():null};
+  const {error}=await client.from('reports').update(patch).eq('id',id);if(error){say(error.message);return}
+  await client.from('moderation_actions').insert({admin_id:session.user.id,action_type:'report_'+status,report_id:id});
+  say('Report updated.');await Promise.all([loadReports(),loadStats()]);
+}
+async function loadAds(){
+  const {data,error}=await client.from('sponsored_ads').select('id,advertiser_name,headline,placement,click_count,is_active,created_at').order('sort_order',{ascending:true}).order('created_at',{ascending:false});
+  if(error){say(error.message);return}
+  const list=data||[];$('adsEmpty').hidden=!!list.length;
+  $('adRows').innerHTML=list.map(x=>`<tr><td>${esc(x.advertiser_name)}</td><td>${esc(x.headline)}</td><td>${esc(x.placement)}</td><td>${esc(x.click_count)}</td><td>${pill(x.is_active?'active':'inactive')}</td><td><button class="secondary" data-adedit="${x.id}">Edit</button> <button class="secondary" data-ad="${x.id}" data-active="${x.is_active?'0':'1'}">${x.is_active?'Pause':'Activate'}</button> <button class="secondary danger" data-addelete="${x.id}">Delete</button></td></tr>`).join('');
+  document.querySelectorAll('[data-adedit]').forEach(b=>b.onclick=()=>editAd(b.dataset.adedit));document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>toggleAd(b.dataset.ad,b.dataset.active==='1'));
+  document.querySelectorAll('[data-addelete]').forEach(b=>b.onclick=()=>deleteAd(b.dataset.addelete));
+}
+
+let editingAdId=null;
+async function editAd(id){
+  const {data:x,error}=await client.from('sponsored_ads').select('*').eq('id',id).single();
+  if(error){say(error.message);return}
+  editingAdId=id;
+  $('adAdvertiser').value=x.advertiser_name||'';$('adHeadline').value=x.headline||'';$('adCtaText').value=x.cta_text||'Learn More';$('adCtaUrl').value=x.cta_url||'';$('adPlacement').value=x.placement||'homepage';$('adCategory').value=x.category||'all';$('adDescription').value=x.description||'';
+  const submit=$('adForm').querySelector('button[type="submit"]');submit.textContent='Save sponsored ad';
+  $('adForm').scrollIntoView({behavior:'smooth',block:'start'});say('Edit the ad and press Save sponsored ad.');
+}
+
+async function toggleAd(id,isActive){const {error}=await client.from('sponsored_ads').update({is_active:isActive}).eq('id',id);if(error){say(error.message);return}say('Ad status updated.');await Promise.all([loadAds(),loadStats()])}
+async function deleteAd(id){
+  const answer=await adminDialogV104('Delete sponsored ad','Delete this sponsored ad permanently?',{okText:'Delete ad'});
+  if(!answer)return;
+  const {error}=await client.from('sponsored_ads').delete().eq('id',id);
+  if(error){say(error.message);return}
+  say('Sponsored ad deleted.');
+  await Promise.all([loadAds(),loadStats()]);
+}
+$('adImage').onchange=()=>{
+  const f=$('adImage').files?.[0],wrap=$('adImagePreviewWrap'),img=$('adImagePreview');
+  if(!f){wrap.hidden=true;img.removeAttribute('src');return}
+  img.src=URL.createObjectURL(f);wrap.hidden=false;
+};
+$('adForm').onsubmit=async e=>{
+  e.preventDefault();
+  const submit=e.target.querySelector('button[type="submit"]');submit.disabled=true;
+  let image_url=null;
+  try{
+    const f=$('adImage').files?.[0];
+    if(f){
+      if(f.size>10*1024*1024)throw new Error('Ad image must be 10 MB or smaller.');
+      const ext=(f.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const path=session.user.id+'/'+crypto.randomUUID()+'.'+ext;
+      const up=await client.storage.from('sponsored-ad-media').upload(path,f,{cacheControl:'3600',upsert:false,contentType:f.type});
+      if(up.error)throw up.error;
+      image_url=client.storage.from('sponsored-ad-media').getPublicUrl(path).data.publicUrl;
+    }
+    const row={advertiser_name:$('adAdvertiser').value.trim(),headline:$('adHeadline').value.trim(),cta_text:$('adCtaText').value.trim(),cta_url:$('adCtaUrl').value.trim(),placement:$('adPlacement').value,category:$('adCategory').value.trim()||'all',description:$('adDescription').value.trim()||null,is_active:true,created_by:session.user.id};
+    if(image_url)row.image_url=image_url;
+    let q=editingAdId?client.from('sponsored_ads').update(row).eq('id',editingAdId):client.from('sponsored_ads').insert(row);
+    const {error}=await q;if(error)throw error;
+    const wasEditing=!!editingAdId;editingAdId=null;e.target.reset();$('adCtaText').value='Learn More';$('adCategory').value='all';$('adImagePreviewWrap').hidden=true;$('adImagePreview').removeAttribute('src');submit.textContent='Create sponsored ad';say(wasEditing?'Sponsored ad updated.':'Sponsored ad created.');await Promise.all([loadAds(),loadStats()]);
+  }catch(err){say(err.message||'Could not create sponsored ad.')}
+  finally{submit.disabled=false}
+}
+$('saveMode').onclick=async()=>{const b=$('saveMode');b.disabled=true;const r=await client.rpc('admin_set_membership_approval_mode',{p_mode:selectedMode});b.disabled=false;if(r.error){say(r.error.message);return}$('modeStatus').textContent='Current: '+(selectedMode==='manual'?'Manual Approval':'Automatic Approval');say('Approval mode saved.')};
+$('loadTodayInvitationsBtn').onclick=()=>loadInvitations(true);$('loadAllInvitationsBtn').onclick=()=>loadInvitations(false);$('showNotSentBtn').onclick=()=>loadInvitations(false,'not_sent');$('showSentBtn').onclick=()=>loadInvitations(false,'sent');$('showDncBtn').onclick=()=>loadInvitations(false,'do_not_contact');$('sendToContactBtn').onclick=()=>shareInvitationV2122('',null);$('shareInvitationBtn').onclick=()=>shareInvitationV2122('',null);
+$('pasteNumbersBtn').onclick=()=>{$('customerImportBox').hidden=false;$('customerNumbersInput').focus()};$('cancelCustomerImportBtn').onclick=()=>{$('customerImportBox').hidden=true;$('customerNumbersInput').value=''};$('importFileBtn').onclick=()=>$('customerFileInput').click();$('customerFileInput').onchange=importCustomerFileV2138;$('saveCustomerNumbersBtn').onclick=()=>importCustomerNumbersV2138($('customerNumbersInput').value);$('importContactsBtn').onclick=importPhoneContactsV2138;
+$('loadMembersBtn').onclick=loadMembers;$('loadListingsBtn').onclick=loadListings;$('loadCommunityBtn').onclick=loadCommunity;$('loadReflectionsBtn').onclick=loadReflections;$('loadReportsBtn').onclick=loadReports;$('loadWantedBtn').onclick=loadWanted;$('createBackupBtn').onclick=createBackup;$('refreshBackupsBtn').onclick=loadBackups;
+$('refreshAll').onclick=()=>loadAll();
+$('logoutBtn').onclick=async()=>{if(client)await client.auth.signOut();location.href='am-offer-net-sign-in-v1.html'};
+
+async function loadWanted(){
+  let q=client.from('wanted_posts').select('id,user_id,title,status,created_at').order('created_at',{ascending:false}).limit(300);
+  const status=$('wantedStatus').value;
+  if(status) q=q.eq('status',status);
+  const {data,error}=await q;
+  if(error){$('wantedRows').innerHTML='<tr><td colspan="5" style="padding:14px">Could not load WANTED ads: '+esc(error.message)+'</td></tr>';say('Could not load WANTED ads: '+error.message);return}
+  const term=($('wantedSearch').value||'').trim().toLowerCase();
+  const list=(data||[]).filter(x=>!term||(x.title||'').toLowerCase().includes(term));
+  $('wantedEmpty').hidden=!!list.length;
+  $('wantedRows').innerHTML=list.map(x=>`<tr>
+    <td><strong>${esc(x.title||'')}</strong></td>
+    <td>${esc(x.user_id||'')}</td>
+    <td><span class="pill">${esc(x.status||'')}</span></td>
+    <td>${x.created_at?new Date(x.created_at).toLocaleString():''}</td>
+    <td>
+      <a class="small-btn" href="am-offer-net-wanted-detail-v1.html?id=${x.id}" target="_blank">View</a>
+      <a class="small-btn" href="am-offer-net-post-wanted-v1.html?edit=${x.id}">Edit</a>
+      <button class="small-btn" onclick="window.adminWantedActionV209('${x.id}','${x.status==='hidden'?'restore':'hide'}')">${x.status==='hidden'?'Restore':'Hide'}</button>
+      <button class="small-btn danger" onclick="window.adminWantedActionV209('${x.id}','delete')">Delete</button>
+    </td>
+  </tr>`).join('');
+}
+window.adminWantedActionV209=async(id,action)=>{
+  if(action==='delete'){
+    const answer=await adminDialogV104('Delete WANTED ad','Permanently delete this WANTED ad? This cannot be undone.',{okText:'Delete'});
+    if(!answer)return;
+    const {error}=await client.from('wanted_posts').delete().eq('id',id);
+    if(error){say('Could not delete WANTED ad: '+error.message);return}
+  }else{
+    const status=action==='restore'?'published':'hidden';
+    const {error}=await client.from('wanted_posts').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+    if(error){say('Could not update WANTED ad: '+error.message);return}
+  }
+  await loadWanted();
+};
+
+function normalizeCustomerPhoneV2138(raw){
+  let v=String(raw||'').trim(); if(!v)return null;
+  const hadPlus=v.startsWith('+'); let d=v.replace(/\D/g,'');
+  if(d.length===10)return '+1'+d;
+  if(d.length===11&&d.startsWith('1'))return '+'+d;
+  if(hadPlus&&d.length>=8&&d.length<=15)return '+'+d;
+  return null;
+}
+function extractPhonesV2138(text){
+  const src=String(text||''); const out=[];
+  // Works with pasted lists, CSV/TXT and vCard TEL fields. Require phone-like runs.
+  const matches=src.match(/(?:\+?\d[\d\s().-]{6,}\d)/g)||[];
+  for(const m of matches){const n=normalizeCustomerPhoneV2138(m);if(n)out.push(n)}
+  return [...new Set(out)];
+}
+async function importCustomerNumbersV2138(source){
+  const result=$('customerImportResult'); const incoming=extractPhonesV2138(source);
+  if(!incoming.length){result.textContent='لم أجد أرقام هاتف صالحة.';return}
+  result.textContent='جاري فحص الأرقام ومنع التكرار...';
+  const {data:existing,error}=await client.from('customer_invitations').select('phone,status');
+  if(error){result.textContent='تعذر فحص القائمة: '+error.message;return}
+  const exists=new Set((existing||[]).map(x=>normalizeCustomerPhoneV2138(x.phone)).filter(Boolean));
+  const fresh=incoming.filter(x=>!exists.has(x)); const duplicates=incoming.length-fresh.length;
+  let added=0, failed=0;
+  // Insert in modest chunks. Database UNIQUE(phone) is a second protection against duplicates.
+  for(let i=0;i<fresh.length;i+=100){
+    const rows=fresh.slice(i,i+100).map(phone=>({phone,status:'not_sent'}));
+    const {data,error:e}=await client.from('customer_invitations').insert(rows).select('id');
+    if(e){failed+=rows.length}else added+=(data||[]).length;
+  }
+  result.textContent=`تمت إضافة ${added} رقم جديد · تم تجاهل ${duplicates} رقم مكرر${failed?` · تعذر إضافة ${failed}`:''}`;
+  $('customerNumbersInput').value='';$('customerImportBox').hidden=true;
+  try{localStorage.removeItem('amoffer_customer_invitation_batch_v2128')}catch(_e){}
+  await loadInvitations(false,'not_sent');
+}
+async function importCustomerFileV2138(ev){
+  const f=ev.target.files&&ev.target.files[0];if(!f)return;
+  try{await importCustomerNumbersV2138(await f.text())}catch(e){$('customerImportResult').textContent='تعذر قراءة الملف: '+(e.message||e)}
+  ev.target.value='';
+}
+async function importPhoneContactsV2138(){
+  const result=$('customerImportResult');
+  if(navigator.contacts&&navigator.contacts.select){
+    try{
+      const contacts=await navigator.contacts.select(['tel'],{multiple:true});
+      const phones=[];(contacts||[]).forEach(c=>(c.tel||[]).forEach(t=>phones.push(t)));
+      if(!phones.length){result.textContent='لم يتم اختيار أرقام.';return}
+      await importCustomerNumbersV2138(phones.join('\n'));return;
+    }catch(e){if(e&&e.name==='AbortError')return;result.textContent='تعذر فتح جهات الاتصال على هذا المتصفح.';return}
+  }
+  // iPhone Safari does not currently expose the Contact Picker API to ordinary websites.
+  result.textContent='iPhone لا يسمح للموقع بقراءة جهات الاتصال مباشرة. صدّر جهات الاتصال كملف VCF ثم اضغط «استيراد ملف» — وسيتم فحص التكرار تلقائيًا.';
+}
+async function shareInvitationV2122(phone,id){
+  if(id){
+    pendingInvitationSendV218={id:Number(id),phone:String(phone||'')};
+    try{sessionStorage.setItem('amoffer_pending_invitation_v218',JSON.stringify(pendingInvitationSendV218));}catch(_e){}
+  }
+  // v21.27: send ONE clickable rich-link card only. Do not attach a second image.
+  // The dedicated invitation URL supplies the approved poster as its Open Graph image.
+  const link='https://am-offer.net/customer-invitation-v2127.html';
+  const clean=String(phone||'').replace(/[^+\d]/g,'');
+  const sep=/iPhone|iPad|iPod/i.test(navigator.userAgent)?'&':'?';
+  window.location.href='sms:'+clean+sep+'body='+encodeURIComponent(link);
+}
+window.shareCustomerInvitationForRowV2121=(id,phone)=>shareInvitationV2122(phone,id);
+async function setInvitationStatusV218(id,status){
+  const patch={status,updated_at:new Date().toISOString()};
+  patch.sent_at=status==='sent'?new Date().toISOString():null;
+  const {error}=await client.from('customer_invitations').update(patch).eq('id',id);
+  if(error){say('Could not update invitation: '+error.message);return false}
+  return true;
+}
+let pendingInvitationSendV218=null;
+window.sendCustomerInvitationV218=(id,phone)=>{
+  pendingInvitationSendV218={id:Number(id),phone:String(phone||'')};
+  sessionStorage.setItem('amoffer_pending_invitation_send',JSON.stringify(pendingInvitationSendV218));
+  window.location.href=invitationSmsUrlV219(phone);
+};
+window.confirmInvitationSentV218=async(id)=>{
+  if(await setInvitationStatusV218(id,'sent')){
+    pendingInvitationSendV218=null;
+    sessionStorage.removeItem('amoffer_pending_invitation_send');
+    await loadInvitations(window.__todayInvitationsV218!==false);
+  }
+};
+window.addEventListener('pageshow',()=>{
+  try{pendingInvitationSendV218=JSON.parse(sessionStorage.getItem('amoffer_pending_invitation_send')||'null')}catch(_e){pendingInvitationSendV218=null}
+  if(document.getElementById('panel-invitations')?.classList.contains('active')) loadInvitations(window.__todayInvitationsV218!==false);
+});
+window.addEventListener('focus',()=>{
+  try{pendingInvitationSendV218=JSON.parse(sessionStorage.getItem('amoffer_pending_invitation_send')||'null')}catch(_e){pendingInvitationSendV218=null}
+  if(pendingInvitationSendV218 && document.getElementById('panel-invitations')?.classList.contains('active')) loadInvitations(window.__todayInvitationsV218!==false);
+});
+window.invitationStatusV218=async(id,status)=>{if(await setInvitationStatusV218(id,status))await loadInvitations(window.__todayInvitationsV218!==false)};
+async function loadInvitations(todayOnly=true,statusFilter=null){
+  window.__todayInvitationsV218=todayOnly;
+  const {data,error}=await client.from('customer_invitations').select('id,phone,status,sent_at,created_at').order('id',{ascending:true});
+  if(error){say('Could not load customer invitations: '+error.message);return}
+  const all=data||[], notSent=all.filter(x=>x.status==='not_sent'), sent=all.filter(x=>x.status==='sent'), dnc=all.filter(x=>x.status==='do_not_contact');
+  $('invitationStats').textContent=`الكل ${all.length} · لم يُرسل ${notSent.length} · تم الإرسال ${sent.length} · عدم التواصل ${dnc.length}`;
+  // v21.28: keep Today's 30 as a stable batch. Marking a customer Sent must not
+  // remove that row and replace it with the next phone number; the same card stays
+  // visible and turns green so the admin can see exactly who has already been sent.
+  let list=statusFilter?all.filter(x=>x.status===statusFilter):all;
+  if(todayOnly){
+    const batchKey='amoffer_customer_invitation_batch_v2128';
+    let batchIds=[];
+    try{
+      const saved=JSON.parse(localStorage.getItem(batchKey)||'null');
+      if(saved && Array.isArray(saved.ids)) batchIds=saved.ids.map(Number).filter(Number.isFinite);
+    }catch(_e){}
+    // Start/rebuild a batch only when none exists or every saved row is no longer actionable.
+    const existingIds=new Set(all.map(x=>Number(x.id)));
+    batchIds=batchIds.filter(id=>existingIds.has(id));
+    if(!batchIds.length || batchIds.every(id=>{
+      const r=all.find(x=>Number(x.id)===id);
+      return !r || r.status==='do_not_contact';
+    })){
+      batchIds=notSent.slice(0,30).map(x=>Number(x.id));
+      try{localStorage.setItem(batchKey,JSON.stringify({ids:batchIds,createdAt:new Date().toISOString()}));}catch(_e){}
+    }
+    list=batchIds.map(id=>all.find(x=>Number(x.id)===id)).filter(Boolean);
+  }
+  $('invitationsEmpty').hidden=!!list.length;
+  $('invitationRows').innerHTML=list.map(x=>{const pending=x.status==='not_sent'&&pendingInvitationSendV218&&Number(pendingInvitationSendV218.id)===Number(x.id);const st=x.status==='sent'?'✓ تم الإرسال':x.status==='do_not_contact'?'عدم التواصل':'لم يُرسل';return `<tr class="${x.status==='sent'?'inv-row-sent':''}"><td class="inv-phone"><strong>${esc(x.phone)}</strong>${x.status==='sent'?'<span class="sent-check">✓ تم الإرسال</span>':''}</td><td class="inv-status">${pill(st)}</td><td class="inv-sent">${x.sent_at?'تم '+fmtDate(x.sent_at):pending?'عدت من الرسائل — أكد إذا تم الإرسال':'لم يُرسل بعد'}</td><td class="inv-actions">${x.status==='not_sent'?`<button class="small-btn sms-btn" onclick="shareCustomerInvitationForRowV2121(${x.id},'${esc(x.phone)}')">إرسال الدعوة</button>${pending?`<button class="small-btn confirm-sent-btn" onclick="confirmInvitationSentV218(${x.id})">✓ تم الإرسال</button>`:`<button class="small-btn sent-btn" onclick="invitationStatusV218(${x.id},'sent')">وضع علامة تم الإرسال</button>`}`:''}<button class="small-btn dnc-btn" onclick="invitationStatusV218(${x.id},'${x.status==='do_not_contact'?'not_sent':'do_not_contact'}')">${x.status==='do_not_contact'?'إرجاع للقائمة':'عدم التواصل'}</button>${x.status==='sent'?`<button class="small-btn" onclick="invitationStatusV218(${x.id},'not_sent')">إلغاء علامة الإرسال</button>`:''}</td></tr>`}).join('');
+}
+
+async function loadAll(){await Promise.all([loadStats(),loadMembership(),loadMembers(),loadListings(),loadCommunity(),loadReflections(),loadReports(),loadAds(),loadWanted(),loadBackups()])}
+(async()=>{try{if(await requireAdmin())await loadAll()}catch(e){say(e.message||'Unable to load admin dashboard.')}})();
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+
+</body>
+</html>

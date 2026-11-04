@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Log in | am-Offer</title>
+<link href="favicon-32x32.png" rel="icon"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#ddd;font-family:Arial,Helvetica,sans-serif;color:#111}
+.page{position:relative;width:100vw;height:100vh;background:url("am-offer-net-auth-approved-exact.png") center center/100% 100% no-repeat}
+#home{position:absolute;left:1.2%;top:1.6%;width:14.1%;height:5.4%;background:transparent;border:0;cursor:pointer}
+.card{position:absolute;left:57.55%;top:20.7%;width:38.35%;height:58.9%;background:#fff;border-radius:16px;box-shadow:0 18px 48px rgba(0,0,0,.20);padding:5.2% 3.0% 3.0%;display:flex;flex-direction:column;justify-content:center}
+h1{text-align:center;font-size:clamp(28px,2.35vw,40px);margin:0 0 6.2vh}
+.field{position:relative;margin-bottom:2.6vh}
+.field input{width:100%;height:7vh;min-height:54px;border:1px solid #b8b8b8;border-radius:5px;padding:0 18px 0 72px;font-size:clamp(16px,1.25vw,21px);outline:none;background:#fff}
+.field:before{position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:28px;color:#666;z-index:2}
+.field.email:before{content:'✉'}
+.field.password:before{content:'🔒';font-size:22px}
+.forgot-row{text-align:right;margin:-.7vh 0 1.9vh}
+.forgot-row a,.subrow a{color:#111}
+.primary{width:100%;height:6.5vh;min-height:54px;border:0;border-radius:4px;background:#111;color:#fff;font-size:clamp(18px,1.35vw,23px);font-weight:700;cursor:pointer}
+.subrow{text-align:center;margin-top:4.2vh;padding-top:2.6vh;border-top:1px solid #d4d4d4;font-size:clamp(15px,1.15vw,18px)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:4px;display:none;z-index:10}
+@media(max-width:700px){
+ html,body{overflow:auto;background:#f4f4f4;height:auto;min-height:100%}
+ .page{width:100%;height:auto;min-height:100vh;background:none!important;padding:24px 18px 40px;display:flex;align-items:flex-start;justify-content:center}
+ #home{position:fixed;left:16px;top:16px;width:auto;height:auto;background:#111;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700;z-index:3}
+ #home:after{content:'Back to Home'}
+ .card{position:relative;left:auto;top:auto;width:100%;max-width:430px;height:auto;margin-top:64px;padding:28px 20px 24px;border-radius:14px;display:block}
+ h1{font-size:32px;margin:0 0 28px}
+ .field{margin-bottom:16px}.field input{height:58px;font-size:18px;padding-left:58px}.field:before{left:20px}
+ .forgot-row{margin:0 0 20px}.primary{height:58px;font-size:19px}.subrow{margin-top:26px;padding-top:22px;font-size:17px;line-height:1.5}
+}
+</style>
+<meta content="noindex, nofollow, noarchive" name="robots"/></head>
+<body>
+<main class="page">
+<a aria-label="Back to Home" href="index.html" id="home"></a>
+<section class="card">
+<h1>Log in</h1>
+<form id="loginForm" novalidate="">
+<div class="field email"><input autocomplete="email" id="loginEmail" placeholder="Email" required="" type="email"/></div>
+<div class="field password"><input autocomplete="current-password" id="loginPassword" placeholder="Password" required="" type="password"/></div>
+<div class="forgot-row"><a href="am-offer-net-forgot-password-v1.html">Forgot password?</a></div>
+<button class="primary" type="submit">Log in</button>
+</form>
+<div class="subrow">New to am-offer.net? <a href="am-offer-net-create-account-v1.html"><b>Create account</b></a></div>
+</section>
+</main>
+<div aria-live="polite" id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script src="am-offer-message-indicator-v138.js"></script>
+<script>
+(function(){
+  const toast=document.getElementById('toast');
+  function showToast(m,ms=4200){toast.textContent=m;toast.style.display='block';clearTimeout(showToast._t);showToast._t=setTimeout(()=>toast.style.display='none',ms);}
+  const reason=new URLSearchParams(location.search).get('reason');
+  if(reason==='pending') setTimeout(()=>showToast('Your membership request is waiting for administrator approval.',5200),150);
+  else if(reason==='rejected') setTimeout(()=>showToast('This membership request is not active.',5200),150);
+  else if(reason==='inactive') setTimeout(()=>showToast('This account is not currently active.',5200),150);
+  else if(reason==='profile') setTimeout(()=>showToast('We could not verify your membership profile. Please sign in again.',5200),150);
+  function safeReturn(){try{const p=new URLSearchParams(location.search);return AmOfferAuth.cleanReturnPath(p.get('return'));}catch(_e){return '';}}
+  async function routeSignedInUser(client,user){
+    const {data:adminRow}=await client.from('admin_users').select('role').eq('user_id',user.id).maybeSingle();
+    const wanted=safeReturn();
+    if(adminRow){location.href=wanted||'am-offer-net-admin-membership-v1.html';return;}
+    const {data:profile,error}=await client.from('profiles').select('membership_status').eq('id',user.id).single();
+    if(error||!profile){await client.auth.signOut();showToast('We could not verify your membership status. Please try again.');return;}
+    if(profile.membership_status!=='active'){
+      await client.auth.signOut();
+      if(profile.membership_status==='pending')showToast('Your membership request is waiting for administrator approval.',5200);
+      else if(profile.membership_status==='rejected')showToast('This membership request is not active.',5200);
+      else showToast('This account is not currently active.',5200);
+      return;
+    }
+    location.href=wanted||'am-offer-net-my-account-v1.html';
+  }
+  document.getElementById('loginForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const email=document.getElementById('loginEmail').value.trim();
+    const password=document.getElementById('loginPassword').value;
+    if(!email||!password){showToast('Enter your email and password.');return;}
+    const btn=this.querySelector('button[type="submit"]');btn.disabled=true;const old=btn.textContent;btn.textContent='Logging in…';
+    try{
+      const client=AmOfferAuth.client();
+      const {data,error}=await client.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      await routeSignedInUser(client,data.user);
+    }catch(err){showToast(err?.message||'Unable to log in. Check your email and password.',5200);}
+    finally{btn.disabled=false;btn.textContent=old;}
+  });
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+</body>
+</html>

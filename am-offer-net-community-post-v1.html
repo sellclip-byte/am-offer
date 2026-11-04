@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Post to Community — am-offer.net</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#111;font-family:Arial,sans-serif}
+header{border-bottom:1px solid #aaa;padding:12px 22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:26px;font-weight:800;text-decoration:none;color:#111}.logo span{color:#777;font-weight:500}
+nav a{color:#111;font-size:13px;margin-left:16px}.wrap{max-width:720px;margin:auto;padding:28px 22px 55px}
+h1{font-size:26px;margin:0 0 6px}.intro{font-size:13px;color:#666;line-height:1.55;margin-bottom:23px}
+label{display:block;font-size:13px;font-weight:700;margin:16px 0 6px}
+input,select,textarea{width:100%;border:1px solid #999;background:#fff;color:#111;padding:10px;font:14px Arial,sans-serif}
+textarea{min-height:150px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.help{font-size:11px;color:#777;line-height:1.5;margin-top:5px}
+button{margin-top:22px;background:#000;color:#fff;border:0;padding:11px 17px;font-weight:700;cursor:pointer}
+.rules{margin-top:27px;border-top:1px solid #aaa;padding-top:16px;font-size:12px;color:#666;line-height:1.65}
+.rules b{color:#111}.preview{display:none;margin-top:22px;border:1px solid #999;padding:16px}
+.preview h2{font-size:18px;margin:0 0 7px}.meta{font-size:11px;color:#777;margin-bottom:12px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+</style>
+<!-- am-offer.net approved logo / Google / social -->
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+<link href="google-icon-192x192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="1200" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://am-offer.net/social-share-1200x1200.png" name="twitter:image"/>
+<style id="amoffer-unified-background-v5">
+html, body { background-color: #DCDCDA !important; }
+</style>
+<style id="amoffer-full-page-background-v6">
+html, body,
+.page, .site, .site-wrap, .site-wrapper, .wrapper, .container,
+.main, main, .content, .content-wrap, .layout,
+header, .header, .topbar, .top-bar,
+.catalog, .category-grid, .categories, .section,
+.sidebar, aside, .card, .panel,
+footer, .footer {
+  background-color: #DCDCDA !important;
+}
+</style>
+<style id="amoffer-text-background-fix-v7">
+/* Remove the unwanted white boxes behind catalog/link text */
+.section ul li,
+.section ul li a,
+.category-grid a,
+.categories a,
+.catalog a,
+.category-column a,
+.category-list a,
+.card ul li,
+.card ul li a,
+.sidebar a,
+.quick-links a,
+.account-links a {
+  background: transparent !important;
+}
+
+/* Keep the approved hover behavior */
+.section ul li:hover,
+.section ul li:hover a,
+.category-grid a:hover,
+.categories a:hover,
+.catalog a:hover,
+.category-column a:hover,
+.category-list a:hover,
+.card ul li a:hover,
+.sidebar a:hover,
+.quick-links a:hover,
+.account-links a:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Keep headings clean on the unified background */
+.section .heading,
+.section .heading h2,
+.section .heading h2 a,
+.card h2,
+.card h3 {
+  background: transparent !important;
+}
+</style>
+<style id="image-integrity-v32">img{max-width:100%}.poster img,.post-head img{height:auto!important;object-fit:contain!important}.listing .photo img{object-fit:cover!important}</style>
+<meta content="noindex, nofollow, noarchive" name="robots"/></head>
+<body>
+<header>
+<a class="logo" href="home.html">am-offer<span>.net</span></a>
+<nav><a href="am-offer-net-community-v2.html">community</a><a href="am-offer-net-my-account-v1.html">account</a><a href="am-offer-net-help-faq-v1.html">help</a></nav>
+</header>
+<main class="wrap">
+<h1>Post to community</h1>
+<p class="intro">Share useful local information with your neighbors. Community posts are separate from marketplace listings and do not use Make Offer.</p>
+<form id="form">
+<label for="type">Community section</label>
+<select id="type" required="">
+<option value="">Choose a section</option>
+<option>lost</option><option>found</option><option>alerts</option><option>general</option><option>local news</option><option>help from neighbors</option>
+</select>
+<label for="title">Title</label>
+<input id="title" maxlength="100" placeholder="Keep it short and clear" required=""/>
+<div class="row">
+<div><label for="state">State</label><select id="state" required=""><option value="">Select State</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option></select></div>
+<div><label for="city">City</label><select id="city" required=""><option value="">Select City</option></select><div class="help">Select a city after choosing the state.</div></div>
+</div>
+<label for="details">Details</label>
+<textarea id="details" maxlength="1500" placeholder="What should your neighbors know?" required=""></textarea>
+<div class="help">Do not include passwords, financial information, Social Security numbers, or other sensitive personal information.</div>
+<label for="communityPhotos">Photos <span style="font-weight:normal">(optional)</span></label>
+<input id="communityPhotos" type="file" accept="image/*" multiple>
+<div class="help" id="communityPhotoHelp">Add up to 6 photos. Photos are especially useful for Lost and Found posts.</div>
+<div id="communityPhotoPreview" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 16px"></div>
+<button type="submit">Preview community post</button>
+</form>
+<section class="preview" id="preview">
+<div class="meta" id="pmeta"></div><h2 id="ptitle"></h2><div id="pdetails"></div>
+</section>
+<div class="rules"><b>Keep Community useful.</b> No marketplace advertisements, political campaigning, arguments, spam, harassment, or emergency requests. For immediate danger or emergencies, contact the appropriate emergency services or local authorities.</div>
+</main>
+<script id="community-location-v145">
+const communityCityMap={"Alabama":["Birmingham","Montgomery","Mobile","Huntsville","Tuscaloosa","Hoover","Auburn","Dothan"],"Alaska":["Anchorage","Fairbanks","Juneau","Sitka","Ketchikan","Wasilla","Kenai"],"Arizona":["Phoenix","Tucson","Mesa","Chandler","Scottsdale","Glendale","Tempe","Gilbert","Peoria","Surprise"],"Arkansas":["Little Rock","Fort Smith","Fayetteville","Springdale","Jonesboro","Rogers","Conway","Bentonville"],"California":["Los Angeles","San Diego","San Jose","San Francisco","Fresno","Sacramento","Long Beach","Oakland","Bakersfield","Anaheim","Santa Ana","Riverside","Stockton","Irvine","Chula Vista"],"Colorado":["Denver","Colorado Springs","Aurora","Fort Collins","Lakewood","Thornton","Arvada","Westminster","Pueblo","Boulder"],"Connecticut":["Bridgeport","New Haven","Stamford","Hartford","Waterbury","Norwalk","Danbury","New Britain","Bristol","Meriden"],"Delaware":["Wilmington","Dover","Newark","Middletown","Smyrna","Milford","Seaford"],"Florida":["Jacksonville","Miami","Tampa","Orlando","St. Petersburg","Hialeah","Tallahassee","Port St. Lucie","Cape Coral","Fort Lauderdale","Pembroke Pines","Hollywood","Gainesville","Clearwater"],"Georgia":["Atlanta","Augusta","Columbus","Macon","Savannah","Athens","South Fulton","Sandy Springs","Roswell","Warner Robins"],"Hawaii":["Honolulu","Hilo","Kailua","Pearl City","Waipahu","Kaneohe","Mililani Town"],"Idaho":["Boise","Meridian","Nampa","Idaho Falls","Caldwell","Pocatello","Coeur d'Alene","Twin Falls"],"Illinois":["Chicago","Aurora","Joliet","Naperville","Rockford","Elgin","Springfield","Peoria","Champaign","Waukegan"],"Indiana":["Indianapolis","Fort Wayne","Evansville","South Bend","Carmel","Fishers","Bloomington","Hammond","Lafayette","Noblesville"],"Iowa":["Des Moines","Cedar Rapids","Davenport","Sioux City","Iowa City","West Des Moines","Ankeny","Waterloo","Ames"],"Kansas":["Wichita","Overland Park","Kansas City","Olathe","Topeka","Lawrence","Shawnee","Lenexa","Manhattan"],"Kentucky":["Louisville","Lexington","Bowling Green","Owensboro","Covington","Georgetown","Richmond","Florence"],"Louisiana":["New Orleans","Baton Rouge","Shreveport","Lafayette","Lake Charles","Kenner","Bossier City","Monroe"],"Maine":["Portland","Lewiston","Bangor","South Portland","Auburn","Biddeford","Sanford","Augusta"],"Maryland":["Baltimore","Frederick","Gaithersburg","Rockville","Bowie","Hagerstown","Annapolis","College Park"],"Massachusetts":["Boston","Worcester","Springfield","Cambridge","Lowell","Brockton","Quincy","Lynn","New Bedford","Fall River"],"Michigan":["Detroit","Grand Rapids","Warren","Sterling Heights","Ann Arbor","Lansing","Dearborn","Livonia","Troy","Flint"],"Minnesota":["Minneapolis","St. Paul","Rochester","Duluth","Bloomington","Brooklyn Park","Plymouth","Woodbury","Maple Grove"],"Mississippi":["Jackson","Gulfport","Southaven","Hattiesburg","Biloxi","Meridian","Tupelo","Olive Branch"],"Missouri":["Kansas City","St. Louis","Springfield","Columbia","Independence","Lee's Summit","O'Fallon","St. Joseph","St. Charles"],"Montana":["Billings","Missoula","Great Falls","Bozeman","Butte","Helena","Kalispell","Belgrade"],"Nebraska":["Omaha","Lincoln","Bellevue","Grand Island","Kearney","Fremont","Hastings","Norfolk"],"Nevada":["Las Vegas","Henderson","Reno","North Las Vegas","Sparks","Carson City","Mesquite","Elko"],"New Hampshire":["Manchester","Nashua","Concord","Derry","Dover","Rochester","Salem","Merrimack"],"New Jersey":["Newark","Jersey City","Paterson","Elizabeth","Edison","Woodbridge","Lakewood","Toms River","Hamilton","Trenton"],"New Mexico":["Albuquerque","Las Cruces","Rio Rancho","Santa Fe","Roswell","Farmington","Clovis","Hobbs"],"New York":["New York City","Buffalo","Yonkers","Rochester","Syracuse","Albany","New Rochelle","Mount Vernon","Schenectady","Utica"],"North Carolina":["Charlotte","Raleigh","Greensboro","Durham","Winston-Salem","Fayetteville","Cary","Wilmington","High Point","Concord"],"North Dakota":["Fargo","Bismarck","Grand Forks","Minot","West Fargo","Williston","Dickinson","Mandan"],"Ohio":["Columbus","Cleveland","Cincinnati","Toledo","Akron","Dayton","Parma","Canton","Lorain","Hamilton"],"Oklahoma":["Oklahoma City","Tulsa","Norman","Broken Arrow","Edmond","Lawton","Moore","Midwest City","Enid"],"Oregon":["Portland","Salem","Eugene","Gresham","Hillsboro","Bend","Beaverton","Medford","Springfield","Corvallis"],"Pennsylvania":["Philadelphia","Pittsburgh","Allentown","Reading","Erie","Scranton","Bethlehem","Lancaster","Harrisburg","York"],"Rhode Island":["Providence","Warwick","Cranston","Pawtucket","East Providence","Woonsocket","Cumberland","Coventry"],"South Carolina":["Charleston","Columbia","North Charleston","Mount Pleasant","Rock Hill","Greenville","Summerville","Goose Creek","Sumter"],"South Dakota":["Sioux Falls","Rapid City","Aberdeen","Brookings","Watertown","Mitchell","Yankton","Pierre"],"Tennessee":["Nashville","Memphis","Knoxville","Chattanooga","Clarksville","Murfreesboro","Franklin","Johnson City","Jackson","Bartlett"],"Texas":["Houston","San Antonio","Dallas","Austin","Fort Worth","El Paso","Arlington","Corpus Christi","Plano","Lubbock","Laredo","Irving","Garland","Frisco","McKinney","Amarillo","Grand Prairie","Brownsville","Killeen","Denton"],"Utah":["Salt Lake City","West Valley City","West Jordan","Provo","Orem","Sandy","St. George","Ogden","Layton","South Jordan"],"Vermont":["Burlington","South Burlington","Rutland","Essex Junction","Barre","Montpelier","St. Albans","Winooski"],"Virginia":["Virginia Beach","Chesapeake","Norfolk","Richmond","Newport News","Alexandria","Hampton","Roanoke","Portsmouth","Suffolk"],"Washington":["Seattle","Spokane","Tacoma","Vancouver","Bellevue","Kent","Everett","Renton","Spokane Valley","Federal Way"],"West Virginia":["Charleston","Huntington","Morgantown","Parkersburg","Wheeling","Martinsburg","Weirton","Fairmont"],"Wisconsin":["Milwaukee","Madison","Green Bay","Kenosha","Racine","Appleton","Waukesha","Eau Claire","Oshkosh","Janesville"],"Wyoming":["Cheyenne","Casper","Laramie","Gillette","Rock Springs","Sheridan","Green River","Evanston"],"District of Columbia":["Washington"]};
+const communityState=document.getElementById('state');
+const communityCity=document.getElementById('city');
+function fillCommunityCities(){
+  communityCity.innerHTML='<option value="">Select City</option>';
+  (communityCityMap[communityState.value]||[]).forEach(city=>{
+    const opt=document.createElement('option'); opt.value=city; opt.textContent=city; communityCity.appendChild(opt);
+  });
+  communityCity.disabled=!communityState.value;
+}
+communityState.addEventListener('change',fillCommunityCities);
+fillCommunityCities();
+</script>
+<script id="community-post-save-v153">
+const communityPhotos=document.getElementById('communityPhotos');
+const communityPhotoPreview=document.getElementById('communityPhotoPreview');
+let communityPhotoFiles=[];
+function renderCommunityPhotos(){
+ communityPhotoPreview.innerHTML='';
+ communityPhotoFiles.forEach((file,i)=>{const img=document.createElement('img');img.alt='Selected photo '+(i+1);img.style.cssText='width:100%;height:120px;object-fit:cover;border:1px solid #aaa;background:#fff';img.src=URL.createObjectURL(file);communityPhotoPreview.appendChild(img);});
+}
+communityPhotos.addEventListener('change',()=>{
+ communityPhotoFiles=Array.from(communityPhotos.files||[]).filter(f=>f.type.startsWith('image/')).slice(0,6);
+ if((communityPhotos.files||[]).length>6) alert('You can add up to 6 photos.');
+ renderCommunityPhotos();
+});
+document.getElementById('form').addEventListener('submit',async function(e){
+ e.preventDefault();
+ const type=document.getElementById('type').value;
+ const title=document.getElementById('title').value.trim();
+ const state=document.getElementById('state').value;
+ const city=document.getElementById('city').value.trim();
+ const details=document.getElementById('details').value.trim();
+ let client, session;
+ try{ client=AmOfferAuth.client(); session=(await client.auth.getSession()).data.session; }catch(_e){}
+ if(!session){ location.href='am-offer-net-sign-in-v1.html?next='+encodeURIComponent(location.pathname+location.search); return; }
+ const btn=this.querySelector('button[type=submit]'); const oldText=btn.textContent; btn.disabled=true; btn.textContent='Publishing...';
+ let postId=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(16).slice(2)); const uploaded=[];
+ try{
+   const paths=[];
+   for(let i=0;i<communityPhotoFiles.length;i++){
+     const file=communityPhotoFiles[i]; const ext=(file.name.split('.').pop()||'jpg').replace(/[^a-z0-9]/gi,'').toLowerCase()||'jpg';
+     // Storage RLS requires the first folder to be the signed-in user's UUID.
+     const path=session.user.id+'/community/'+postId+'/'+String(i+1).padStart(2,'0')+'-'+Date.now()+'.'+ext;
+     const {error:upErr}=await client.storage.from('listing-media').upload(path,file,{contentType:file.type||'image/jpeg',upsert:false,cacheControl:'3600'});
+     if(upErr) throw upErr; paths.push(path); uploaded.push(path);
+   }
+   // Insert once, including image_paths. This avoids requiring an UPDATE policy on community_posts.
+   const {error}=await client.from('community_posts').insert({id:postId,user_id:session.user.id,section:type,title,state,city,details,image_paths:paths});
+   if(error) throw error;
+   location.href='am-offer-net-community-v2.html?section='+encodeURIComponent(type)+'&posted=1';
+ }catch(err){
+   console.error('Community publish failed:',err);
+   if(uploaded.length) try{await client.storage.from('listing-media').remove(uploaded)}catch(_e){}
+   alert('Could not publish community post. '+(err?.message||'Please try again.')); btn.disabled=false; btn.textContent=oldText;
+ }
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="am-offer-auth-v1.js"></script>
+<script id="community-post-auth-gate-v150">
+(async function(){
+ try{
+   const ctx=await AmOfferAuth.requireActiveMember('am-offer-net-community-post-v1.html');
+   if(!ctx) return;
+ }catch(_e){ location.replace('am-offer-net-sign-in-v1.html?return='+encodeURIComponent('am-offer-net-community-post-v1.html')); }
+})();
+</script>
+
+<script src="am-offer-message-indicator-v138.js"></script>
+<script id="global-auth-nav-v99">
+(function(){
+  async function run(){
+    let client;
+    try{ client=AmOfferAuth.client(); }catch(_e){ return; }
+
+    let session=null;
+    try{
+      const r=await client.auth.getSession();
+      session=r && r.data ? r.data.session : null;
+    }catch(_e){ return; }
+
+    const loginLinks=[...document.querySelectorAll('a[href*="am-offer-net-sign-in-v1.html"]')];
+    const createLinks=[...document.querySelectorAll('a[href*="am-offer-net-create-account-v1.html"]')];
+
+    if(!session) return;
+
+    loginLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='log in' || t==='login' || t==='sign in') a.style.display='none';
+    });
+    createLinks.forEach(a=>{
+      const t=(a.textContent||'').trim().toLowerCase();
+      if(t==='create account' || t==='sign up' || t==='signup') a.style.display='none';
+    });
+
+    const nav=document.querySelector('header .topnav, header .links, header nav, .topnav');
+    if(nav && !document.querySelector('.auth-nav-signout-v99')){
+      const out=document.createElement('a');
+      out.href='#';
+      out.className='auth-nav-signout-v99';
+      out.textContent='Sign out';
+      out.style.cursor='pointer';
+      out.addEventListener('click',async function(e){
+        e.preventDefault();
+        try{await client.auth.signOut();}catch(_e){}
+        location.href='index.html';
+      });
+      nav.appendChild(out);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<script src="am-offer-nav-cleanup-v138.js"></script>
+</body></html>
