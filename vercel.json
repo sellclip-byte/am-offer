@@ -1,8 +1,7 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/home", "destination": "/index.html" }
+  "redirects": [
+    { "source": "/:path((?!index\\.html$|am-pro\\.jpg$|am-customer\\.jpg$|favicon|apple-touch-icon|google-icon|site\\.webmanifest$|sw\\.js$|social-share|404\\.html$|robots\\.txt$|sitemap\\.xml$).+)", "destination": "/", "permanent": false }
   ]
 }
