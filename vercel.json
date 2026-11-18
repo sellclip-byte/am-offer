@@ -2,6 +2,6 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/:path((?!index\\.html$|am-pro\\.jpg$|am-customer\\.jpg$|favicon|apple-touch-icon|google-icon|site\\.webmanifest$|sw\\.js$|social-share|404\\.html$|robots\\.txt$|sitemap\\.xml$).+)", "destination": "/", "permanent": false }
+    { "source": "/:path((?!index\\.html$|am-pro\\.jpg$|am-customer\\.jpg$|favicon|apple-touch-icon|google-icon|site\\.webmanifest$|sw\\.js$|social-share|404\\.html$|google[0-9a-f]+\\.html$|BingSiteAuth\\.xml$|robots\\.txt$|sitemap\\.xml$).+)", "destination": "/", "permanent": false }
   ]
 }
