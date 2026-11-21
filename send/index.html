@@ -48,6 +48,15 @@ li .act{display:flex;gap:6px}
 </div>
 
 <div class="box"><ul id="list"></ul></div>
+
+<div class="box">
+  <label for="q">🔎 Find a number (someone replied or called)</label>
+  <input id="q" inputmode="tel" placeholder="Type the last 4+ digits" style="width:100%;font:inherit;padding:11px;border:1px solid var(--line);border-radius:10px">
+  <ul id="found"></ul>
+  <label style="margin-top:12px">Reply if they say “I’m not your customer”</label>
+  <textarea id="sorry">So sorry! This number was in our customer list from a past service, it may have changed owners. We removed it and won't text again. Have a great holiday!</textarea>
+  <button class="ghost" id="copySorry">📋 Copy reply</button>
+</div>
 <div class="small"><button class="ghost" id="reset">Clear this phone</button></div>
 
 <script>
@@ -75,11 +84,19 @@ function render(){
 }
 $('next10').onclick=function(){render();window.scrollTo(0,$('list').offsetTop-20)};
 $('file').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){
-  var seen={},list=[];String(r.result).split(/\r?\n/).slice(1).forEach(function(l){var c=l.split(','),p=(c[0]||'').replace(/\D/g,'').slice(-10);if(p.length===10&&!seen[p]){seen[p]=1;list.push({p:p,c:c[3]||''})}});
+  var seen={},list=[];String(r.result).split(/\r?\n/).slice(1).forEach(function(l){var c=l.split(','),p=(c[0]||'').replace(/\D/g,'').slice(-10);if(p.length===10&&!seen[p]){seen[p]=1;list.push({p:p,c:c[3]||'',n:c[1]||'',d:c[5]||'',s:c[6]||''})}});
   S.list=list;save();render()};r.readAsText(f)};
 $('testBtn').onclick=function(e){var p=$('test').value.replace(/\D/g,'').slice(-10);if(p.length!==10){e.preventDefault();return}this.href=href(p)};
 $('copyImg').onclick=function(){var n=$('imgNote');try{navigator.clipboard.write([new ClipboardItem({'image/png':fetch($('pic').src).then(function(r){return r.blob()}).then(function(b){return createImageBitmap(b)}).then(function(bm){var c=document.createElement('canvas');c.width=bm.width;c.height=bm.height;c.getContext('2d').drawImage(bm,0,0);return new Promise(function(res){c.toBlob(res,'image/png')})})})]).then(function(){n.textContent='Copied ✅ Paste it in the message.'},function(){n.textContent='Hold the picture → Copy.'})}catch(e){n.textContent='Hold the picture → Copy.'}};
 $('reset').onclick=function(){if(this.dataset.ok){S={list:[],sent:{},stop:{},page:0};save();render();this.textContent='Clear this phone';delete this.dataset.ok}else{this.dataset.ok=1;this.textContent='Tap again to clear'}};
 $('picFile').onchange=function(){var f=this.files[0];if(f)$('pic').src=URL.createObjectURL(f)};
+function day(t){var d=new Date(t);return (d.getMonth()+1)+'/'+d.getDate()+' '+d.toTimeString().slice(0,5)}
+function find(){var q=$('q').value.replace(/\D/g,''),ul=$('found');ul.innerHTML='';if(q.length<4)return;
+  S.list.filter(function(x){return x.p.indexOf(q)>=0}).slice(0,10).forEach(function(x){var li=document.createElement('li');
+  var st=S.stop[x.p]?'⛔ STOP':S.sent[x.p]?'✅ Sent '+day(S.sent[x.p]):'⏳ Not sent';
+  li.innerHTML='<div><div class="n">'+fmt(x.p)+'</div><div class="c">'+st+'<br>'+[x.n,x.c,x.s,x.d?'last contact '+x.d:''].filter(Boolean).join(' · ')+'</div></div><div class="act"><button class="ghost">'+(S.stop[x.p]?'Undo':'STOP')+'</button></div>';
+  li.querySelector('button').onclick=function(){if(S.stop[x.p])delete S.stop[x.p];else S.stop[x.p]=1;save();find();render()};ul.appendChild(li)})}
+$('q').oninput=find;
+$('copySorry').onclick=function(){var b=this;try{navigator.clipboard.writeText($('sorry').value).then(function(){b.textContent='Copied ✅'},function(){$('sorry').select()})}catch(e){$('sorry').select()}};
 render();
 </script></body></html>
