@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Send</title>
+<style>
+:root{--bg:#f4f6f3;--card:#fff;--fg:#13203a;--mute:#5b6577;--line:#dfe4dc;--green:#1f7a37;--gold:#c8890f;--done:#e8f3ea}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 -apple-system,system-ui,Arial,sans-serif;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 40px max(14px,env(safe-area-inset-left))}
+h1{font-size:20px;margin:4px 0 12px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+label{font-weight:700;font-size:14px;color:var(--mute);display:block;margin-bottom:6px}
+textarea{width:100%;min-height:70px;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button,.btn{font:700 16px/1 inherit;font-family:inherit;padding:13px 16px;border-radius:12px;border:0;background:var(--fg);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+button.ghost{background:#fff;color:var(--fg);border:1px solid var(--line)}
+.stat{font-weight:700}.stat b{color:var(--green)}
+img.card{width:120px;border-radius:10px;display:block;margin:8px 0}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+li .n{font-variant-numeric:tabular-nums;font-weight:700}li .c{color:var(--mute);font-size:13px}
+li.sent{background:var(--done)}li.stop .n{text-decoration:line-through;color:#b91c1c}
+li .act{display:flex;gap:6px}
+.sms{background:var(--green)}
+.small{font-size:13px;color:var(--mute)}
+</style></head><body>
+<h1>📨 Customer messages</h1>
+
+<div class="box" id="loadBox">
+  <label for="file">1) Load the customer list (CSV) — stays on this phone only</label>
+  <input type="file" id="file" accept=".csv,text/csv">
+  <div class="small" id="loaded"></div>
+</div>
+
+<div class="box">
+  <label for="msg">2) Message</label>
+  <textarea id="msg">Happy Holidays from DFW Mobile Lawnmower! 🌱</textarea>
+  <img class="card" src="card.jpg" alt="Card">
+  <div class="row"><button class="ghost" id="copyImg">📋 Copy picture</button><span class="small" id="imgNote">Copy, then paste it in the message.</span></div>
+</div>
+
+<div class="box">
+  <div class="row" style="justify-content:space-between">
+    <div class="stat">Sent <b id="sentN">0</b> / <span id="totN">0</span></div>
+    <button id="next10">Next 10 ▶</button>
+  </div>
+  <div class="small">Tap “Text” → Messages opens with the text ready → paste the picture → Send → come back.</div>
+  <div class="row" style="margin-top:8px"><input id="test" inputmode="tel" placeholder="Test number" style="flex:1;min-width:0;font:inherit;padding:11px;border:1px solid var(--line);border-radius:10px"><a class="btn sms" id="testBtn" href="#">Test</a></div>
+</div>
+
+<div class="box"><ul id="list"></ul></div>
+<div class="small"><button class="ghost" id="reset">Clear this phone</button></div>
+
+<script>
+var K='tc_send_v1',S={list:[],sent:{},stop:{},page:0};
+try{var s=JSON.parse(localStorage.getItem(K));if(s&&s.list)S=s}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+function msgVal(){try{var m=localStorage.getItem(K+'_m');if(m!==null)$('msg').value=m}catch(e){}}
+msgVal();$('msg').oninput=function(){try{localStorage.setItem(K+'_m',this.value)}catch(e){}render()};
+function href(p){return 'sms:+1'+p+'&body='+encodeURIComponent($('msg').value)}
+function fmt(p){return '('+p.slice(0,3)+') '+p.slice(3,6)+'-'+p.slice(6)}
+function render(){
+  var pend=S.list.filter(function(x){return !S.sent[x.p]&&!S.stop[x.p]});
+  $('sentN').textContent=Object.keys(S.sent).length;$('totN').textContent=S.list.length;
+  $('loaded').textContent=S.list.length?S.list.length+' numbers on this phone':'';
+  var show=pend.slice(0,10),ul=$('list');ul.innerHTML='';
+  if(!S.list.length){ul.innerHTML='<li class="small">Load the CSV first.</li>';return}
+  if(!show.length){ul.innerHTML='<li class="small">All done ✅</li>';return}
+  show.forEach(function(x){var li=document.createElement('li');
+    li.innerHTML='<div><div class="n">'+fmt(x.p)+'</div><div class="c">'+(x.c||'')+'</div></div><div class="act"><a class="btn sms" href="'+href(x.p)+'">Text</a><button class="ghost" data-d>✓</button><button class="ghost" data-s>STOP</button></div>';
+    li.querySelector('a').addEventListener('click',function(){S.sent[x.p]=Date.now();save();setTimeout(render,400)});
+    li.querySelector('[data-d]').onclick=function(){S.sent[x.p]=Date.now();save();render()};
+    li.querySelector('[data-s]').onclick=function(){S.stop[x.p]=1;save();render()};
+    ul.appendChild(li)});
+}
+$('next10').onclick=function(){render();window.scrollTo(0,$('list').offsetTop-20)};
+$('file').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){
+  var seen={},list=[];String(r.result).split(/\r?\n/).slice(1).forEach(function(l){var c=l.split(','),p=(c[0]||'').replace(/\D/g,'').slice(-10);if(p.length===10&&!seen[p]){seen[p]=1;list.push({p:p,c:c[3]||''})}});
+  S.list=list;save();render()};r.readAsText(f)};
+$('testBtn').onclick=function(e){var p=$('test').value.replace(/\D/g,'').slice(-10);if(p.length!==10){e.preventDefault();return}this.href=href(p)};
+$('copyImg').onclick=function(){var n=$('imgNote');try{navigator.clipboard.write([new ClipboardItem({'image/png':fetch('card.jpg').then(function(r){return r.blob()}).then(function(b){return createImageBitmap(b)}).then(function(bm){var c=document.createElement('canvas');c.width=bm.width;c.height=bm.height;c.getContext('2d').drawImage(bm,0,0);return new Promise(function(res){c.toBlob(res,'image/png')})})})]).then(function(){n.textContent='Copied ✅ Paste it in the message.'},function(){n.textContent='Hold the picture → Copy.'})}catch(e){n.textContent='Hold the picture → Copy.'}};
+$('reset').onclick=function(){if(this.dataset.ok){S={list:[],sent:{},stop:{},page:0};save();render();this.textContent='Clear this phone';delete this.dataset.ok}else{this.dataset.ok=1;this.textContent='Tap again to clear'}};
+render();
+</script></body></html>
