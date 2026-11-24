@@ -44,6 +44,21 @@
   dialog h2{margin:0 0 8px;font-size:20px}
   dialog p{margin:0 0 10px;font-size:15px}
   dialog button{margin-top:6px;padding:9px 18px;border-radius:999px;border:0;background:#111;color:#fff;font-weight:700;cursor:pointer}
+  .side{position:fixed;top:50%;transform:translateY(-58%);z-index:4;width:min(330px,26vw);padding:20px 20px 18px;border-radius:20px;background:rgba(10,14,24,.42);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.35);text-align:left}
+  .side.l{left:clamp(14px,3vw,48px)} .side.r{right:clamp(14px,3vw,48px)}
+  .side .tag{display:inline-block;font-size:12px;font-weight:900;letter-spacing:1.5px;padding:4px 10px;border-radius:999px;background:#f5b400;color:#111}
+  .side.l .tag{background:#fff}
+  .side h2{margin:10px 0 6px;font-size:clamp(20px,1.7vw,26px);line-height:1.15;font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .side p{margin:0 0 12px;font-size:15px;line-height:1.4;color:rgba(255,255,255,.92)}
+  .side label{display:block;font-size:12px;font-weight:800;letter-spacing:.5px;margin:0 0 5px;color:rgba(255,255,255,.85)}
+  .side input,.side select{width:100%;padding:13px 14px;border-radius:12px;border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.95);color:#111;font:700 17px system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;margin-bottom:10px}
+  .side input:focus,.side select:focus{outline:none;border-color:#f5b400}
+  .side button{width:100%;padding:14px;border:0;border-radius:999px;background:#f5b400;color:#111;font-weight:900;font-size:18px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+  .side.l button{background:#fff}
+  .side button:hover{filter:brightness(1.05)}
+  .side .err{min-height:1em;font-size:13px;color:#ffd38a;margin-top:6px}
+  @media (max-width:900px){.side.l{display:none}.side.r{top:calc(58px + env(safe-area-inset-top));transform:none;left:14px;right:14px;width:auto;padding:14px 14px 12px}.side.r p{display:none}.side.r h2{font-size:19px;margin:8px 0 8px}.side.r .row{display:flex;gap:8px}.side.r .row input{margin:0;flex:1}.side.r .row button{width:auto;padding:0 18px;font-size:16px;white-space:nowrap}.side.r label{display:none}.chips{display:none}}
+  @media (max-height:640px) and (max-width:900px){.side.r{display:none}}
   @media (prefers-reduced-motion:reduce){.slide{transition:none}}
 </style>
 </head>
@@ -53,6 +68,54 @@
   <div class="slide" style="background-image:url(am-customer.jpg)"></div>
 </div>
 <div class="brand">am-offer<span>.net</span></div>
+<form class="side l" id="proForm" autocomplete="on">
+  <span class="tag">FOR PROS</span>
+  <h2>Join thousands of local pros</h2>
+  <p>Get customer requests in your area by text. Free to join. No lead fees.</p>
+  <label for="proSvc">Your service</label>
+  <select id="proSvc" required>
+      <option value="">Choose your service…</option>
+      <option value="Central Air Conditioning Repair or Maintenance">AC &amp; Heating</option>
+      <option value="Plumbing Pipe Repair">Plumbing</option>
+      <option value="Electrical and Wiring Repair">Electrical</option>
+      <option value="Handyman">Handyman</option>
+      <option value="Roof Repair or Maintenance">Roofing</option>
+      <option value="Outdoor Landscaping and Design">Lawn &amp; Landscaping</option>
+      <option value="House Cleaning">House Cleaning</option>
+      <option value="Interior Painting">Painting</option>
+      <option value="Fence and Gate Installation">Fence &amp; Gates</option>
+      <option value="Concrete Installation">Concrete</option>
+      <option value="Floor Installation or Replacement">Flooring</option>
+      <option value="Junk Removal">Junk Removal</option>
+      <option value="Local Moving (under 50 miles)">Moving</option>
+      <option value="Tree Trimming and Removal">Tree Service</option>
+      <option value="Pressure Washing">Pressure Washing</option>
+      <option value="Garage Door Repair">Garage Doors</option>
+      <option value="Appliance Repair or Maintenance">Appliance Repair</option>
+      <option value="Mobile Auto Mechanic">Mobile Mechanic</option>
+      <option value="Lawn Mower, Water Pump &amp; Outdoor Equipment Repair">Lawn Mower Repair</option>
+      <option value="Pest Control Services">Pest Control</option>
+      <option value="Swimming Pool Cleaning &amp; Maintenance">Pool Service</option>
+      <option value="General Contracting">Remodeling / Contractor</option>
+      <option value="Gutter Cleaning and Maintenance">Gutters</option>
+      <option value="Drywall Repair and Texturing">Drywall</option>
+      <option value="Metalwork">Welding</option>
+      <option value="other">Other service</option>
+  </select>
+  <label for="proZip">Your ZIP code</label>
+  <input id="proZip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g. 76063" autocomplete="postal-code">
+  <button type="submit">Start free →</button>
+  <div class="err" id="proErr"></div>
+</form>
+<form class="side r" id="custForm" autocomplete="on">
+  <span class="tag">NEED A PRO?</span>
+  <h2>Don't search. Don't call around.</h2>
+  <p>Post your job free. Local pros message you, and you pick the one you like.</p>
+  <label for="custZip">Your ZIP code</label>
+  <div class="row"><input id="custZip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="Your ZIP code" autocomplete="postal-code" required>
+  <button type="submit">Get offers →</button></div>
+  <div class="err" id="custErr"></div>
+</form>
 <div class="dock">
   <div class="line" id="line">Pros: get messages from customers near you</div>
   <a class="btn" id="go" href="https://texcontractor.com/?utm_source=am_offer&amp;utm_medium=site&amp;utm_campaign=pro">AM OFFER →</a>
@@ -85,6 +148,14 @@
   function start(){clearInterval(t);t=setInterval(next,6000)}
   dots.forEach(function(d,k){d.onclick=function(){show(k);start()}});
   document.getElementById('aboutBtn').onclick=function(){var d=document.getElementById('about');d.showModal?d.showModal():alert(d.innerText)};
+  var TC='https://texcontractor.com/';
+  function zipLookup(z){return fetch('https://api.zippopotam.us/us/'+z).then(function(r){return r.ok?r.json():null}).then(function(j){var p=j&&j.places&&j.places[0];return p?{city:p['place name'],state:p['state abbreviation']}:null}).catch(function(){return null})}
+  function okZip(z){return /^\d{5}$/.test(z)}
+  document.getElementById('custForm').onsubmit=function(e){e.preventDefault();var z=document.getElementById('custZip').value.trim(),er=document.getElementById('custErr');if(!okZip(z)){er.textContent='Please enter a 5-digit ZIP code.';return}er.textContent='';var b=this.querySelector('button');b.disabled=true;
+    zipLookup(z).then(function(l){var u=TC+'requests.html?post=1'+(l?'&city='+encodeURIComponent(l.city)+'&state='+l.state:'')+'&utm_source=am_offer&utm_medium=site&utm_campaign=customer_zip';location.href=u})};
+  document.getElementById('proForm').onsubmit=function(e){e.preventDefault();var sv=document.getElementById('proSvc').value,z=document.getElementById('proZip').value.trim(),er=document.getElementById('proErr');if(!sv){er.textContent='Please choose your service.';return}if(z&&!okZip(z)){er.textContent='Please enter a 5-digit ZIP code.';return}er.textContent='';var b=this.querySelector('button');b.disabled=true;
+    (z?zipLookup(z):Promise.resolve(null)).then(function(l){var u=TC+'contractor-register.html?from=start'+(sv!=='other'?'&service='+encodeURIComponent(sv):'')+(l?'&state='+l.state+'&city='+encodeURIComponent(l.city):'')+'&utm_source=am_offer&utm_medium=site&utm_campaign=pro_join';location.href=u})};
+  window.addEventListener('pageshow',function(){document.querySelectorAll('.side button').forEach(function(b){b.disabled=false})});
   show(0);start();
   if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).catch(function(){});
 })();
